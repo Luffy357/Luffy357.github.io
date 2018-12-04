@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="记录我的学习生活">
+<meta name="keywords" content="Python Django2.0">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Three Fire">
+<meta property="og:url" content="https://luffy357.github.io/index.html">
+<meta property="og:site_name" content="Three Fire">
+<meta property="og:description" content="记录我的学习生活">
+<meta property="og:locale" content="zh-Hans">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Three Fire">
+<meta name="twitter:description" content="记录我的学习生活">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://luffy357.github.io/">
+
+
+
+
+
+  <title>Three Fire</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left 
+  page-home">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Three Fire</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">三火的个人博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://luffy357.github.io/2018/12/01/Django的URL处理/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Threefire">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://piuib58oz.bkt.clouddn.com/%E4%B8%8B%E8%BD%BD.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Three Fire">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/01/Django的URL处理/" itemprop="url">Django的URL处理</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-01T19:08:21+08:00">
+                2018-12-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在创建 django 项目时其中默认会生成一个 urls.py 的文件，django 将 url模块化都集中在一个 py 文件中处理。</p>
+<p>下面是 urls.py 中的注释说明，简单的介绍了 URL 的配置。</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">url_params_demo <span class="built_in">URL</span> Configuration</span><br><span class="line"></span><br><span class="line">The `urlpatterns` list routes URLs <span class="built_in">to</span> views. For more information please see:</span><br><span class="line"><span class="keyword">https</span>://docs.djangoproject.com/en/<span class="number">2.0</span>/topics/<span class="keyword">http</span>/urls/</span><br><span class="line">Examples:</span><br><span class="line">Function views</span><br><span class="line">		<span class="number">1.</span> Add <span class="keyword">an</span> import:  <span class="built_in">from</span> my_app import views</span><br><span class="line">		<span class="number">2.</span> Add <span class="keyword">a</span> <span class="built_in">URL</span> <span class="built_in">to</span> urlpatterns:  path(<span class="string">''</span>, views.home, name=<span class="string">'home'</span>)</span><br><span class="line">	Class-based views</span><br><span class="line">		<span class="number">1.</span> Add <span class="keyword">an</span> import:  <span class="built_in">from</span> other_app.views import Home</span><br><span class="line">		<span class="number">2.</span> Add <span class="keyword">a</span> <span class="built_in">URL</span> <span class="built_in">to</span> urlpatterns:  path(<span class="string">''</span>, Home.as_view(), name=<span class="string">'home'</span>)</span><br><span class="line">	Including another URLconf</span><br><span class="line">		<span class="number">1.</span> Import <span class="keyword">the</span> <span class="built_in">include</span>() <span class="function"><span class="keyword">function</span>: <span class="title">from</span> <span class="title">django</span>.<span class="title">urls</span> <span class="title">import</span> <span class="title">include</span>, <span class="title">path</span></span></span><br><span class="line">		<span class="number">2.</span> Add <span class="keyword">a</span> <span class="built_in">URL</span> <span class="built_in">to</span> urlpatterns:  path(<span class="string">'blog/'</span>, <span class="built_in">include</span>(<span class="string">'blog.urls'</span>))</span><br></pre></td></tr></table></figure>
+<p>##Django如何处理请求</p>
+<p>当浏览器发过来一个请求时，django 会根据 setting.py 文件中 ROOT_URLCONF 设置来寻找匹配。django 会加载设置中的模块，并找到 urlpatterns 变量，这个变量是一个 python 列表保存着 django.urls.path() 和 django.urls.re_path() 的实例。一旦其中一个URL 与请求匹配，就会调用给定的视图。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment"># settings.py</span></span><br><span class="line">ROOT_URLCONF = <span class="string">'url_params_demo.urls'</span></span><br><span class="line"></span><br><span class="line"> <span class="comment"># urls.py</span></span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(<span class="string">'admin/'</span>, admin.site.urls),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>##url传参</p>
+<p>浏览器传过来的请求可能是多种多样的，如果 URL 携带着参数，django 的 url 如何接收， </p>
+<p>​1、在 url 中使用变量：用一个变量接收然后用尖括号包裹起来（变量名可以自己定义，当然要符合 python 变量名规则），这个变量保存的值就可以传递到视图中进行处理。视图函数中的参数必须和url中的参数名称保持一致，不然就找不到这个参数。另外，url中可以传递多个参数。</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> # urls.<span class="keyword">py</span></span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(<span class="string">'index/&lt;nums&gt;/'</span>, <span class="keyword">view</span>.<span class="built_in">index</span>),</span><br><span class="line">    ]</span><br></pre></td></tr></table></figure>
+<p>​2、采用查询字符串的方式：如果浏览器是以查询字符串的方式传递过来的参数，就不需要在 url 中用变量接收，只需要在视图函数中使用如方式获取<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">request<span class="selector-class">.GET</span><span class="selector-class">.get</span>(<span class="string">'参数名称'</span>)</span><br></pre></td></tr></table></figure></p>
+<h6 id="url-参数转换器："><a href="#url-参数转换器：" class="headerlink" title="url 参数转换器："></a>url 参数转换器：</h6><p>可以通过参数转换器，对 url 中的参数进行限制，以下是内置转换器，也可以自己定制。</p>
+<p>url参数的转换器：</p>
+<ol>
+<li>str：除了斜杠<code>/</code>以外所有的字符都是可以的。</li>
+<li>int：只有是一个或者多个的阿拉伯数字。</li>
+<li>path：所有的字符都是满足的。</li>
+<li>uuid：只有满足<code>uuid.uuid4()</code>这个函数返回的字符串的格式。</li>
+<li>slug：英文中的横杆或者英文字符或者阿拉伯数字或者下划线才满足。</li>
+</ol>
+<h5 id="urls-模块化"><a href="#urls-模块化" class="headerlink" title="urls 模块化"></a>urls 模块化</h5><p>如果项目越来越大，那么 url 会越来越多因为都放在urls.py 中，这样就不太好管理，因此就可以将每个 app 自己的 url 放到自己的 app 中管理，也就是在app 中 新建一个 urls.py 文件来存储和这个 app 相关的url。<br><figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># appname/urls.py</span><br><span class="line">from django.urls <span class="keyword">import</span> <span class="built_in">path</span></span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    <span class="built_in">path</span>(<span class="string">'book'</span>, books.urls),</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<p>在这个文件的 url 是和主 urls.py 中的 url 进行拼接的，所以不必多加斜杠。在主 urs.py 中的 url 使用 include 函数进行跳转</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># urls.py</span></span><br><span class="line">path(<span class="string">''</span>, <span class="keyword">include</span>(<span class="string">'addname.urls'</span>))</span><br></pre></td></tr></table></figure>
+<h5 id="url-命名"><a href="#url-命名" class="headerlink" title="url 命名"></a>url 命名</h5><p>在项目开发中 url 是经常变化的，如果把 url 写死了就经常需要改代码，以后要引用的时候就直接用名字。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">urlpatterns = [</span><br><span class="line">    path(<span class="string">''</span>, views<span class="selector-class">.index</span>, name=<span class="string">'index'</span>),</span><br><span class="line">    path(<span class="string">'login/'</span>, views<span class="selector-class">.login</span>, name=<span class="string">'login'</span>)</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<h6 id="应用命名空间："><a href="#应用命名空间：" class="headerlink" title="应用命名空间："></a>应用命名空间：</h6><p>在多个 app 之间有可能产生同名的url，这时候为了避免反转 url 的时候产生混淆，可以是应用命名空间区分不同的 app 。应用命名空间只需要在 app 的 urls.py 中定义一个 app_name 的变量来指定这个应用的命名空间名。</p>
+<figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># app/urls.py</span><br><span class="line"></span><br><span class="line">app_name = <span class="string">'book'</span></span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    <span class="built_in">path</span>(<span class="string">''</span>, views.index, <span class="keyword">name</span>=<span class="string">'index'</span>),</span><br><span class="line">    <span class="built_in">path</span>(<span class="string">'login/'</span>, views.login, <span class="keyword">name</span>=<span class="string">'login'</span>)</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>在做 url 反转的时候就可以使用应用命名空间反转，<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">login_url</span> = reverse(<span class="string">'book:login'</span>)</span><br></pre></td></tr></table></figure></p>
+<h6 id="实例命名空间："><a href="#实例命名空间：" class="headerlink" title="实例命名空间："></a>实例命名空间：</h6><p>一个 app 可以创建多个实例，可以使用多个 url 映射同一个 app ，所以这样就会产生一个问题，以后再做反转的时候如果使用应用命名空间，那么就会发生混淆，为了避免这个问题，我们可以使用实例命名空间。实例命名空间只需要在include 函数中传递一个 namesapce 变量即可。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">   <span class="comment"># urls.py</span></span><br><span class="line">   urlpatterns = [</span><br><span class="line">       path(<span class="string">'admin/'</span>, admin.site.urls),</span><br><span class="line">       path(<span class="string">'book1/'</span>, <span class="keyword">include</span>(<span class="string">'book.urls'</span>)),</span><br><span class="line">       path(<span class="string">'book2/'</span>, <span class="keyword">include</span>(<span class="string">'book.urls'</span>)),</span><br><span class="line">   ]</span><br><span class="line"></span><br><span class="line"><span class="comment"># app/urls.py</span></span><br><span class="line">   app_name = <span class="string">'book'</span></span><br><span class="line"></span><br><span class="line">   urlpatterns = [</span><br><span class="line">       path(<span class="string">''</span>, views.index, name=<span class="string">'index'</span>),</span><br><span class="line">       path(<span class="string">'login/'</span>, views.login, name=<span class="string">'login'</span>)</span><br><span class="line">   </span><br><span class="line">   <span class="comment"># app/viws.py</span></span><br><span class="line">   <span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">(request)</span></span><span class="symbol">:</span></span><br><span class="line">       username = request.GET.get(<span class="string">'username'</span>)</span><br><span class="line">       <span class="keyword">if</span> <span class="symbol">username:</span></span><br><span class="line">           <span class="keyword">return</span> HttpResponse(<span class="string">'书籍首页'</span>)</span><br><span class="line">       <span class="symbol">else:</span></span><br><span class="line">           <span class="comment"># 获取当前的实例命名空间</span></span><br><span class="line">           current_namespace = request.resolver_match.namespace</span><br><span class="line">           <span class="keyword">return</span> redirect(reverse(<span class="string">"%s:login"</span> % current_namespace))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">def</span> <span class="title">login</span><span class="params">(request)</span></span><span class="symbol">:</span></span><br><span class="line">       <span class="keyword">return</span> HttpResponse(<span class="string">'书籍登录页面'</span>)</span><br></pre></td></tr></table></figure>
+<p>实例命名空间需要注意，在反转的时候可以先获取到实例命名：<br><figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">current_namespace = request.resolver_match.namesapce</span><br><span class="line"><span class="keyword">return</span> redirect(<span class="keyword">reverse</span>(<span class="string">'%s:login'</span>% current_namespace))</span><br></pre></td></tr></table></figure></p>
+<h5 id="reverse函数url反转"><a href="#reverse函数url反转" class="headerlink" title="reverse函数url反转"></a>reverse函数url反转</h5><p>1、如果在url 反转的时候需要添加参数，那么可以传递kwargs 参数到 reverse 函数中</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">detail_url</span> = reverse(<span class="string">'detail'</span>, <span class="string">'kwargs=&#123;'</span>article_id<span class="string">':1, '</span>page<span class="string">':2&#125;'</span>)</span><br></pre></td></tr></table></figure>
+<p>2、如果想要添加的参数是查询字符串的参数，则必须手动的进行拼接</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">login_url = <span class="keyword">reverse</span>(<span class="symbol">'login</span>') + '?next=/</span><br></pre></td></tr></table></figure>
+<h6 id="include-函数用法"><a href="#include-函数用法" class="headerlink" title="include 函数用法"></a>include 函数用法</h6><p>1.include(module, namespace=None):</p>
+<p>​       *module: 子 url 的模块名字。</p>
+<p>​       *namespace: 实例命名空间，如果使用实例命名空间，前提是必须先指定应用命名空间，也就是在子 urls 中添加变量 app_name。</p>
+<p>2.include((pattern_list, app_namespace), namespace=Nonw): </p>
+<p>include 函数的第一参数既可以是一个字符串，也可以是一个元组，元组的第一个参数是一个列表，在这个列表中可以是多个 path 或者 re_path 函数。元组的第二个参数就是应用命名空间。也就是所说可以不采用在 app 中创建子 urls.py 的方式来区分各个 app  的 url 了。用元组的方式将子 urls 的url 作为列表放到 include 的元组参数中，app 的应用命名作为元组的第二个参数。</p>
+<figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">from book <span class="keyword">import</span> views</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    <span class="built_in">path</span>(<span class="string">'admin/'</span>, admin.site.urls),</span><br><span class="line">    <span class="built_in">path</span>(<span class="string">'book/'</span>, include(([</span><br><span class="line">        <span class="built_in">path</span>(<span class="string">'detail/'</span>, views.detail),</span><br><span class="line">        <span class="built_in">path</span>(<span class="string">'list/'</span>, views.book_list)</span><br><span class="line">                    ], <span class="string">'book'</span>), namespace=<span class="string">'book'</span>)),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<h4 id="re-path-函数："><a href="#re-path-函数：" class="headerlink" title="re_path 函数："></a>re_path 函数：</h4><ol>
+<li>re_path和path的作用都是一样的。只不过<code>re_path</code>是在写url的时候可以用正则表达式，功能更加强大。</li>
+<li>写正则表达式都推荐使用原生字符串。也就是以<code>r</code>开头的字符串。</li>
+<li>在正则表达式中定义变量，需要使用圆括号括起来。这个参数是有名字的，那么需要使用<code>?P&lt;参数的名字&gt;</code>。然后在后面添加正则表达式的规则。示例代码如下：</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> re_path</span><br><span class="line"><span class="keyword">from</span> . <span class="keyword">import</span> views</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    <span class="comment"># r""：代表的是原生字符串（raw）</span></span><br><span class="line">    re_path(<span class="string">r'^$'</span>,views.article),</span><br><span class="line">    <span class="comment"># /article/list/&lt;year&gt;/</span></span><br><span class="line">    re_path(<span class="string">r"^list/(?P&lt;year&gt;\d&#123;4&#125;)/$"</span>,views.article_list),</span><br><span class="line">    re_path(<span class="string">r"^list/(?P&lt;month&gt;\d&#123;2&#125;)/$"</span>,views.article_list_month)</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>如果不是特别要求。直接使用<code>path</code>就够了，省的把代码搞的很麻烦（因为正则表达式其实是非常晦涩的，特别是一些比较复杂的正则表达式，今天写的明天可能就不记得了）。除非是url中确实是需要使用正则表达式来解决才使用<code>re_path</code>。</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+  </section>
+
+  
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="http://piuib58oz.bkt.clouddn.com/%E4%B8%8B%E8%BD%BD.jpg" alt="Threefire">
+            
+              <p class="site-author-name" itemprop="name">Threefire</p>
+              <p class="site-description motion-element" itemprop="description">记录我的学习生活</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Luffy357" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ljy1042537@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/Liang3Fire" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Threefire</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
