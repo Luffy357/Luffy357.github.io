@@ -1,0 +1,61 @@
+# Header
+menu:
+  首页: /
+  #简历: /works
+  关于: /about
+  #Tags: /tags
+
+rss: /atom.xml
+
+# User Info
+user_name: Threefire
+user_avatar: http://piuib58oz.bkt.clouddn.com/%E4%B8%8B%E8%BD%BD.jpg
+user_location: 杭州
+user_description: "A Touch Of Zen"
+user_contact: ljy1042537@gmail.com
+user_introduction: "人"
+
+github_username: Luffy357
+twitter_username: 
+weibo_username:
+zhihu_username: Threefire
+facebook_username:
+linkedin_username:
+
+# Content
+excerpt_link: 阅读更多
+fancybox: true
+
+# display widgets at the bottom of index pages (pagination == 2)
+index_widgets:
+ - category
+ - tagcloud
+ - archive
+
+# widget behavior
+#archive_type: 'monthly'
+#show_count: false
+
+# 评论系统
+# 不要用别人的 uid, 自己去注册一个吧
+use_livere: false
+livere_uid: 
+
+use_disqus: false
+disqus_url: 
+
+# Miscellaneous
+google_analytics:
+favicon: /favicon.png
+#twitter:
+#google_plus:
+#fb_admins:
+#fb_app_id:
+
+# Highlight code
+# do ensure u have closed all the highlight choices in ur root _config.yml
+# currently we provided 6 choices based on highlight script
+# highlight_default, highlight_light, highlight_github, highlight_rainbow, highlight_vs, highlight_atom
+ 
+
+block_highlight: highlight_atom
