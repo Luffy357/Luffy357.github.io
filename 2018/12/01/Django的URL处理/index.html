@@ -117,18 +117,18 @@
 
 
 
-<meta name="description" content="在创建 django 项目时其中默认会生成一个 urls.py 的文件，django 将 url模块化都集中在一个 py 文件中处理。 下面是 urls.py 中的注释说明，简单的介绍了 URL 的配置。 1234567891011121314url_params_demo URL ConfigurationThe `urlpatterns` list routes URLs to views.">
+<meta name="description" content="在创建 django 项目时其中默认会生成一个 urls.py 的文件，django 将 url模块化都集中在一个 py 文件中处理。">
 <meta name="keywords" content="Django2.0">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Django的URL处理">
 <meta property="og:url" content="https://luffy357.github.io/2018/12/01/Django的URL处理/index.html">
 <meta property="og:site_name" content="Three Fire">
-<meta property="og:description" content="在创建 django 项目时其中默认会生成一个 urls.py 的文件，django 将 url模块化都集中在一个 py 文件中处理。 下面是 urls.py 中的注释说明，简单的介绍了 URL 的配置。 1234567891011121314url_params_demo URL ConfigurationThe `urlpatterns` list routes URLs to views.">
+<meta property="og:description" content="在创建 django 项目时其中默认会生成一个 urls.py 的文件，django 将 url模块化都集中在一个 py 文件中处理。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-04T08:32:15.214Z">
+<meta property="og:updated_time" content="2018-12-05T13:53:29.628Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Django的URL处理">
-<meta name="twitter:description" content="在创建 django 项目时其中默认会生成一个 urls.py 的文件，django 将 url模块化都集中在一个 py 文件中处理。 下面是 urls.py 中的注释说明，简单的介绍了 URL 的配置。 1234567891011121314url_params_demo URL ConfigurationThe `urlpatterns` list routes URLs to views.">
+<meta name="twitter:description" content="在创建 django 项目时其中默认会生成一个 urls.py 的文件，django 将 url模块化都集中在一个 py 文件中处理。">
 
 
 
@@ -381,17 +381,20 @@
 
       
         <p>在创建 django 项目时其中默认会生成一个 urls.py 的文件，django 将 url模块化都集中在一个 py 文件中处理。</p>
+<a id="more"></a>
 <p>下面是 urls.py 中的注释说明，简单的介绍了 URL 的配置。</p>
 <figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">url_params_demo <span class="built_in">URL</span> Configuration</span><br><span class="line"></span><br><span class="line">The `urlpatterns` list routes URLs <span class="built_in">to</span> views. For more information please see:</span><br><span class="line"><span class="keyword">https</span>://docs.djangoproject.com/en/<span class="number">2.0</span>/topics/<span class="keyword">http</span>/urls/</span><br><span class="line">Examples:</span><br><span class="line">Function views</span><br><span class="line">		<span class="number">1.</span> Add <span class="keyword">an</span> import:  <span class="built_in">from</span> my_app import views</span><br><span class="line">		<span class="number">2.</span> Add <span class="keyword">a</span> <span class="built_in">URL</span> <span class="built_in">to</span> urlpatterns:  path(<span class="string">''</span>, views.home, name=<span class="string">'home'</span>)</span><br><span class="line">	Class-based views</span><br><span class="line">		<span class="number">1.</span> Add <span class="keyword">an</span> import:  <span class="built_in">from</span> other_app.views import Home</span><br><span class="line">		<span class="number">2.</span> Add <span class="keyword">a</span> <span class="built_in">URL</span> <span class="built_in">to</span> urlpatterns:  path(<span class="string">''</span>, Home.as_view(), name=<span class="string">'home'</span>)</span><br><span class="line">	Including another URLconf</span><br><span class="line">		<span class="number">1.</span> Import <span class="keyword">the</span> <span class="built_in">include</span>() <span class="function"><span class="keyword">function</span>: <span class="title">from</span> <span class="title">django</span>.<span class="title">urls</span> <span class="title">import</span> <span class="title">include</span>, <span class="title">path</span></span></span><br><span class="line">		<span class="number">2.</span> Add <span class="keyword">a</span> <span class="built_in">URL</span> <span class="built_in">to</span> urlpatterns:  path(<span class="string">'blog/'</span>, <span class="built_in">include</span>(<span class="string">'blog.urls'</span>))</span><br></pre></td></tr></table></figure>
 <p>##Django如何处理请求</p>
 <p>当浏览器发过来一个请求时，django 会根据 setting.py 文件中 ROOT_URLCONF 设置来寻找匹配。django 会加载设置中的模块，并找到 urlpatterns 变量，这个变量是一个 python 列表保存着 django.urls.path() 和 django.urls.re_path() 的实例。一旦其中一个URL 与请求匹配，就会调用给定的视图。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment"># settings.py</span></span><br><span class="line">ROOT_URLCONF = <span class="string">'url_params_demo.urls'</span></span><br><span class="line"></span><br><span class="line"> <span class="comment"># urls.py</span></span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(<span class="string">'admin/'</span>, admin.site.urls),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment"># settings.py</span></span><br><span class="line">ROOT_URLCONF = 'url_params_demo.urls'</span><br><span class="line"></span><br><span class="line"> <span class="comment"># urls.py</span></span><br><span class="line">urlpatterns = [</span><br><span class="line">    path('admin/', admin.site.urls),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
 <p>##url传参</p>
 <p>浏览器传过来的请求可能是多种多样的，如果 URL 携带着参数，django 的 url 如何接收， </p>
-<p>​1、在 url 中使用变量：用一个变量接收然后用尖括号包裹起来（变量名可以自己定义，当然要符合 python 变量名规则），这个变量保存的值就可以传递到视图中进行处理。视图函数中的参数必须和url中的参数名称保持一致，不然就找不到这个参数。另外，url中可以传递多个参数。</p>
+<p>​1、在 url 中使用变量：<br>  用一个变量接收然后用尖括号包裹起来（变量名可以自己定义，当然要符合 python 变量名规则），这个变量保存的值就可以传递到视图中进行处理。视图函数中的参数必须和url中的参数名称保持一致，不然就找不到这个参数。另外，url中可以传递多个参数。</p>
 <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> # urls.<span class="keyword">py</span></span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(<span class="string">'index/&lt;nums&gt;/'</span>, <span class="keyword">view</span>.<span class="built_in">index</span>),</span><br><span class="line">    ]</span><br></pre></td></tr></table></figure>
-<p>​2、采用查询字符串的方式：如果浏览器是以查询字符串的方式传递过来的参数，就不需要在 url 中用变量接收，只需要在视图函数中使用如方式获取<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">request<span class="selector-class">.GET</span><span class="selector-class">.get</span>(<span class="string">'参数名称'</span>)</span><br></pre></td></tr></table></figure></p>
-<h6 id="url-参数转换器："><a href="#url-参数转换器：" class="headerlink" title="url 参数转换器："></a>url 参数转换器：</h6><p>可以通过参数转换器，对 url 中的参数进行限制，以下是内置转换器，也可以自己定制。</p>
+<p>​2、采用查询字符串的方式：<br>   如果浏览器是以查询字符串的方式传递过来的参数，就不需要在 url 中用变量接收，只需要在视图函数中使用如方式获取<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">request<span class="selector-class">.GET</span><span class="selector-class">.get</span>(<span class="string">'参数名称'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>3、指定默认参数:<br>   在url 中指定一个默认参数，视图使用关键字参数的方式接收。还可以通过转换器对默认参数进行类型限制。如场景，有些内容显示默认读取第一页，如果用户请求其他页面可以再传递参数。<br><figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># urls.py</span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(<span class="string">'blog/'</span>, views.page),</span><br><span class="line">    path(<span class="string">'blog/page&lt;int:num&gt;'</span>, views.page)</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"># views.py</span><br><span class="line">def page(request, num=<span class="number">1</span>):</span><br><span class="line">    ......</span><br></pre></td></tr></table></figure></p>
+<p>###url 参数转换器：</p>
+<p>  可以通过参数转换器，对 url 中的参数类型进行限制，以下是内置转换器，也可以自己定制。<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">path</span><span class="params">(<span class="string">'blog/page&lt;int:num&gt;'</span>, views.page)</span></span></span><br></pre></td></tr></table></figure></p>
 <p>url参数的转换器：</p>
 <ol>
 <li>str：除了斜杠<code>/</code>以外所有的字符都是可以的。</li>
@@ -400,28 +403,37 @@
 <li>uuid：只有满足<code>uuid.uuid4()</code>这个函数返回的字符串的格式。</li>
 <li>slug：英文中的横杆或者英文字符或者阿拉伯数字或者下划线才满足。</li>
 </ol>
-<h5 id="urls-模块化"><a href="#urls-模块化" class="headerlink" title="urls 模块化"></a>urls 模块化</h5><p>如果项目越来越大，那么 url 会越来越多因为都放在urls.py 中，这样就不太好管理，因此就可以将每个 app 自己的 url 放到自己的 app 中管理，也就是在app 中 新建一个 urls.py 文件来存储和这个 app 相关的url。<br><figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># appname/urls.py</span><br><span class="line">from django.urls <span class="keyword">import</span> <span class="built_in">path</span></span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    <span class="built_in">path</span>(<span class="string">'book'</span>, books.urls),</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<p>###自定义url 转换器<br> 当内置的转换器不能满足需求的时候，可以自定义转义器，主要分五步:<br>  1、定义一个类。<br>  2、在类中定义一个属性regex，这个属性是用来保存url转换器规则的正则表达式。<br>  3、实现to_python(self,value)方法，这个方法是将url中的值转换一下，然后传给视图函数的。<br>  4、实现to_url(self,value)方法，这个方法是在做url反转的时候，将传进来的参数转换后拼接成一个正确的url。<br>  5、将定义好的转换器，注册到django中。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># converter.py</span></span><br><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> register_converter</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CategoryConverter</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="comment"># 参数检验规则</span></span><br><span class="line">    regex = <span class="string">r'\w+|(\w+\+\w+)+'</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">to_python</span><span class="params">(self,value)</span>:</span></span><br><span class="line">        <span class="comment"># python+django+flask</span></span><br><span class="line">        <span class="comment"># ['python','django','flask']</span></span><br><span class="line">        result = value.split(<span class="string">"+"</span>)</span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">to_url</span><span class="params">(self,value)</span>:</span></span><br><span class="line">        <span class="comment"># value：['python','django','flask']</span></span><br><span class="line">        <span class="comment"># python+django+flask</span></span><br><span class="line">        <span class="keyword">if</span> isinstance(value,list):</span><br><span class="line">            result = <span class="string">"+"</span>.join(value)</span><br><span class="line">            <span class="keyword">return</span> result</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">raise</span> RuntimeError(<span class="string">"转换url的时候，分类参数必须为列表！"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 注册转换器</span></span><br><span class="line">register_converter(CategoryConverter,<span class="string">'cate'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>定义好了转换器，还要注意在项目中要执行这段代码才行，在每个 app模块中都有一个 ‘<strong>init</strong>.py’ 的文件，每个模块在被导入的时候，这个文件都会被最先执行。所有只需要在这里导入转换器这个文件就行了。<br><figure class="highlight nimrod"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> . <span class="keyword">import</span> <span class="keyword">converter</span></span><br></pre></td></tr></table></figure></p>
+<p>##urls 模块化</p>
+<p>如果项目越来越大，那么 url 会越来越多因为都放在urls.py 中，这样就不太好管理，因此就可以将每个 app 自己的 url 放到自己的 app 中管理，也就是在app 中 新建一个 urls.py 文件来存储和这个 app 相关的url。<br><figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># appname/urls.py</span><br><span class="line">from django.urls <span class="keyword">import</span> <span class="built_in">path</span></span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    <span class="built_in">path</span>(<span class="string">'book'</span>, books.urls),</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
 <p>在这个文件的 url 是和主 urls.py 中的 url 进行拼接的，所以不必多加斜杠。在主 urs.py 中的 url 使用 include 函数进行跳转</p>
 <figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># urls.py</span></span><br><span class="line">path(<span class="string">''</span>, <span class="keyword">include</span>(<span class="string">'addname.urls'</span>))</span><br></pre></td></tr></table></figure>
-<h5 id="url-命名"><a href="#url-命名" class="headerlink" title="url 命名"></a>url 命名</h5><p>在项目开发中 url 是经常变化的，如果把 url 写死了就经常需要改代码，以后要引用的时候就直接用名字。</p>
+<p>###url 命名</p>
+<p>在项目开发中 url 是经常变化的，如果把 url 写死了就经常需要改代码，以后要引用的时候就直接用名字。</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">urlpatterns = [</span><br><span class="line">    path(<span class="string">''</span>, views<span class="selector-class">.index</span>, name=<span class="string">'index'</span>),</span><br><span class="line">    path(<span class="string">'login/'</span>, views<span class="selector-class">.login</span>, name=<span class="string">'login'</span>)</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-<h6 id="应用命名空间："><a href="#应用命名空间：" class="headerlink" title="应用命名空间："></a>应用命名空间：</h6><p>在多个 app 之间有可能产生同名的url，这时候为了避免反转 url 的时候产生混淆，可以是应用命名空间区分不同的 app 。应用命名空间只需要在 app 的 urls.py 中定义一个 app_name 的变量来指定这个应用的命名空间名。</p>
+<p>##应用命名空间：</p>
+<p>在多个 app 之间有可能产生同名的url，这时候为了避免反转 url 的时候产生混淆，可以是应用命名空间区分不同的 app 。应用命名空间只需要在 app 的 urls.py 中定义一个 app_name 的变量来指定这个应用的命名空间名。</p>
 <figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># app/urls.py</span><br><span class="line"></span><br><span class="line">app_name = <span class="string">'book'</span></span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    <span class="built_in">path</span>(<span class="string">''</span>, views.index, <span class="keyword">name</span>=<span class="string">'index'</span>),</span><br><span class="line">    <span class="built_in">path</span>(<span class="string">'login/'</span>, views.login, <span class="keyword">name</span>=<span class="string">'login'</span>)</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
 <p>在做 url 反转的时候就可以使用应用命名空间反转，<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">login_url</span> = reverse(<span class="string">'book:login'</span>)</span><br></pre></td></tr></table></figure></p>
-<h6 id="实例命名空间："><a href="#实例命名空间：" class="headerlink" title="实例命名空间："></a>实例命名空间：</h6><p>一个 app 可以创建多个实例，可以使用多个 url 映射同一个 app ，所以这样就会产生一个问题，以后再做反转的时候如果使用应用命名空间，那么就会发生混淆，为了避免这个问题，我们可以使用实例命名空间。实例命名空间只需要在include 函数中传递一个 namesapce 变量即可。</p>
+<p>##实例命名空间：</p>
+<p>一个 app 可以创建多个实例，可以使用多个 url 映射同一个 app ，所以这样就会产生一个问题，以后再做反转的时候如果使用应用命名空间，那么就会发生混淆，为了避免这个问题，我们可以使用实例命名空间。实例命名空间只需要在include 函数中传递一个 namesapce 变量即可。</p>
 <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">   <span class="comment"># urls.py</span></span><br><span class="line">   urlpatterns = [</span><br><span class="line">       path(<span class="string">'admin/'</span>, admin.site.urls),</span><br><span class="line">       path(<span class="string">'book1/'</span>, <span class="keyword">include</span>(<span class="string">'book.urls'</span>)),</span><br><span class="line">       path(<span class="string">'book2/'</span>, <span class="keyword">include</span>(<span class="string">'book.urls'</span>)),</span><br><span class="line">   ]</span><br><span class="line"></span><br><span class="line"><span class="comment"># app/urls.py</span></span><br><span class="line">   app_name = <span class="string">'book'</span></span><br><span class="line"></span><br><span class="line">   urlpatterns = [</span><br><span class="line">       path(<span class="string">''</span>, views.index, name=<span class="string">'index'</span>),</span><br><span class="line">       path(<span class="string">'login/'</span>, views.login, name=<span class="string">'login'</span>)</span><br><span class="line">   </span><br><span class="line">   <span class="comment"># app/viws.py</span></span><br><span class="line">   <span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">(request)</span></span><span class="symbol">:</span></span><br><span class="line">       username = request.GET.get(<span class="string">'username'</span>)</span><br><span class="line">       <span class="keyword">if</span> <span class="symbol">username:</span></span><br><span class="line">           <span class="keyword">return</span> HttpResponse(<span class="string">'书籍首页'</span>)</span><br><span class="line">       <span class="symbol">else:</span></span><br><span class="line">           <span class="comment"># 获取当前的实例命名空间</span></span><br><span class="line">           current_namespace = request.resolver_match.namespace</span><br><span class="line">           <span class="keyword">return</span> redirect(reverse(<span class="string">"%s:login"</span> % current_namespace))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">def</span> <span class="title">login</span><span class="params">(request)</span></span><span class="symbol">:</span></span><br><span class="line">       <span class="keyword">return</span> HttpResponse(<span class="string">'书籍登录页面'</span>)</span><br></pre></td></tr></table></figure>
 <p>实例命名空间需要注意，在反转的时候可以先获取到实例命名：<br><figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">current_namespace = request.resolver_match.namesapce</span><br><span class="line"><span class="keyword">return</span> redirect(<span class="keyword">reverse</span>(<span class="string">'%s:login'</span>% current_namespace))</span><br></pre></td></tr></table></figure></p>
-<h5 id="reverse函数url反转"><a href="#reverse函数url反转" class="headerlink" title="reverse函数url反转"></a>reverse函数url反转</h5><p>1、如果在url 反转的时候需要添加参数，那么可以传递kwargs 参数到 reverse 函数中</p>
+<p>##reverse函数url反转</p>
+<p>1、如果在url 反转的时候需要添加参数，那么可以传递kwargs 参数到 reverse 函数中</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">detail_url</span> = reverse(<span class="string">'detail'</span>, <span class="string">'kwargs=&#123;'</span>article_id<span class="string">':1, '</span>page<span class="string">':2&#125;'</span>)</span><br></pre></td></tr></table></figure>
 <p>2、如果想要添加的参数是查询字符串的参数，则必须手动的进行拼接</p>
 <figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">login_url = <span class="keyword">reverse</span>(<span class="symbol">'login</span>') + '?next=/</span><br></pre></td></tr></table></figure>
-<h6 id="include-函数用法"><a href="#include-函数用法" class="headerlink" title="include 函数用法"></a>include 函数用法</h6><p>1.include(module, namespace=None):</p>
+<p>##include 函数用法</p>
+<p>1.include(module, namespace=None):</p>
 <p>​       *module: 子 url 的模块名字。</p>
 <p>​       *namespace: 实例命名空间，如果使用实例命名空间，前提是必须先指定应用命名空间，也就是在子 urls 中添加变量 app_name。</p>
 <p>2.include((pattern_list, app_namespace), namespace=Nonw): </p>
 <p>include 函数的第一参数既可以是一个字符串，也可以是一个元组，元组的第一个参数是一个列表，在这个列表中可以是多个 path 或者 re_path 函数。元组的第二个参数就是应用命名空间。也就是所说可以不采用在 app 中创建子 urls.py 的方式来区分各个 app  的 url 了。用元组的方式将子 urls 的url 作为列表放到 include 的元组参数中，app 的应用命名作为元组的第二个参数。</p>
 <figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">from book <span class="keyword">import</span> views</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    <span class="built_in">path</span>(<span class="string">'admin/'</span>, admin.site.urls),</span><br><span class="line">    <span class="built_in">path</span>(<span class="string">'book/'</span>, include(([</span><br><span class="line">        <span class="built_in">path</span>(<span class="string">'detail/'</span>, views.detail),</span><br><span class="line">        <span class="built_in">path</span>(<span class="string">'list/'</span>, views.book_list)</span><br><span class="line">                    ], <span class="string">'book'</span>), namespace=<span class="string">'book'</span>)),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-<h4 id="re-path-函数："><a href="#re-path-函数：" class="headerlink" title="re_path 函数："></a>re_path 函数：</h4><ol>
+<p>##re_path 函数：</p>
+<ol>
 <li>re_path和path的作用都是一样的。只不过<code>re_path</code>是在写url的时候可以用正则表达式，功能更加强大。</li>
 <li>写正则表达式都推荐使用原生字符串。也就是以<code>r</code>开头的字符串。</li>
 <li>在正则表达式中定义变量，需要使用圆括号括起来。这个参数是有名字的，那么需要使用<code>?P&lt;参数的名字&gt;</code>。然后在后面添加正则表达式的规则。示例代码如下：</li>
@@ -456,6 +468,22 @@
       
       
 
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/05/Django的模板/" rel="prev" title="Django的模板">
+                Django的模板 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
       
 
       
@@ -504,17 +532,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -531,7 +550,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -598,22 +617,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-6"><a class="nav-link" href="#url-参数转换器："><span class="nav-number">1.</span> <span class="nav-text">url 参数转换器：</span></a></li></ol><li class="nav-item nav-level-5"><a class="nav-link" href="#urls-模块化"><span class="nav-number"></span> <span class="nav-text">urls 模块化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#url-命名"><span class="nav-number"></span> <span class="nav-text">url 命名</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#应用命名空间："><span class="nav-number">1.</span> <span class="nav-text">应用命名空间：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#实例命名空间："><span class="nav-number">2.</span> <span class="nav-text">实例命名空间：</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#reverse函数url反转"><span class="nav-number"></span> <span class="nav-text">reverse函数url反转</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#include-函数用法"><span class="nav-number">1.</span> <span class="nav-text">include 函数用法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#re-path-函数："><span class="nav-number"></span> <span class="nav-text">re_path 函数：</span></a></li></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
