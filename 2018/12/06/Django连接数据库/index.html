@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Django2.0,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="django 操作数据库其实底层还是 Python 连接的，python 连接数据库就要通过驱动程序，驱动程序根据不同的python版本有很多，在 “https://www.lfd.uci.edu/~gohlke/pythonlibs/#&amp;quot; 这里有很多python 扩展包。选择对应的版本进行安装。这里是有mysqlclient 来连接数据库。">
+<meta name="keywords" content="Django2.0">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Django连接数据库">
+<meta property="og:url" content="https://luffy357.github.io/2018/12/06/Django连接数据库/index.html">
+<meta property="og:site_name" content="Three Fire">
+<meta property="og:description" content="django 操作数据库其实底层还是 Python 连接的，python 连接数据库就要通过驱动程序，驱动程序根据不同的python版本有很多，在 “https://www.lfd.uci.edu/~gohlke/pythonlibs/#&amp;quot; 这里有很多python 扩展包。选择对应的版本进行安装。这里是有mysqlclient 来连接数据库。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-12-06T15:19:57.994Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Django连接数据库">
+<meta name="twitter:description" content="django 操作数据库其实底层还是 Python 连接的，python 连接数据库就要通过驱动程序，驱动程序根据不同的python版本有很多，在 “https://www.lfd.uci.edu/~gohlke/pythonlibs/#&amp;quot; 这里有很多python 扩展包。选择对应的版本进行安装。这里是有mysqlclient 来连接数据库。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://luffy357.github.io/2018/12/06/Django连接数据库/">
+
+
+
+
+
+  <title>Django连接数据库 | Three Fire</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Three Fire</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">三火的个人博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://luffy357.github.io/2018/12/06/Django连接数据库/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Threefire">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://piuib58oz.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181205230447.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Three Fire">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Django连接数据库</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-06T21:27:55+08:00">
+                2018-12-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>django 操作数据库其实底层还是 Python 连接的，python 连接数据库就要通过驱动程序，驱动程序根据不同的python版本有很多，在 “<a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/#&quot;" target="_blank" rel="noopener">https://www.lfd.uci.edu/~gohlke/pythonlibs/#&quot;</a> 这里有很多python 扩展包。选择对应的版本进行安装。这里是有mysqlclient 来连接数据库。<br><a id="more"></a></p>
+<h2 id="djano配置数据库连接"><a href="#djano配置数据库连接" class="headerlink" title="djano配置数据库连接"></a>djano配置数据库连接</h2><p>django 连接数据库首先要在 settings.py 文件中的 DATABASES变量进行配置。<br><figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">DATABASES = &#123;</span><br><span class="line">    default: &#123;</span><br><span class="line">        <span class="meta"># 选择数据引擎</span></span><br><span class="line">        ENGINE: 'django.db.backends.mysql',</span><br><span class="line">        <span class="meta"># 数据库名字</span></span><br><span class="line">        NAME：'threefile',</span><br><span class="line">        <span class="meta"># 连接数据库的用户名</span></span><br><span class="line">        USER: 'root',</span><br><span class="line">        <span class="meta"># 连接数据库的密码</span></span><br><span class="line">        PASSWORD: 'root',</span><br><span class="line">        <span class="meta"># 数据库主机地址</span></span><br><span class="line">        HOST: '127.0.0.1',</span><br><span class="line">        <span class="meta"># 数据库使用的端口</span></span><br><span class="line">        PORT: '<span class="number">3306</span>'</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="Django-操作数据库"><a href="#Django-操作数据库" class="headerlink" title="Django 操作数据库"></a>Django 操作数据库</h2><p>在settings.py中配置好了数据库连接信息后直接使用Django封装好的接口就可以操作了。<br>在Django中操作数据库有两种方式。<br>  第一种方式就是使用原生sql语句操作，<br>  第二种就是使用ORM模型来操作。<br>在Django中使用原生sql语句操作其实就是使用python db API的接口来操作。只不过Django将数据库连接的这一部分封装好了, 使用的什么数据库驱动就用相应的接口就可以了。</p>
+<h3 id="原生的-SQL-语句"><a href="#原生的-SQL-语句" class="headerlink" title="原生的 SQL 语句"></a>原生的 SQL 语句</h3><p>使用 django 封装好的 connection对象可以读取 settings 文件的数据库配置信息<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> djagno.db import connection</span><br><span class="line"></span><br><span class="line"><span class="comment"># 首先获取游标对象</span></span><br><span class="line">cursor = connection.cursor()</span><br><span class="line"><span class="comment"># 执行原生SQL语句</span></span><br><span class="line">cursor.execute(<span class="string">"select * from book"</span>)</span><br><span class="line"><span class="comment"># 获取所有数据</span></span><br><span class="line">rows = cursor.fetchall()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 遍历取出每条数据</span></span><br><span class="line"><span class="keyword">for</span> row <span class="keyword">in</span> rows：</span><br><span class="line">    <span class="builtin-name">print</span>(row)</span><br></pre></td></tr></table></figure></p>
+<p>以上的execute 以及fetchall 方法都是Python DB API 规范中定义好的。任何使用Python来操作MySQL的驱动程序都应该遵循这个规范。</p>
+<h4 id="Python-DB-API下规范下cursor对象常用接口："><a href="#Python-DB-API下规范下cursor对象常用接口：" class="headerlink" title="Python DB API下规范下cursor对象常用接口："></a>Python DB API下规范下cursor对象常用接口：</h4><p>description：如果cursor执行了查询的sql代码。那么读取cursor.description属性的时候，将返回一个列表，这个列表中装的是元组，元组中装的分别是(name,type_code,display_size,internal_size,precision,scale,null_ok)，其中name代表的是查找出来的数据的字段名称，其他参数暂时用处不大。<br>rowcount：代表的是在执行了sql语句后受影响的行数。<br>close：关闭游标。关闭游标以后就再也不能使用了，否则会抛出异常。<br>execute(sql[,parameters])：执行某个sql语句。如果在执行sql语句的时候还需要传递参数，那么可以传给parameters参数。<br>示例代码如下：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cursor.execute("<span class="keyword">select</span> * <span class="keyword">from</span> article <span class="keyword">where</span> <span class="keyword">id</span>=%s<span class="string">",(1,))</span></span><br></pre></td></tr></table></figure></p>
+<p>fetchone：在执行了查询操作以后，获取第一条数据。<br>fetchall：获取所有满足sql语句的数据。<br>fetchmany(size)：在执行查询操作以后，获取多条数据。具体是多少条要看传的size参数。如果不传size参数，那么默认是获取第一条数据。</p>
+<h2 id="ORM-模型"><a href="#ORM-模型" class="headerlink" title="ORM 模型"></a>ORM 模型</h2><p>ORM，全称Object Relational Mapping，中文叫做对象关系映射，通过ORM我们可以通过类的方式去操作数据库，而不用再写原生的SQL语句。通过把表映射成类，把行作实例，把字段作为属性，ORM在执行对象操作的时候最终还是会把对应的操作转换为数据库原生语句。</p>
+<h3 id="创建ORM模型："><a href="#创建ORM模型：" class="headerlink" title="创建ORM模型："></a>创建ORM模型：</h3><p>ORM模型一般都是放在app的models.py文件中。每个app都可以拥有自己的模型。并且如果这个模型想要映射到数据库中，那么这个app必须要放在settings.py的INSTALLED_APP中进行安装。以下是写一个简单的书籍ORM模型<br><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">from</span> django.db <span class="keyword">import</span> models</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="type">Book</span>(<span class="title">models</span>.<span class="type">Model</span>):</span></span><br><span class="line"><span class="class">    name = models.<span class="type">CharField</span>(<span class="title">max_length</span>=20,<span class="title">null</span>=<span class="type">False</span>)</span></span><br><span class="line"><span class="class">    author = models.<span class="type">CharField</span>(<span class="title">max_length</span>=20,<span class="title">null</span>=<span class="type">False</span>)</span></span><br><span class="line"><span class="class">    price = models.<span class="type">FloatField</span>(<span class="title">default</span>=0)</span></span><br></pre></td></tr></table></figure></p>
+<p>在数据库中，app名加类名就是表的名字，Book类的属性名就是表中字段的名字。所有在ORM 模型中类和属性就是对应着数据库中的一张表。</p>
+<h3 id="映射模型到数据库中："><a href="#映射模型到数据库中：" class="headerlink" title="映射模型到数据库中："></a>映射模型到数据库中：</h3><p>将ORM模型映射到数据库中<br>1、在 settings.py 中，配置好 DATABASES，做好数据库相关的配置。<br>2、在app中的 models.py 中定义好模型，这个模型必须继承自django.db.models。<br>3、将这个app添加到 settings.py 的INSTALLED_APP中。<br>4、执行命令 makemigrations 来生成迁移脚本文件。<br>5、执行命令 migrate 来将迁移脚本文件映射到数据库中。</p>
+<h3 id="数据模型的基本操作："><a href="#数据模型的基本操作：" class="headerlink" title="数据模型的基本操作："></a>数据模型的基本操作：</h3><p>1、取出所有数据<br>   all 方法取出所有数据<br><figure class="highlight capnproto"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># views.py</span></span><br><span class="line"><span class="comment"># 导入模型</span></span><br><span class="line"><span class="keyword">from</span> .models <span class="keyword">import</span> Book</span><br><span class="line"></span><br><span class="line">book = Book.objects.all()</span><br></pre></td></tr></table></figure></p>
+<p>2、取出单个对象,<br>    get 方法获得单个符合条件的对象。<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># pk就是主键的缩写，不管在数据库表中主键叫什么，pk都对应着主键</span></span><br><span class="line">book = Book.objects.<span class="builtin-name">get</span>(<span class="attribute">pk</span>=1)</span><br></pre></td></tr></table></figure></p>
+<p>3、过滤数据<br>    filter 方法用来进行条件过滤，只要符合条件的都取出来<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">book = Book<span class="selector-class">.objects</span><span class="selector-class">.filter</span>(price=<span class="number">100</span>)</span><br></pre></td></tr></table></figure></p>
+<p>4、增加数据<br>   建立一个对象，然后保存<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">book = Book(<span class="attribute">name</span>=<span class="string">'西游记'</span>, <span class="attribute">author</span>=<span class="string">'吴承恩'</span>, <span class="attribute">price</span>=100)</span><br><span class="line">book.save()</span><br></pre></td></tr></table></figure></p>
+<p>5、删除数据<br>   获取数据对象，执行delete 方法<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">book = Book.objects.<span class="builtin-name">get</span>(<span class="attribute">pk</span>=1)</span><br><span class="line">book.delete()</span><br></pre></td></tr></table></figure></p>
+<p>6、修改数据<br>   对数据对象重新赋值，保存<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">book = Book<span class="selector-class">.objects</span><span class="selector-class">.get</span>(name=<span class="string">'西游记'</span>)</span><br><span class="line">book<span class="selector-class">.price</span> = <span class="number">200</span></span><br><span class="line">book.save()</span><br></pre></td></tr></table></figure></p>
+<h2 id="模型常用属性"><a href="#模型常用属性" class="headerlink" title="模型常用属性"></a>模型常用属性</h2><p>在Django中，定义了一些 Field 属性与数据库表的字段对应，不同的Field 对应不同的字段类型。</p>
+<h3 id="AutoField："><a href="#AutoField：" class="headerlink" title="AutoField："></a>AutoField：</h3><p>映射到数据库中是int类型，可以有自动增长的特性。一般不需要使用这个类型，如果不指定主键，那么模型会自动的生成一个叫做id的自动增长的主键。如果你想指定一个其他名字的并且具有自动增长的主键，使用AutoField也是可以的。</p>
+<h3 id="BigAutoField："><a href="#BigAutoField：" class="headerlink" title="BigAutoField："></a>BigAutoField：</h3><p>64位的整形，类似于AutoField，只不过是产生的数据的范围是从1-9223372036854775807。</p>
+<h3 id="BooleanField："><a href="#BooleanField：" class="headerlink" title="BooleanField："></a>BooleanField：</h3><p>在模型层面接收的是True/False。在数据库层面是tinyint类型。如果没有指定默认值，默认值是None。</p>
+<h3 id="CharField："><a href="#CharField：" class="headerlink" title="CharField："></a>CharField：</h3><p>在数据库层面是varchar类型。在Python层面就是普通的字符串。这个类型在使用的时候必须要指定最大的长度，也即必须要传递max_length这个关键字参数进去。</p>
+<h3 id="DateField："><a href="#DateField：" class="headerlink" title="DateField："></a>DateField：</h3><p>日期类型。在Python中是datetime.date类型，可以记录年月日。在映射到数据库中也是date类型。使用这个Field可以传递以下几个参数：</p>
+<p>auto_now：在每次这个数据保存的时候，都使用当前的时间。比如作为一个记录修改日期的字段，可以将这个属性设置为True。<br>auto_now_add：在每次数据第一次被添加进去的时候，都使用当前的时间。比如作为一个记录第一次入库的字段，可以将这个属性设置为True。</p>
+<h3 id="DateTimeField："><a href="#DateTimeField：" class="headerlink" title="DateTimeField："></a>DateTimeField：</h3><p>日期时间类型，类似于DateField。不仅仅可以存储日期，还可以存储时间。映射到数据库中是datetime类型。这个Field也可以使用auto_now和auto_now_add两个属性。</p>
+<h3 id="TimeField："><a href="#TimeField：" class="headerlink" title="TimeField："></a>TimeField：</h3><p>时间类型。在数据库中是time类型。在Python中是datetime.time类型。</p>
+<h3 id="EmailField："><a href="#EmailField：" class="headerlink" title="EmailField："></a>EmailField：</h3><p>类似于CharField。在数据库底层也是一个varchar类型。最大长度是254个字符。</p>
+<h3 id="FileField："><a href="#FileField：" class="headerlink" title="FileField："></a>FileField：</h3><p>用来存储文件的。这个请参考后面的文件上传章节部分。</p>
+<h3 id="ImageField："><a href="#ImageField：" class="headerlink" title="ImageField："></a>ImageField：</h3><p>用来存储图片文件的。这个请参考后面的图片上传章节部分。</p>
+<h3 id="FloatField："><a href="#FloatField：" class="headerlink" title="FloatField："></a>FloatField：</h3><p>浮点类型。映射到数据库中是float类型。</p>
+<h3 id="IntegerField："><a href="#IntegerField：" class="headerlink" title="IntegerField："></a>IntegerField：</h3><p>整形。值的区间是-2147483648——2147483647。</p>
+<h3 id="BigIntegerField："><a href="#BigIntegerField：" class="headerlink" title="BigIntegerField："></a>BigIntegerField：</h3><p>大整形。值的区间是-9223372036854775808——9223372036854775807。</p>
+<h3 id="PositiveIntegerField："><a href="#PositiveIntegerField：" class="headerlink" title="PositiveIntegerField："></a>PositiveIntegerField：</h3><p>正整形。值的区间是0——2147483647。</p>
+<h3 id="SmallIntegerField："><a href="#SmallIntegerField：" class="headerlink" title="SmallIntegerField："></a>SmallIntegerField：</h3><p>小整形。值的区间是-32768——32767。</p>
+<h3 id="PositiveSmallIntegerField："><a href="#PositiveSmallIntegerField：" class="headerlink" title="PositiveSmallIntegerField："></a>PositiveSmallIntegerField：</h3><p>正小整形。值的区间是0——32767。</p>
+<h3 id="TextField："><a href="#TextField：" class="headerlink" title="TextField："></a>TextField：</h3><p>大量的文本类型。映射到数据库中是longtext类型。</p>
+<h3 id="UUIDField："><a href="#UUIDField：" class="headerlink" title="UUIDField："></a>UUIDField：</h3><p>只能存储uuid格式的字符串。uuid是一个32位的全球唯一的字符串，一般用来作为主键。</p>
+<h3 id="URLField："><a href="#URLField：" class="headerlink" title="URLField："></a>URLField：</h3><p>类似于CharField，只不过只能用来存储url格式的字符串。并且默认的max_length是200。</p>
+<h2 id="Field的常用参数："><a href="#Field的常用参数：" class="headerlink" title="Field的常用参数："></a>Field的常用参数：</h2><h3 id="null："><a href="#null：" class="headerlink" title="null："></a>null：</h3><p>如果设置为True，Django将会在映射表的时候指定是否为空。默认是为False。在使用字符串相关的Field（CharField/TextField）的时候，官方推荐尽量不要使用这个参数，也就是保持默认值False。因为Django在处理字符串相关的Field的时候，即使这个Field的null=False，如果你没有给这个Field传递任何值，那么Django也会使用一个空的字符串””来作为默认值存储进去。因此如果再使用null=True，Django会产生两种空值的情形（NULL或者空字符串）。如果想要在表单验证的时候允许这个字符串为空，那么建议使用blank=True。如果你的Field是BooleanField，那么对应的可空的字段则为NullBooleanField。</p>
+<h3 id="blank："><a href="#blank：" class="headerlink" title="blank："></a>blank：</h3><p>标识这个字段在表单验证的时候是否可以为空。默认是False。<br>这个和null是有区别的，null是一个纯数据库级别的。而blank是表单验证级别的。</p>
+<h3 id="db-column："><a href="#db-column：" class="headerlink" title="db_column："></a>db_column：</h3><p>这个字段在数据库中的名字。如果没有设置这个参数，那么将会使用模型中属性的名字。</p>
+<h3 id="default："><a href="#default：" class="headerlink" title="default："></a>default：</h3><p>默认值。可以为一个值，或者是一个函数，但是不支持lambda表达式。并且不支持列表/字典/集合等可变的数据结构。</p>
+<h3 id="primary-key："><a href="#primary-key：" class="headerlink" title="primary_key："></a>primary_key：</h3><p>是否为主键。默认是False。</p>
+<h3 id="unique："><a href="#unique：" class="headerlink" title="unique："></a>unique：</h3><p>在表中这个字段的值是否唯一。一般是设置手机号码/邮箱等。</p>
+<p>官方文档中更多的Field参数：<a href="https://docs.djangoproject.com/zh-hans/2.0/ref/models/fields/" target="_blank" rel="noopener">https://docs.djangoproject.com/zh-hans/2.0/ref/models/fields/</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Django2-0/" rel="tag"># Django2.0</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/05/Django的模板/" rel="next" title="Django的模板">
+                <i class="fa fa-chevron-left"></i> Django的模板
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="http://piuib58oz.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181205230447.jpg" alt="Threefire">
+            
+              <p class="site-author-name" itemprop="name">Threefire</p>
+              <p class="site-description motion-element" itemprop="description">记录我的学习生活</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Luffy357" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ljy1042537@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/Liang3Fire" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#djano配置数据库连接"><span class="nav-number">1.</span> <span class="nav-text">djano配置数据库连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Django-操作数据库"><span class="nav-number">2.</span> <span class="nav-text">Django 操作数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#原生的-SQL-语句"><span class="nav-number">2.1.</span> <span class="nav-text">原生的 SQL 语句</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Python-DB-API下规范下cursor对象常用接口："><span class="nav-number">2.1.1.</span> <span class="nav-text">Python DB API下规范下cursor对象常用接口：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ORM-模型"><span class="nav-number">3.</span> <span class="nav-text">ORM 模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建ORM模型："><span class="nav-number">3.1.</span> <span class="nav-text">创建ORM模型：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#映射模型到数据库中："><span class="nav-number">3.2.</span> <span class="nav-text">映射模型到数据库中：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据模型的基本操作："><span class="nav-number">3.3.</span> <span class="nav-text">数据模型的基本操作：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模型常用属性"><span class="nav-number">4.</span> <span class="nav-text">模型常用属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#AutoField："><span class="nav-number">4.1.</span> <span class="nav-text">AutoField：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BigAutoField："><span class="nav-number">4.2.</span> <span class="nav-text">BigAutoField：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BooleanField："><span class="nav-number">4.3.</span> <span class="nav-text">BooleanField：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CharField："><span class="nav-number">4.4.</span> <span class="nav-text">CharField：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DateField："><span class="nav-number">4.5.</span> <span class="nav-text">DateField：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DateTimeField："><span class="nav-number">4.6.</span> <span class="nav-text">DateTimeField：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TimeField："><span class="nav-number">4.7.</span> <span class="nav-text">TimeField：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#EmailField："><span class="nav-number">4.8.</span> <span class="nav-text">EmailField：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FileField："><span class="nav-number">4.9.</span> <span class="nav-text">FileField：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ImageField："><span class="nav-number">4.10.</span> <span class="nav-text">ImageField：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FloatField："><span class="nav-number">4.11.</span> <span class="nav-text">FloatField：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IntegerField："><span class="nav-number">4.12.</span> <span class="nav-text">IntegerField：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BigIntegerField："><span class="nav-number">4.13.</span> <span class="nav-text">BigIntegerField：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PositiveIntegerField："><span class="nav-number">4.14.</span> <span class="nav-text">PositiveIntegerField：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SmallIntegerField："><span class="nav-number">4.15.</span> <span class="nav-text">SmallIntegerField：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PositiveSmallIntegerField："><span class="nav-number">4.16.</span> <span class="nav-text">PositiveSmallIntegerField：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TextField："><span class="nav-number">4.17.</span> <span class="nav-text">TextField：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UUIDField："><span class="nav-number">4.18.</span> <span class="nav-text">UUIDField：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#URLField："><span class="nav-number">4.19.</span> <span class="nav-text">URLField：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Field的常用参数："><span class="nav-number">5.</span> <span class="nav-text">Field的常用参数：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#null："><span class="nav-number">5.1.</span> <span class="nav-text">null：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#blank："><span class="nav-number">5.2.</span> <span class="nav-text">blank：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#db-column："><span class="nav-number">5.3.</span> <span class="nav-text">db_column：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#default："><span class="nav-number">5.4.</span> <span class="nav-text">default：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#primary-key："><span class="nav-number">5.5.</span> <span class="nav-text">primary_key：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#unique："><span class="nav-number">5.6.</span> <span class="nav-text">unique：</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Threefire</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
