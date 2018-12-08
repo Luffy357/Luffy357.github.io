@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Django2.0,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="在我们做查找的时候，都是通过 模型名+objects的方式进行操作，其实’模型名+objects’ 所创建的是一个 “Djagno.db.models.manager.Manger” 对象，而 Manager 只是一个空壳，它本身没有任何的属性和方法，它的属性和方法都是通过继承 QuerySet 获得。QuerySet 上还有很多API 可以进行查找操作，这些API 都是在 QuerySet 对象">
+<meta name="keywords" content="Django2.0">
+<meta property="og:type" content="article">
+<meta property="og:title" content="QuerySet API">
+<meta property="og:url" content="https://luffy357.github.io/2018/12/08/QuerySet-API/index.html">
+<meta property="og:site_name" content="Three Fire">
+<meta property="og:description" content="在我们做查找的时候，都是通过 模型名+objects的方式进行操作，其实’模型名+objects’ 所创建的是一个 “Djagno.db.models.manager.Manger” 对象，而 Manager 只是一个空壳，它本身没有任何的属性和方法，它的属性和方法都是通过继承 QuerySet 获得。QuerySet 上还有很多API 可以进行查找操作，这些API 都是在 QuerySet 对象">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-12-08T09:13:35.114Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="QuerySet API">
+<meta name="twitter:description" content="在我们做查找的时候，都是通过 模型名+objects的方式进行操作，其实’模型名+objects’ 所创建的是一个 “Djagno.db.models.manager.Manger” 对象，而 Manager 只是一个空壳，它本身没有任何的属性和方法，它的属性和方法都是通过继承 QuerySet 获得。QuerySet 上还有很多API 可以进行查找操作，这些API 都是在 QuerySet 对象">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://luffy357.github.io/2018/12/08/QuerySet-API/">
+
+
+
+
+
+  <title>QuerySet API | Three Fire</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Three Fire</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">三火的个人博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://luffy357.github.io/2018/12/08/QuerySet-API/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Threefire">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://piuib58oz.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181205230447.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Three Fire">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">QuerySet API</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-08T17:09:47+08:00">
+                2018-12-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在我们做查找的时候，都是通过 模型名+objects<br>的方式进行操作，其实’模型名+objects’ 所创建的是一个 “Djagno.db.models.manager.Manger” 对象，而 Manager 只是一个空壳，它本身没有任何的属性和方法，它的属性和方法都是通过继承 QuerySet 获得。QuerySet 上还有很多API 可以进行查找操作，这些API 都是在 QuerySet 对象上进行查找之后再创造一个新的 QuerySet 对象，也就是说在新创造的对象上面还是可以使用这些 API 实现链式调用。<br><a id="more"></a></p>
+<h2 id="QuerySet-API"><a href="#QuerySet-API" class="headerlink" title="QuerySet API"></a>QuerySet API</h2><p>1、filter:<br>   将满足条件的数据取出来返回一个新的 QuerySet 对象。</p>
+<p>2、exclude:<br>    排除满足条件的数据返回一个新的 QuerySet 对象。</p>
+<p>3、annotate:<br>   给 QuerySet 对象中的每一个字段，都添加一个使用查询表达式(聚合函数，F表达式，Q表达式)的新字段，可以使用关键字参数的形式给表达式字段重命名。</p>
+<p>4、order_bay:<br>   根据查询结果依据某个字段进行排序，如果要倒序排序只需要在字段前加一个负号。排序可以对多个字段进行排序，也就是前一个字段排序有多个数据相同的情况，依据第二个提供的字段进行排序，需要注意的是多个 order_bay 在链式调用的时候只有最后一个会起作用。</p>
+<p>5、values:<br>   默认情况下会把所有字段提取出来，也可以指定要提取的字段。需要注意的是虽然他提取出来的还是一个 QuertSet 对象但不在是模型的形式，而是字典的形式。</p>
+<p>6、values_list:<br>   和values 类似只不过返回的是一个元组对象而不是字典。如果返回的只有一个字段，可以用 flat=True 扁平化，返回的就是一个列表对象。</p>
+<p>7、all:<br>   返回 ORM 模型中所有的 QuerySet 对象。</p>
+<p>8、select_related:<br>   提取某个模型数据的同时也将相关联的字段提取出来，这样可以减少查询次数，优化查询。但只能在一对多或者一对一中使用，不能再多对多或者 多对一中使用。</p>
+<p>9、perfetch_related:<br>   这个方法和 select_related 非常的类似，就是在访问多个表的数据的时候，减少查询的次数，这个方法是为了解决 多对一 和 多对多 的关系的查询。使用这个方法要注意，如果在之后 再进行过滤查询那么优化就没有意义，所以如果有过滤操作，这个时候可以使用 django.db.models.Prefetch 来实现。Prefetch 这个可以提前定义好 queryset 。</p>
+<p>10、defer:<br>   在提取数据时可以过滤掉不需要的字段。返回的是一个模型对象。但主键是不会被过滤的。</p>
+<p>11、only:<br>   这个方法只能获取一条，而且有且只有一条。返回多条或者没有数据都会报错。</p>
+<p>12、get:<br>   获取满足条件的数据，只能返回一条，给出的数据有多条或者没有都会报错。</p>
+<p>13、create:<br>   创建一条数据，并且保存到数据库中。相当于用指定的模型创建一个对象，然后调用这个对象的 save() 方法</p>
+<p>14、get_or_create:<br>   根据条件进行查找，如果找到了就返回这条数据，如果没有找到就创建一个。<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">obj,created = Category<span class="selector-class">.objects</span><span class="selector-class">.get_or_create</span>(title=<span class="string">"默认分类"</span>)</span><br></pre></td></tr></table></figure></p>
+<p>如果有标题等于默认分类的分类，那么就会查找出来，如果没有，则会创建并且存储到数据库中。<br>这个方法的返回值是一个元组，元组的第一个参数obj是这个对象，第二个参数created代表是否创建的。</p>
+<p>15、bulk_create：<br>一次性创建多个数据。示例代码如下：<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Tag.objects.bulk_create([</span><br><span class="line">    Tag(<span class="attribute">name</span>=<span class="string">'111'</span>),</span><br><span class="line">    Tag(<span class="attribute">name</span>=<span class="string">'222'</span>),</span><br><span class="line">])</span><br></pre></td></tr></table></figure></p>
+<p>16、count：<br>获取提取的数据的个数。如果想要知道总共有多少条数据，那么建议使用 count，而不是使用 len(articles) 这种。因为count在底层是使用 select count(*)来实现的，这种方式比使用 len 函数更加的高效。</p>
+<p>17、first和last：<br>返回 QuerySet 中的第一条和最后一条数据。</p>
+<p>18、aggregate：<br>使用聚合函数。</p>
+<p>19、exists：<br> 判断某个条件的数据是否存在。如果要判断某个条件的元素是否存在，那么建议使用 exists，这比使用 count 或者直接判断 QuerySet 更有效得多。示例代码如下：<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> Article.objects.filter(<span class="attribute">title__contains</span>=<span class="string">'hello'</span>).exists():</span><br><span class="line">    <span class="builtin-name">print</span>(<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">比使用count更高效：</span><br><span class="line"><span class="keyword">if</span> Article.objects.filter(<span class="attribute">title__contains</span>=<span class="string">'hello'</span>).count() &gt; 0:</span><br><span class="line">    <span class="builtin-name">print</span>(<span class="literal">True</span>)</span><br><span class="line">也比直接判断QuerySet更高效：</span><br><span class="line"><span class="keyword">if</span> Article.objects.filter(<span class="attribute">title__contains</span>=<span class="string">'hello'</span>):</span><br><span class="line">    <span class="builtin-name">print</span>(<span class="literal">True</span>)</span><br></pre></td></tr></table></figure></p>
+<p>20、distinct：<br>去除掉那些重复的数据。这个方法如果底层数据库用的是 MySQL，那么不能传递任何的参数。比如想要提取所有销售的价格超过80元的图书，并且删掉那些重复的，那么可以使用 distinct 来帮我们实现，示例代码如下：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">books = Book<span class="selector-class">.objects</span><span class="selector-class">.filter</span>(bookorder__price__gte=<span class="number">80</span>).distinct()</span><br></pre></td></tr></table></figure></p>
+<p>需要注意的是，如果在 distinct之 前使用了 order_by，那么因为 order_by会提取 order_by 中指定的字段，因此再使用 distinct就会根据多个字段来进行唯一化，所以就不会把那些重复的数据删掉。示例代码如下：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">orders = BookOrder<span class="selector-class">.objects</span><span class="selector-class">.order_by</span>(<span class="string">"create_time"</span>).values(<span class="string">"book_id"</span>).distinct()</span><br></pre></td></tr></table></figure></p>
+<p>那么以上代码因为使用了 order_by，即使使用了 distinct，也会把重复的 book_id提取出来。</p>
+<p>21、update：<br>执行更新操作，在SQL底层走的也是 update 命令。比如要将所有 category 为空的 article 的 article 字段都更新为默认的分类。示例代码如下：<br><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Article.objects.filter<span class="params">(<span class="attr">category__isnull</span>=True)</span><span class="string">.update</span><span class="params">(<span class="attr">category_id</span>=3)</span></span><br></pre></td></tr></table></figure></p>
+<p>注意这个方法走的是更新的逻辑。所以更新完成后保存到数据库中不会执行 save 方法，因此不会更新 auto_now 设置的字段。</p>
+<p>22、delete：<br>删除所有满足条件的数据。删除数据的时候，要注意 on_delete 指定的处理方式。</p>
+<p>23、切片操作：<br>有时候我们查找数据，有可能只需要其中的一部分。那么这时候可以使用切片操作来帮我们完成。QuerySe t使用切片操作就跟列表使用切片操作是一样的。示例代码如下：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">books = Book<span class="selector-class">.objects</span><span class="selector-class">.all</span>()[<span class="number">1</span>:<span class="number">3</span>]</span><br><span class="line"><span class="keyword">for</span> book <span class="keyword">in</span> books:</span><br><span class="line">    print(book)</span><br></pre></td></tr></table></figure></p>
+<p>切片操作并不是把所有数据从数据库中提取出来再做切片操作。而是在数据库层面使用 LIMIE 和 OFFSET 来帮我们完成。所以如果只需要取其中一部分的数据的时候，建议大家使用切片操作。</p>
+<h2 id="什么时候Django会将QuerySet转换为SQL去执行："><a href="#什么时候Django会将QuerySet转换为SQL去执行：" class="headerlink" title="什么时候Django会将QuerySet转换为SQL去执行："></a>什么时候Django会将QuerySet转换为SQL去执行：</h2><p>生成一个 QuerySet 对象并不会马上转换为 SQL语句去执行。<br>比如我们获取 Book表下所有的图书：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">books = Book<span class="selector-class">.objects</span><span class="selector-class">.all</span>()</span><br><span class="line"><span class="function"><span class="title">print</span><span class="params">(connection.queries)</span></span></span><br></pre></td></tr></table></figure></p>
+<p>我们可以看到在打印 connection.quries 的时候打印的是一个空的列表。说明上面的 QuerySet 并没有真正的执行。<br>在以下情况下 QuerySet 会被转换为 SQL语句执行：</p>
+<p>1、迭代：在遍历 QuerySet 对象的时候，会首先先执行这个 SQL语句，然后再把这个结果返回进行迭代。比如以下代码就会转换为SQL语句：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> book <span class="keyword">in</span> Book<span class="selector-class">.objects</span><span class="selector-class">.all</span>():</span><br><span class="line">    print(book)</span><br></pre></td></tr></table></figure></p>
+<p>2、使用步长做切片操作：QuerySet 可以类似于列表一样做切片操作。做切片操作本身不会执行 SQL语句，但是如果如果在做切片操作的时候提供了步长，那么就会立马执行 SQL语句。需要注意的是，做切片后不能再执行 filter 方法，否则会报错。<br>3、调用 len函数：调用len函数用来获取 QuerySet中总共有多少条数据也会执行SQL语句。<br>4、调用 list函数：调用 list函数用来将一个 QuerySet对象转换为 list对象也会立马执行 SQL语句。<br>5、判断：如果对某个 QuerySet进行判断，也会立马执行 SQL语句。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Django2-0/" rel="tag"># Django2.0</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/08/ORM的查询操作/" rel="next" title="ORM的查询操作">
+                <i class="fa fa-chevron-left"></i> ORM的查询操作
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="http://piuib58oz.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181205230447.jpg" alt="Threefire">
+            
+              <p class="site-author-name" itemprop="name">Threefire</p>
+              <p class="site-description motion-element" itemprop="description">记录我的学习生活</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Luffy357" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ljy1042537@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/Liang3Fire" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#QuerySet-API"><span class="nav-number">1.</span> <span class="nav-text">QuerySet API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么时候Django会将QuerySet转换为SQL去执行："><span class="nav-number">2.</span> <span class="nav-text">什么时候Django会将QuerySet转换为SQL去执行：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Threefire</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
