@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Django2.0,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="迁移命令： 1、makemigrations: 将模型生成迁移脚本，模型所在的 app 必须放在 settings.py 中的 INSTALLED_APPS 中。该命令还有如下几个常用选项：  app_label: 后面可以跟一个或者多个app，就只会针对这几个 app 生成迁移脚本，如果没有任何的 app_label，那么会检查 INSTALLED_APPS 中的所有 app 下的模型，针对每个">
+<meta name="keywords" content="Django2.0">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ORM模型迁移">
+<meta property="og:url" content="https://luffy357.github.io/2018/12/10/ORM模型迁移/index.html">
+<meta property="og:site_name" content="Three Fire">
+<meta property="og:description" content="迁移命令： 1、makemigrations: 将模型生成迁移脚本，模型所在的 app 必须放在 settings.py 中的 INSTALLED_APPS 中。该命令还有如下几个常用选项：  app_label: 后面可以跟一个或者多个app，就只会针对这几个 app 生成迁移脚本，如果没有任何的 app_label，那么会检查 INSTALLED_APPS 中的所有 app 下的模型，针对每个">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-12-10T16:19:21.885Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ORM模型迁移">
+<meta name="twitter:description" content="迁移命令： 1、makemigrations: 将模型生成迁移脚本，模型所在的 app 必须放在 settings.py 中的 INSTALLED_APPS 中。该命令还有如下几个常用选项：  app_label: 后面可以跟一个或者多个app，就只会针对这几个 app 生成迁移脚本，如果没有任何的 app_label，那么会检查 INSTALLED_APPS 中的所有 app 下的模型，针对每个">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://luffy357.github.io/2018/12/10/ORM模型迁移/">
+
+
+
+
+
+  <title>ORM模型迁移 | Three Fire</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Three Fire</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">三火的个人博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://luffy357.github.io/2018/12/10/ORM模型迁移/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Threefire">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://piuib58oz.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181205230447.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Three Fire">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ORM模型迁移</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-10T21:29:36+08:00">
+                2018-12-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="迁移命令："><a href="#迁移命令：" class="headerlink" title="迁移命令："></a>迁移命令：</h2><p> 1、makemigrations: 将模型生成迁移脚本，模型所在的 app 必须放在 settings.py 中的 INSTALLED_APPS 中。该命令还有如下几个常用选项：</p>
+<ul>
+<li>app_label: 后面可以跟一个或者多个app，就只会针对这几个 app 生成迁移脚本，如果没有任何的 app_label，那么会检查 INSTALLED_APPS 中的所有 app 下的模型，针对每个 app 的模型生成迁移脚本。</li>
+<li><p>–name: 生成的迁移脚本都会在各自 app 下的 migrations 包中，这个选项可以给对迁移文件指定名字。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;</span>&gt; python manages.py makemigrations --name <span class="string">"add_content_author"</span></span><br><span class="line"><span class="comment"># 生成迁移文件为</span></span><br><span class="line"><span class="number">0001_</span>add_content_author.py</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>empty：生成一个空的迁移脚本，如果你想自己写迁移脚本，可以使用这个命令生成一个空的文件，然后自己再在文件中写迁移脚本。</p>
+<p>2、migrate: 将新生成的迁移脚本映射到数据库中，创建新的表或者修改表的结构，以下是常用的选项：</p>
+</li>
+<li>app_label: 将某个 app 下的迁移脚本映射到数据库中，没有指定的话会将 INSTALLED_APPS 中的 app 下的模型都映射到数据库中。</li>
+<li>app_label migrationname: 将某个 app 下指定名字的 migration 文件映射到数据库中。</li>
+<li>–fake: 可以将指定的迁移脚本名字添加到数据库中，但是并不会把迁移脚本转换为 SQL 语句，修改数据库中的表。</li>
+<li>–fake-initial: 将第一次生成的迁移文件版本号记录在数据库中，但并不会真正的执行迁移脚本。</li>
+</ul>
+<h2 id="执行-migrate-报错"><a href="#执行-migrate-报错" class="headerlink" title="执行 migrate 报错"></a>执行 migrate 报错</h2><p>  要知道 migrations 命令是生成的迁移脚本的，并且每个迁移脚本都记录在 app 文件在的 migrations 包中。而 migrate 是执行这些迁移脚本的。当 migrate 命令出错的时候，可能就是是数据库中的迁移版本与 migratins 中的版本一致导致的。<br>  每执行一次 migrate 操作在数据库 django_migrations 表中也会有记录。</p>
+<p>  总结：</p>
+<ul>
+<li>migrate 通过比对数据库 django_migrations 迁移脚本与项目中的迁移脚本，如果发现数据库中没有这个迁移脚本，就会执行这个脚本</li>
+<li><p>migrate 将相关的脚本翻译成 SQL 语句，在数据库中执行生效。<br>如果 SQL 语句没有问题，那么就会将这个迁移脚本名字记录到 django_migrations</p>
+<p>解决思路:<br>  1、使用 –fake 参数：<br>   首先对比数据库中的迁移脚本和代码中的迁移脚本，然后找到不同，之后使用 –fake ，将代码中的迁移脚本添加到 django_migrations 中，但并不会执行 SQL 语句，这样避免执行 migrate 命令重复执行一些迁移脚本，然后报错。<br>  2、使用 –fake inital 参数：<br>   如果代码中的迁移脚本和数据库中迁移脚本太多，而理不清时。想相关的 app 迁移文件和数据库中的记录都删除。然后重新映射。但要确保 app 中的模型和数据库的表保持一致。</p>
+<ul>
+<li>删除 app 中 migrations 包中的迁移文件，注意不要删除 init.py 文件</li>
+<li>删除 数据库中 django_migrations 表中的与 app 相关的记录。</li>
+<li>使用 migrations 重新将模型生成一个迁移脚本。</li>
+<li>使用 migrate –fake-initial 参数，将刚刚生成的迁移脚本，标记为完成。<br>因为这些模型相对应的表，已经在数据库中存在了，不需要重复执行了。这样就不会报错。</li>
+</ul>
+</li>
+</ul>
+<h2 id="根据已有的表自动生成模型"><a href="#根据已有的表自动生成模型" class="headerlink" title="根据已有的表自动生成模型:"></a>根据已有的表自动生成模型:</h2><p>  如果已经有了现成的表，或者要用以前非 Django 开发项目的数据库的表。就需要根据现有的表生成模型。<br>  1、Django 提供一个 inspectdb 的命令，可以将已经存在的表，自动的生成模型。<br>  要使用这个命令首先要在 settings.py 中配置好数据库相关信息。也就是要转换的那个数据库。<br>  <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 通过就会将表转换为模型后的代码。</span><br><span class="line"><span class="keyword">python</span> manage.<span class="keyword">py</span> inspectdb </span><br><span class="line"></span><br><span class="line"># 要将生成的代码保存到指定的文件夹</span><br><span class="line"><span class="keyword">python</span> manage.<span class="keyword">py</span> inspectdb &gt; filename.<span class="keyword">py</span></span><br><span class="line"></span><br><span class="line"># 转换一个表为模型，那么可以指定表的名字</span><br><span class="line"><span class="keyword">python</span> manage.<span class="keyword">py</span> inspectdb table_name &gt; filename.<span class="keyword">py</span></span><br></pre></td></tr></table></figure></p>
+<p>  2、修正模型:<br>   新生成的 ORM 模型有些地方可能不太合适，那么可以进行重新配置</p>
+<ul>
+<li>模型名：模型可以更改合适的</li>
+<li>模型所属 app: 只需要将模型放在对应的 app 中。</li>
+<li>模型外键引用: 使用 ForeignKey 的地方，模型引用改成字符串的形式。</li>
+<li>让 Django 管理模型: 将 Meta 下的 managed=False 删除，这个属性的意思是模型的修改，使用 migrate 都不会映射到数据库中。</li>
+<li><p>当有多对多的时候，应该也要修正模型。将中间表注视了，然后使用ManyToManyField来实现多对多。并且，使用ManyToManyField生成的中间表的名字可能和数据库中那个中间表的名字不一致，这时候肯定就不能正常连接了。那么可以通过db_table来指定中间表的名字。示例代码如下:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Article</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">   title = models.CharField(max_length=<span class="number">100</span>, blank=<span class="keyword">True</span>, null=<span class="keyword">True</span>)</span><br><span class="line">   content = models.TextField(blank=<span class="keyword">True</span>, null=<span class="keyword">True</span>)</span><br><span class="line">   author = models.ForeignKey(<span class="string">'front.User'</span>, models.SET_NULL, blank=<span class="keyword">True</span>, null=<span class="keyword">True</span>)</span><br><span class="line">   <span class="comment"># 使用ManyToManyField模型到表，生成的中间表的规则是：article_tags</span></span><br><span class="line">   <span class="comment"># 但现在已经存在的表的名字叫做：article_tag</span></span><br><span class="line">   <span class="comment"># 可以使用db_table，指定中间表的名字</span></span><br><span class="line">   tags = models.ManyToManyField(<span class="string">"Tag"</span>,db_table=<span class="string">'article_tag'</span>)</span><br><span class="line"></span><br><span class="line"> <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">     db_table = <span class="string">'article'</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>表名：切记不要修改表的名字。不然映射到数据库中，会发生找不到对应表的错误。</p>
+<p>3、执行命令python manage.py makemigrations生成初始化的迁移脚本。方便后面通过ORM来管理表。这时候还需要执行命令python manage.py migrate –fake-initial，因为如果不使用–fake-initial，那么会将迁移脚本会映射到数据库中。这时候迁移脚本会新创建表，而这个表之前是已经存在了的，所以肯定会报错。此时我们只要将这个0001-initial的状态修改为已经映射，而不真正执行映射，下次再migrate的时候，就会忽略他。</p>
+<p>4、将Django的核心表映射到数据库中：Django中还有一些核心的表也是需要创建的。不然有些功能是用不了的。比如auth相关表。如果这个数据库之前就是使用Django开发的，那么这些表就已经存在了。可以不用管了。如果之前这个数据库不是使用Django开发的，那么应该使用migrate命令将Django中的核心模型映射到数据库中。</p>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Django2-0/" rel="tag"># Django2.0</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/08/QuerySet-API/" rel="next" title="QuerySet API">
+                <i class="fa fa-chevron-left"></i> QuerySet API
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="http://piuib58oz.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181205230447.jpg" alt="Threefire">
+            
+              <p class="site-author-name" itemprop="name">Threefire</p>
+              <p class="site-description motion-element" itemprop="description">记录我的学习生活</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Luffy357" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ljy1042537@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/Liang3Fire" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#迁移命令："><span class="nav-number">1.</span> <span class="nav-text">迁移命令：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#执行-migrate-报错"><span class="nav-number">2.</span> <span class="nav-text">执行 migrate 报错</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#根据已有的表自动生成模型"><span class="nav-number">3.</span> <span class="nav-text">根据已有的表自动生成模型:</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Threefire</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
