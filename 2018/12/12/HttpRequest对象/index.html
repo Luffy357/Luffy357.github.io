@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Django2.0,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Django在接收到http请求之后，会根据http请求携带的参数以及报文信息创建一个WSGIRequest对象，并且作为视图函数第一个参数传给视图函数。也就是我们经常看到的request参数。在这个对象上我们可以找到客户端上传上来的所有信息。这个对象的完整路径是django.core.handlers.wsgi.WSGIRequest。而 WSGIRequest 就是继承 HttpRequest">
+<meta name="keywords" content="Django2.0">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HHttpRequest对象">
+<meta property="og:url" content="https://luffy357.github.io/2018/12/12/HttpRequest对象/index.html">
+<meta property="og:site_name" content="Three Fire">
+<meta property="og:description" content="Django在接收到http请求之后，会根据http请求携带的参数以及报文信息创建一个WSGIRequest对象，并且作为视图函数第一个参数传给视图函数。也就是我们经常看到的request参数。在这个对象上我们可以找到客户端上传上来的所有信息。这个对象的完整路径是django.core.handlers.wsgi.WSGIRequest。而 WSGIRequest 就是继承 HttpRequest">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-12-12T15:14:20.739Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HHttpRequest对象">
+<meta name="twitter:description" content="Django在接收到http请求之后，会根据http请求携带的参数以及报文信息创建一个WSGIRequest对象，并且作为视图函数第一个参数传给视图函数。也就是我们经常看到的request参数。在这个对象上我们可以找到客户端上传上来的所有信息。这个对象的完整路径是django.core.handlers.wsgi.WSGIRequest。而 WSGIRequest 就是继承 HttpRequest">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://luffy357.github.io/2018/12/12/HttpRequest对象/">
+
+
+
+
+
+  <title>HHttpRequest对象 | Three Fire</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Three Fire</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">三火的个人博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://luffy357.github.io/2018/12/12/HttpRequest对象/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Threefire">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://piuib58oz.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181205230447.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Three Fire">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">HHttpRequest对象</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-12T23:06:18+08:00">
+                2018-12-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Django在接收到http请求之后，会根据http请求携带的参数以及报文信息创建一个WSGIRequest对象，并且作为视图函数第一个参数传给视图函数。也就是我们经常看到的request参数。在这个对象上我们可以找到客户端上传上来的所有信息。这个对象的完整路径是django.core.handlers.wsgi.WSGIRequest。而 WSGIRequest 就是继承 HttpRequest 对象。<br><a id="more"></a></p>
+<h2 id="WSGIRequest对象常用属性和方法："><a href="#WSGIRequest对象常用属性和方法：" class="headerlink" title="WSGIRequest对象常用属性和方法："></a>WSGIRequest对象常用属性和方法：</h2><p>  WSGIRequest对象常用属性：<br>  WSGIRequest对象上大部分的属性都是只读的。因为这些属性是从客户端上传上来的，没必要做任何的修改。以下将对一些常用的属性进行讲解：</p>
+<h3 id="path："><a href="#path：" class="headerlink" title="path："></a>path：</h3><p>请求服务器的完整“路径”，但不包含域名和参数。比如<a href="http://www.baidu.com/xxx/yyy/，那么path就是/xxx/yyy/。" target="_blank" rel="noopener">http://www.baidu.com/xxx/yyy/，那么path就是/xxx/yyy/。</a></p>
+<h3 id="method："><a href="#method：" class="headerlink" title="method："></a>method：</h3><p>代表当前请求的http方法。比如是GET还是POST。</p>
+<h3 id="GET："><a href="#GET：" class="headerlink" title="GET："></a>GET：</h3><p>一个django.http.request.QueryDict对象。操作起来类似于字典。这个属性中包含了所有以?xxx=xxx的方式上传上来的参数。</p>
+<h3 id="POST："><a href="#POST：" class="headerlink" title="POST："></a>POST：</h3><p>也是一个django.http.request.QueryDict对象。这个属性中包含了所有以POST方式上传上来的参数。</p>
+<h3 id="FILES："><a href="#FILES：" class="headerlink" title="FILES："></a>FILES：</h3><p>也是一个django.http.request.QueryDict对象。这个属性中包含了所有上传的文件。</p>
+<h3 id="COOKIES："><a href="#COOKIES：" class="headerlink" title="COOKIES："></a>COOKIES：</h3><p>一个标准的Python字典，包含所有的cookie，键值对都是字符串类型。</p>
+<h3 id="session："><a href="#session：" class="headerlink" title="session："></a>session：</h3><p>一个类似于字典的对象。用来操作服务器的session。</p>
+<h3 id="META："><a href="#META：" class="headerlink" title="META："></a>META：</h3><p>存储的客户端发送上来的所有header信息。</p>
+<h3 id="CONTENT-LENGTH："><a href="#CONTENT-LENGTH：" class="headerlink" title="CONTENT_LENGTH："></a>CONTENT_LENGTH：</h3><p>请求的正文的长度（是一个字符串）。</p>
+<h3 id="CONTENT-TYPE："><a href="#CONTENT-TYPE：" class="headerlink" title="CONTENT_TYPE："></a>CONTENT_TYPE：</h3><p>请求的正文的MIME类型。</p>
+<h3 id="HTTP-ACCEPT："><a href="#HTTP-ACCEPT：" class="headerlink" title="HTTP_ACCEPT："></a>HTTP_ACCEPT：</h3><p>响应可接收的Content-Type。</p>
+<h3 id="HTTP-ACCEPT-ENCODING："><a href="#HTTP-ACCEPT-ENCODING：" class="headerlink" title="HTTP_ACCEPT_ENCODING："></a>HTTP_ACCEPT_ENCODING：</h3><p>响应可接收的编码。</p>
+<h3 id="HTTP-ACCEPT-LANGUAGE："><a href="#HTTP-ACCEPT-LANGUAGE：" class="headerlink" title="HTTP_ACCEPT_LANGUAGE："></a>HTTP_ACCEPT_LANGUAGE：</h3><p>响应可接收的语言。</p>
+<h3 id="HTTP-HOST："><a href="#HTTP-HOST：" class="headerlink" title="HTTP_HOST："></a>HTTP_HOST：</h3><p>客户端发送的HOST值。</p>
+<h3 id="HTTP-REFERER："><a href="#HTTP-REFERER：" class="headerlink" title="HTTP_REFERER："></a>HTTP_REFERER：</h3><p>在访问这个页面上一个页面的url。</p>
+<h3 id="QUERY-STRING："><a href="#QUERY-STRING：" class="headerlink" title="QUERY_STRING："></a>QUERY_STRING：</h3><p>单个字符串形式的查询字符串（未解析过的形式）。</p>
+<h3 id="REMOTE-ADDR："><a href="#REMOTE-ADDR：" class="headerlink" title="REMOTE_ADDR："></a>REMOTE_ADDR：</h3><p>客户端的IP地址。如果服务器使用了nginx做反向代理或者负载均衡，那么这个值返回的是127.0.0.1，这时候可以使用HTTP_X_FORWARDED_FOR来获取，所以获取ip地址的代码片段如下：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> request<span class="selector-class">.META</span><span class="selector-class">.has_key</span>(<span class="string">'HTTP_X_FORWARDED_FOR'</span>):  </span><br><span class="line">    ip =  request<span class="selector-class">.META</span>[<span class="string">'HTTP_X_FORWARDED_FOR'</span>]  </span><br><span class="line"><span class="keyword">else</span>:  </span><br><span class="line">    ip = request<span class="selector-class">.META</span>[<span class="string">'REMOTE_ADDR'</span>]</span><br></pre></td></tr></table></figure></p>
+<h3 id="REMOTE-HOST："><a href="#REMOTE-HOST：" class="headerlink" title="REMOTE_HOST："></a>REMOTE_HOST：</h3><p>客户端的主机名。</p>
+<h3 id="REQUEST-METHOD："><a href="#REQUEST-METHOD：" class="headerlink" title="REQUEST_METHOD："></a>REQUEST_METHOD：</h3><p>请求方法。一个字符串类似于GET或者POST。</p>
+<h3 id="SERVER-NAME："><a href="#SERVER-NAME：" class="headerlink" title="SERVER_NAME："></a>SERVER_NAME：</h3><p>服务器域名。</p>
+<h3 id="SERVER-PORT："><a href="#SERVER-PORT：" class="headerlink" title="SERVER_PORT："></a>SERVER_PORT：</h3><p>服务器端口号，是一个字符串类型。</p>
+<h2 id="WSGIRequest对象常用方法："><a href="#WSGIRequest对象常用方法：" class="headerlink" title="WSGIRequest对象常用方法："></a>WSGIRequest对象常用方法：</h2><h3 id="is-secure-："><a href="#is-secure-：" class="headerlink" title="is_secure()："></a>is_secure()：</h3><p>是否是采用https协议。</p>
+<h3 id="is-ajax-："><a href="#is-ajax-：" class="headerlink" title="is_ajax()："></a>is_ajax()：</h3><p>是否采用ajax发送的请求。原理就是判断请求头中是否存在X-Requested-With:XMLHttpRequest。</p>
+<h3 id="get-host-："><a href="#get-host-：" class="headerlink" title="get_host()："></a>get_host()：</h3><p>服务器的域名。如果在访问的时候还有端口号，那么会加上端口号。比如<a href="http://www.baidu.com:9000。" target="_blank" rel="noopener">www.baidu.com:9000。</a></p>
+<h3 id="get-full-path-："><a href="#get-full-path-：" class="headerlink" title="get_full_path()："></a>get_full_path()：</h3><p>返回完整的path。如果有查询字符串，还会加上查询字符串。比如/music/bands/?print=True。</p>
+<h3 id="get-raw-uri-："><a href="#get-raw-uri-：" class="headerlink" title="get_raw_uri()："></a>get_raw_uri()：</h3><p>获取请求的完整url。</p>
+<h2 id="QueryDict对象"><a href="#QueryDict对象" class="headerlink" title="QueryDict对象"></a>QueryDict对象</h2><p>  使用 request.GET 和 request.POST 得到都是 QueryDcit对象。这个对象继承 dict，用法和 dict 差不多。</p>
+<h3 id="get方法："><a href="#get方法：" class="headerlink" title="get方法："></a>get方法：</h3><p>   用来获取指定 key 的值，如果没有这个 key 就返回 None。</p>
+<h3 id="getlist方法"><a href="#getlist方法" class="headerlink" title="getlist方法:"></a>getlist方法:</h3><p>   如果浏览器上传来的 key 对应的值有多个，那么就要用这个方法获取。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Django2-0/" rel="tag"># Django2.0</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/12/Django限制请求/" rel="next" title="Django限制请求">
+                <i class="fa fa-chevron-left"></i> Django限制请求
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/12/HttpResponse对象和JsonResponsee类/" rel="prev" title="HttpResponse对象和JsonResponsee类">
+                HttpResponse对象和JsonResponsee类 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="http://piuib58oz.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181205230447.jpg" alt="Threefire">
+            
+              <p class="site-author-name" itemprop="name">Threefire</p>
+              <p class="site-description motion-element" itemprop="description">记录我的学习生活</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Luffy357" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ljy1042537@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/Liang3Fire" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#WSGIRequest对象常用属性和方法："><span class="nav-number">1.</span> <span class="nav-text">WSGIRequest对象常用属性和方法：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#path："><span class="nav-number">1.1.</span> <span class="nav-text">path：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#method："><span class="nav-number">1.2.</span> <span class="nav-text">method：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GET："><span class="nav-number">1.3.</span> <span class="nav-text">GET：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#POST："><span class="nav-number">1.4.</span> <span class="nav-text">POST：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FILES："><span class="nav-number">1.5.</span> <span class="nav-text">FILES：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#COOKIES："><span class="nav-number">1.6.</span> <span class="nav-text">COOKIES：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#session："><span class="nav-number">1.7.</span> <span class="nav-text">session：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#META："><span class="nav-number">1.8.</span> <span class="nav-text">META：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CONTENT-LENGTH："><span class="nav-number">1.9.</span> <span class="nav-text">CONTENT_LENGTH：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CONTENT-TYPE："><span class="nav-number">1.10.</span> <span class="nav-text">CONTENT_TYPE：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP-ACCEPT："><span class="nav-number">1.11.</span> <span class="nav-text">HTTP_ACCEPT：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP-ACCEPT-ENCODING："><span class="nav-number">1.12.</span> <span class="nav-text">HTTP_ACCEPT_ENCODING：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP-ACCEPT-LANGUAGE："><span class="nav-number">1.13.</span> <span class="nav-text">HTTP_ACCEPT_LANGUAGE：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP-HOST："><span class="nav-number">1.14.</span> <span class="nav-text">HTTP_HOST：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP-REFERER："><span class="nav-number">1.15.</span> <span class="nav-text">HTTP_REFERER：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#QUERY-STRING："><span class="nav-number">1.16.</span> <span class="nav-text">QUERY_STRING：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#REMOTE-ADDR："><span class="nav-number">1.17.</span> <span class="nav-text">REMOTE_ADDR：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#REMOTE-HOST："><span class="nav-number">1.18.</span> <span class="nav-text">REMOTE_HOST：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#REQUEST-METHOD："><span class="nav-number">1.19.</span> <span class="nav-text">REQUEST_METHOD：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SERVER-NAME："><span class="nav-number">1.20.</span> <span class="nav-text">SERVER_NAME：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SERVER-PORT："><span class="nav-number">1.21.</span> <span class="nav-text">SERVER_PORT：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WSGIRequest对象常用方法："><span class="nav-number">2.</span> <span class="nav-text">WSGIRequest对象常用方法：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#is-secure-："><span class="nav-number">2.1.</span> <span class="nav-text">is_secure()：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#is-ajax-："><span class="nav-number">2.2.</span> <span class="nav-text">is_ajax()：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#get-host-："><span class="nav-number">2.3.</span> <span class="nav-text">get_host()：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#get-full-path-："><span class="nav-number">2.4.</span> <span class="nav-text">get_full_path()：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#get-raw-uri-："><span class="nav-number">2.5.</span> <span class="nav-text">get_raw_uri()：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#QueryDict对象"><span class="nav-number">3.</span> <span class="nav-text">QueryDict对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#get方法："><span class="nav-number">3.1.</span> <span class="nav-text">get方法：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#getlist方法"><span class="nav-number">3.2.</span> <span class="nav-text">getlist方法:</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Threefire</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
