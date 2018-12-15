@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Django2.0,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="类视图是 Django 官方推荐的一种写法，就使用类的方式构建视图，这样就可以利用类的属性继承等特点。">
+<meta name="keywords" content="Django2.0">
+<meta property="og:type" content="article">
+<meta property="og:title" content="类视图">
+<meta property="og:url" content="https://luffy357.github.io/2018/12/13/类视图/index.html">
+<meta property="og:site_name" content="Three Fire">
+<meta property="og:description" content="类视图是 Django 官方推荐的一种写法，就使用类的方式构建视图，这样就可以利用类的属性继承等特点。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-12-15T15:31:16.105Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="类视图">
+<meta name="twitter:description" content="类视图是 Django 官方推荐的一种写法，就使用类的方式构建视图，这样就可以利用类的属性继承等特点。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://luffy357.github.io/2018/12/13/类视图/">
+
+
+
+
+
+  <title>类视图 | Three Fire</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Three Fire</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">三火的个人博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://luffy357.github.io/2018/12/13/类视图/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Threefire">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://piuib58oz.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181205230447.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Three Fire">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">类视图</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-13T22:39:41+08:00">
+                2018-12-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>类视图是 Django 官方推荐的一种写法，就使用类的方式构建视图，这样就可以利用类的属性继承等特点。<br><a id="more"></a></p>
+<h2 id="View"><a href="#View" class="headerlink" title="View"></a>View</h2><p>类视图需要继承 django.views.generic.base.View 。然后可以根据当前的请求的 method，来实现不同的方法。类视图在做 url 映射时，需要调用 as_view()方法。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BookDetailView</span><span class="params">(View)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get</span><span class="params">(self, request)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> render(request, <span class="string">'add_book.html'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">post</span><span class="params">(self, request)</span>:</span></span><br><span class="line">        print(request.POST.get(<span class="string">'bookname'</span>))</span><br><span class="line">        print(request.POST.get(<span class="string">'author'</span>))</span><br><span class="line">        <span class="keyword">return</span> HttpResponse(<span class="string">"提交成功"</span>)</span><br></pre></td></tr></table></figure></p>
+<p>不同是什么请求方式，类视图首先都是交给 dispatch(request, *args, **kwargs)来处理。<br><figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># dispatch方法的源码</span><br><span class="line">def dispatch(<span class="keyword">self</span>, request, *args, **kwargs):</span><br><span class="line">    # <span class="keyword">Try</span> <span class="keyword">to</span> dispatch <span class="keyword">to</span> the right <span class="function"><span class="keyword">method</span>;</span> <span class="keyword">if</span> a <span class="function"><span class="keyword">method</span> <span class="title">doesn</span>'<span class="title">t</span> <span class="title">exist</span>,</span></span><br><span class="line"><span class="function">    # <span class="title">defer</span> <span class="title">to</span> <span class="title">the</span> <span class="title">error</span> <span class="title">handler</span>. <span class="title">Also</span> <span class="title">defer</span> <span class="title">to</span> <span class="title">the</span> <span class="title">error</span> <span class="title">handler</span> <span class="title">if</span> <span class="title">the</span></span></span><br><span class="line"><span class="function">    # <span class="title">request</span> <span class="title">method</span> <span class="title">isn</span>'<span class="title">t</span> <span class="title">on</span> <span class="title">the</span> <span class="title">approved</span> <span class="title">list</span>.</span></span><br><span class="line"><span class="function">    <span class="title">if</span> <span class="title">request</span>.<span class="title">method</span>.<span class="title">lower</span><span class="params">()</span> <span class="title">in</span> <span class="title">self</span>.<span class="title">http_method_names</span>:</span></span><br><span class="line">        handler = getattr(<span class="keyword">self</span>, request.method.lower(), <span class="keyword">self</span>.http_method_not_allowed)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            handler = <span class="keyword">self</span>.http_method_not_allowed</span><br><span class="line">        return handler(request, *args, **kwargs)</span><br></pre></td></tr></table></figure></p>
+<p>如果访问了 View 中没有定义的方法。那么就会把这个请求转发给 http_method_not_allowed(request, *args, **kwargs) 方法。<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">http_method_not_allowed</span><span class="params">(<span class="keyword">self</span>, request, *args, **kwargs)</span></span><span class="symbol">:</span></span><br><span class="line">    logger.warning(</span><br><span class="line">            <span class="string">'Method Not Allowed (%s): %s'</span>, request.method, request.path,</span><br><span class="line">            extra=&#123;<span class="string">'status_code'</span>: <span class="number">405</span>, <span class="string">'request'</span>: request&#125;</span><br><span class="line">        )</span><br><span class="line">    <span class="keyword">return</span> HttpResponseNotAllowed(<span class="keyword">self</span>._allowed_methods())</span><br></pre></td></tr></table></figure></p>
+<h2 id="TemplateView"><a href="#TemplateView" class="headerlink" title="TemplateView:"></a>TemplateView:</h2><p>django.views.generic.base.TemplateView 这个视图可以直接返回模板，常用属性</p>
+<ul>
+<li>templaet_name: 指定模板的路径 </li>
+<li>get_context_date: 用来返回上下文数据的，可以直接数据传入模板中。</li>
+</ul>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AboutView</span>(<span class="title">TemplateView</span>):</span></span><br><span class="line">    template_name = <span class="string">'about.html'</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_context_data</span><span class="params">(<span class="keyword">self</span>, **kwargs)</span></span><span class="symbol">:</span></span><br><span class="line">        context = &#123;<span class="string">'phone'</span>: <span class="string">'0571-8585334'</span>&#125;</span><br><span class="line">        <span class="keyword">return</span> context</span><br></pre></td></tr></table></figure>
+<p>如果在模板不需要传递任何参数，完成返回的是一格静态页面，可以直接到 urls.py 中使用。<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">path</span><span class="params">(<span class="string">'about/'</span>, TemplateView.as_view(template_name=<span class="string">'about.html'</span>)</span></span>),</span><br></pre></td></tr></table></figure></p>
+<h2 id="ListView"><a href="#ListView" class="headerlink" title="ListView:"></a>ListView:</h2><p> 如果需要将某些数据作为列表展示出来，就可以是 ListView。<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">lass ArticleListView(ListView)<span class="symbol">:</span></span><br><span class="line">    model = Article</span><br><span class="line">    template_name = <span class="string">'article_list.html'</span></span><br><span class="line">    context_object_name = <span class="string">'articles'</span></span><br><span class="line">    paginate_by = <span class="number">10</span></span><br><span class="line">    ordering = <span class="string">'id'</span></span><br><span class="line">    page_kwarg = <span class="string">'page'</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_context_data</span><span class="params">(<span class="keyword">self</span>, **kwargs)</span></span><span class="symbol">:</span></span><br><span class="line">        context = <span class="keyword">super</span>(ArticleListView, <span class="keyword">self</span>).get_context_data(**kwargs)</span><br><span class="line">        context[<span class="string">'username'</span>] = <span class="string">'threefire'</span></span><br><span class="line">        print(context)</span><br><span class="line">        <span class="keyword">return</span> context</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_queryset</span><span class="params">(<span class="keyword">self</span>)</span></span><span class="symbol">:</span></span><br><span class="line">        <span class="keyword">return</span> Article.objects.filter(id__lte=<span class="number">5</span>)</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>model: 指定给那个模型生成列表</li>
+<li>tempalte_name: 指定关联的模板</li>
+<li>context_objects_name: 传人模板中 context 的名字</li>
+<li>paginate_by: 一页显示多少条数据</li>
+<li>ordering: 根据那个字段排序</li>
+<li>page_kwarg: 获取第几页数据的参数名</li>
+<li>get_context_data: 获取上下文的数据</li>
+<li>get_queryser: 指定返回字段</li>
+</ul>
+<p>注意在 get_context_data 中要先调用父类的 get_context_data 避免重写这个方法导致一些参数不可用。</p>
+<h3 id="Paginator和Page类"><a href="#Paginator和Page类" class="headerlink" title="Paginator和Page类"></a>Paginator和Page类</h3><p>在 context 中还附带着这两个对象，这两个对象是做分页用的。<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'paginator'</span>: &lt;django<span class="selector-class">.core</span><span class="selector-class">.paginator</span><span class="selector-class">.Paginator</span> <span class="selector-tag">object</span> at <span class="number">0</span>x00000000041EB208&gt;, <span class="string">'page_obj'</span>: &lt;Page <span class="number">10</span> of <span class="number">10</span>&gt;,</span><br></pre></td></tr></table></figure></p>
+<h4 id="Paginator常用属性和方法"><a href="#Paginator常用属性和方法" class="headerlink" title="Paginator常用属性和方法"></a>Paginator常用属性和方法</h4><ul>
+<li>count: 总共有多少条数据。</li>
+<li>num_pages: 总共有多少页。</li>
+<li>page_range: 页面的数字区间。如果有三页那么就range(1,4)</li>
+</ul>
+<h4 id="Page常用属性和方法"><a href="#Page常用属性和方法" class="headerlink" title="Page常用属性和方法"></a>Page常用属性和方法</h4><ul>
+<li>has_next: 是否还有下一页。</li>
+<li>has_previous: 是否还有上一页。</li>
+<li>next_page_number: 下一页的页码。</li>
+<li>previous_page_number: 上一页的页码。</li>
+<li>number: 当前页。</li>
+<li>start_index: 当前这一页的第一条数据的索引值。</li>
+<li>end_index: 当前这一页的最后一条数据的索引值。</li>
+</ul>
+<p>利用Paginator和Page实现分页<br><figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"pagination"</span>&gt;</span></span></span><br><span class="line"><span class="xml">    </span><span class="comment">&#123;# 上一页 #&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml">    </span><span class="template-tag">&#123;% <span class="name"><span class="name">if</span></span> page_obj.has_previous %&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"</span></span></span><span class="template-tag">&#123;% <span class="name"><span class="name">url</span></span> 'front:list' %&#125;</span><span class="xml"><span class="tag"><span class="string">?page=</span></span></span><span class="template-variable">&#123;&#123; articles.previous_page_number &#125;&#125;</span><span class="xml"><span class="tag"><span class="string">"</span>&gt;</span>上一页<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="xml">    </span><span class="template-tag">&#123;% <span class="name"><span class="name">else</span></span> %&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"disabled"</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"javascript:void(0)"</span>&gt;</span>上一页<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="xml">    </span><span class="template-tag">&#123;% <span class="name"><span class="name">endif</span></span> %&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">    </span><span class="comment">&#123;# 数字页 #&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml">    </span><span class="template-tag">&#123;% <span class="name"><span class="name">for</span></span> pages <span class="keyword">in</span> paginator.page_range %&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml">        </span><span class="template-tag">&#123;% <span class="name"><span class="name">if</span></span> pages == page_obj.number %&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"active"</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"javascript:void(0)"</span>&gt;</span></span><span class="template-variable">&#123;&#123; pages &#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="xml">        </span><span class="template-tag">&#123;% <span class="name"><span class="name">else</span></span> %&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"</span></span></span><span class="template-tag">&#123;% <span class="name"><span class="name">url</span></span> 'front:list' %&#125;</span><span class="xml"><span class="tag"><span class="string">?page=</span></span></span><span class="template-variable">&#123;&#123; pages&#125;&#125;</span><span class="xml"><span class="tag"><span class="string">"</span>&gt;</span></span><span class="template-variable">&#123;&#123; pages &#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="xml">         </span><span class="template-tag">&#123;% <span class="name"><span class="name">endif</span></span> %&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml">    </span><span class="template-tag">&#123;% <span class="name"><span class="name">endfor</span></span> %&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml">    </span></span><br><span class="line"><span class="xml">    </span><span class="comment">&#123;# 下一页 #&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml">    </span><span class="template-tag">&#123;% <span class="name"><span class="name">if</span></span> page_obj.has_next %&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"</span></span></span><span class="template-tag">&#123;% <span class="name"><span class="name">url</span></span> 'front:list' %&#125;</span><span class="xml"><span class="tag"><span class="string">?page=</span></span></span><span class="template-variable">&#123;&#123; page_obj.next_page_number &#125;&#125;</span><span class="xml"><span class="tag"><span class="string">"</span>&gt;</span>下一页<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="xml">    </span><span class="template-tag">&#123;% <span class="name"><span class="name">else</span></span> %&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"disabled"</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"javascript:void(0)"</span>&gt;</span>下一页<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="xml">    </span><span class="template-tag">&#123;% <span class="name"><span class="name">endif</span></span> %&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></span><br></pre></td></tr></table></figure></p>
+<p>如果想要显示如下形式的分页。<br><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"># views.py (ListView)</span><br><span class="line">    def get_pagination_data(self, paginator, page_obj, around_count=<span class="number">2</span>):</span><br><span class="line">        current_page = page_obj.number</span><br><span class="line">        num_pages = paginator.num_pages</span><br><span class="line"></span><br><span class="line">        left_has_more = <span class="literal">False</span></span><br><span class="line">        right_has_more = <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> current_page &lt;= around_count+<span class="number">2</span>:</span><br><span class="line">            left_pages = <span class="keyword">range</span>(<span class="number">1</span>, current_page)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            left_has_more = <span class="literal">True</span></span><br><span class="line">            left_pages = <span class="keyword">range</span>(current_page-around_count, current_page)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> current_page &gt;= num_pages-around_count-<span class="number">1</span>:</span><br><span class="line">            right_pages = <span class="keyword">range</span>(current_page+<span class="number">1</span>, num_pages+<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            right_has_more = <span class="literal">True</span></span><br><span class="line">            right_pages = <span class="keyword">range</span>(current_page+<span class="number">1</span>, current_page+around_count+<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            <span class="symbol">'left_pages</span>': left_pages,</span><br><span class="line">            <span class="symbol">'right_pages</span>': right_pages,</span><br><span class="line">            <span class="symbol">'current_page</span>': current_page,</span><br><span class="line">            <span class="symbol">'left_has_more</span>': left_has_more,</span><br><span class="line">            <span class="symbol">'right_has_more</span>': right_has_more,</span><br><span class="line">            <span class="symbol">'num_pages</span>': num_pages,</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"># .html</span></span><br><span class="line"><span class="xml"></span><span class="comment">&#123;# 左边页 #&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml">       <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"</span></span></span><span class="template-tag">&#123;% <span class="name"><span class="name">url</span></span> 'front:list' %&#125;</span><span class="xml"><span class="tag"><span class="string">?page=1"</span>&gt;</span>1<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="xml">       </span><span class="template-tag">&#123;% <span class="name"><span class="name">if</span></span> left_has_more %&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml">           <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"javascript:void(0)"</span>&gt;</span>...<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="xml">       </span><span class="template-tag">&#123;% <span class="name"><span class="name">endif</span></span> %&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml">       </span><span class="template-tag">&#123;% <span class="name"><span class="name">for</span></span> left_page <span class="keyword">in</span> left_pages %&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml">           <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"</span></span></span><span class="template-tag">&#123;% <span class="name"><span class="name">url</span></span> 'front:list' %&#125;</span><span class="xml"><span class="tag"><span class="string">?page=</span></span></span><span class="template-variable">&#123;&#123; left_page &#125;&#125;</span><span class="xml"><span class="tag"><span class="string">"</span>&gt;</span></span><span class="template-variable">&#123;&#123; left_page &#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="xml">       </span><span class="template-tag">&#123;% <span class="name"><span class="name">endfor</span></span> %&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">       </span><span class="comment">&#123;# 当前页 #&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml">       <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"</span></span></span><span class="template-tag">&#123;% <span class="name"><span class="name">url</span></span> 'front:list' %&#125;</span><span class="xml"><span class="tag"><span class="string">?page=</span></span></span><span class="template-variable">&#123;&#123; current_page &#125;&#125;</span><span class="xml"><span class="tag"><span class="string">"</span>&gt;</span></span><span class="template-variable">&#123;&#123; current_page &#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">      </span><span class="comment">&#123;# 右边页 #&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml">      </span><span class="template-tag">&#123;% <span class="name"><span class="name">for</span></span> right_page <span class="keyword">in</span> right_pages %&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml">          <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"</span></span></span><span class="template-tag">&#123;% <span class="name"><span class="name">url</span></span> 'front:list' %&#125;</span><span class="xml"><span class="tag"><span class="string">?page=</span></span></span><span class="template-variable">&#123;&#123; right_page &#125;&#125;</span><span class="xml"><span class="tag"><span class="string">"</span>&gt;</span></span><span class="template-variable">&#123;&#123; right_page &#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="xml">      </span><span class="template-tag">&#123;% <span class="name"><span class="name">endfor</span></span> %&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml">      </span><span class="template-tag">&#123;% <span class="name"><span class="name">if</span></span> right_has_more %&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml">          <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"javascript:void(0)"</span>&gt;</span>...<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="xml">      </span><span class="template-tag">&#123;% <span class="name"><span class="name">endif</span></span> %&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"</span></span></span><span class="template-tag">&#123;% <span class="name"><span class="name">url</span></span> 'front:list' %&#125;</span><span class="xml"><span class="tag"><span class="string">?page=</span></span></span><span class="template-variable">&#123;&#123; num_pages &#125;&#125;</span><span class="xml"><span class="tag"><span class="string">"</span>&gt;</span></span><span class="template-variable">&#123;&#123; num_pages &#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="给类视图添加装饰器"><a href="#给类视图添加装饰器" class="headerlink" title="给类视图添加装饰器"></a>给类视图添加装饰器</h2><p>给函数视图添加装饰器，直接写上上就行，如果给类视图添加装饰器有两种方式实现。</p>
+<h3 id="装饰-dispatch-方法"><a href="#装饰-dispatch-方法" class="headerlink" title="装饰 dispatch 方法"></a>装饰 dispatch 方法</h3><p>因为在类视图中所有的请求方法进来都要先调用 dispatch 方法，所以可以对这个方法进行装饰。<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">from django.utils.decorators import method_decorator</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">login_required</span><span class="params">(func)</span></span><span class="symbol">:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(request,*args,**kwargs)</span></span><span class="symbol">:</span></span><br><span class="line">        <span class="keyword">if</span> request.GET.get(<span class="string">"username"</span>)<span class="symbol">:</span></span><br><span class="line">            <span class="keyword">return</span> func(request,*args,**kwargs)</span><br><span class="line">        <span class="symbol">else:</span></span><br><span class="line">            <span class="keyword">return</span> redirect(reverse(<span class="string">'index'</span>))</span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">IndexView</span>(<span class="title">View</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get</span><span class="params">(<span class="keyword">self</span>,request,*args,**kwargs)</span></span><span class="symbol">:</span></span><br><span class="line">        <span class="keyword">return</span> HttpResponse(<span class="string">"index"</span>)</span><br><span class="line"></span><br><span class="line">    @method_decorator(login_required)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">dispatch</span><span class="params">(<span class="keyword">self</span>, request, *args, **kwargs)</span></span><span class="symbol">:</span></span><br><span class="line">        <span class="keyword">super</span>(IndexView, <span class="keyword">self</span>).dispatch(request,*args,**kwargs)</span><br></pre></td></tr></table></figure></p>
+<h3 id="直接装饰在类上"><a href="#直接装饰在类上" class="headerlink" title="直接装饰在类上"></a>直接装饰在类上</h3><p>添加一个 name 参数，指定要装饰的方法。<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">from django.utils.decorators import method_decorator</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">login_required</span><span class="params">(func)</span></span><span class="symbol">:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(request,*args,**kwargs)</span></span><span class="symbol">:</span></span><br><span class="line">        <span class="keyword">if</span> request.GET.get(<span class="string">"username"</span>)<span class="symbol">:</span></span><br><span class="line">            <span class="keyword">return</span> func(request,*args,**kwargs)</span><br><span class="line">        <span class="symbol">else:</span></span><br><span class="line">            <span class="keyword">return</span> redirect(reverse(<span class="string">'login'</span>))</span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@method_decorator(login_required,name=<span class="string">'dispatch'</span>)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">IndexView</span>(<span class="title">View</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get</span><span class="params">(<span class="keyword">self</span>,request,*args,**kwargs)</span></span><span class="symbol">:</span></span><br><span class="line">        <span class="keyword">return</span> HttpResponse(<span class="string">"index"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">dispatch</span><span class="params">(<span class="keyword">self</span>, request, *args, **kwargs)</span></span><span class="symbol">:</span></span><br><span class="line">        <span class="keyword">super</span>(IndexView, <span class="keyword">self</span>).dispatch(request,*args,**kwargs)</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Django2-0/" rel="tag"># Django2.0</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/12/生成CSV文件/" rel="next" title="生成CSV文件">
+                <i class="fa fa-chevron-left"></i> 生成CSV文件
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="http://piuib58oz.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181205230447.jpg" alt="Threefire">
+            
+              <p class="site-author-name" itemprop="name">Threefire</p>
+              <p class="site-description motion-element" itemprop="description">记录我的学习生活</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Luffy357" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ljy1042537@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/Liang3Fire" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#View"><span class="nav-number">1.</span> <span class="nav-text">View</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TemplateView"><span class="nav-number">2.</span> <span class="nav-text">TemplateView:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ListView"><span class="nav-number">3.</span> <span class="nav-text">ListView:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Paginator和Page类"><span class="nav-number">3.1.</span> <span class="nav-text">Paginator和Page类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Paginator常用属性和方法"><span class="nav-number">3.1.1.</span> <span class="nav-text">Paginator常用属性和方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Page常用属性和方法"><span class="nav-number">3.1.2.</span> <span class="nav-text">Page常用属性和方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#给类视图添加装饰器"><span class="nav-number">4.</span> <span class="nav-text">给类视图添加装饰器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#装饰-dispatch-方法"><span class="nav-number">4.1.</span> <span class="nav-text">装饰 dispatch 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#直接装饰在类上"><span class="nav-number">4.2.</span> <span class="nav-text">直接装饰在类上</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Threefire</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
