@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Django2.0,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="在 html 中表单是用来将数据提交到服务器的，不管后台使用的什么语言框架，html 中的 form 表单数据通过 input 标签就可以提交，Django 中的表单可以渲染表单模板，也可以验证表单数据是否合法。">
+<meta name="keywords" content="Django2.0">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Django表单">
+<meta property="og:url" content="https://luffy357.github.io/2018/12/17/Django表单/index.html">
+<meta property="og:site_name" content="Three Fire">
+<meta property="og:description" content="在 html 中表单是用来将数据提交到服务器的，不管后台使用的什么语言框架，html 中的 form 表单数据通过 input 标签就可以提交，Django 中的表单可以渲染表单模板，也可以验证表单数据是否合法。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-12-18T15:33:21.635Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Django表单">
+<meta name="twitter:description" content="在 html 中表单是用来将数据提交到服务器的，不管后台使用的什么语言框架，html 中的 form 表单数据通过 input 标签就可以提交，Django 中的表单可以渲染表单模板，也可以验证表单数据是否合法。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://luffy357.github.io/2018/12/17/Django表单/">
+
+
+
+
+
+  <title>Django表单 | Three Fire</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Three Fire</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">三火的个人博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://luffy357.github.io/2018/12/17/Django表单/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Threefire">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://piuib58oz.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181205230447.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Three Fire">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Django表单</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-17T23:25:55+08:00">
+                2018-12-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习表单/" itemprop="url" rel="index">
+                    <span itemprop="name">学习表单</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在 html 中表单是用来将数据提交到服务器的，不管后台使用的什么语言框架，html 中的 form 表单数据通过 input 标签就可以提交，Django 中的表单可以渲染表单模板，也可以验证表单数据是否合法。<br><a id="more"></a></p>
+<h2 id="在-Django-中使用表单"><a href="#在-Django-中使用表单" class="headerlink" title="在 Django 中使用表单"></a>在 Django 中使用表单</h2><p>1、要在 Django 中使用表单，首先要定义一个表单类。一般的在 app 中创建一个 forms.py<br>文件来专门写表单类。表单类继承 django.forms.Form。<br><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># forms.py</span></span><br><span class="line">class MessgeBoardForm(forms.Form)：</span><br><span class="line">    title = forms.CharField(max_length=<span class="number">3</span>, <span class="keyword">label</span><span class="bash">=<span class="string">'标题'</span>, min_length=2, error_messages=&#123;<span class="string">'min_length'</span>:<span class="string">'标题字段不符合要求!'</span>&#125;)</span></span><br><span class="line"><span class="bash">    content = forms.CharField(widget=forms.Textarea, label=<span class="string">'内容'</span>)</span></span><br><span class="line"><span class="bash">    email = forms.EmailField(label=<span class="string">'邮箱'</span>)</span></span><br><span class="line"><span class="bash">    reply = forms.BooleanField(required=False, label=<span class="string">'回复'</span>)</span></span><br></pre></td></tr></table></figure></p>
+<p>2、然后在视图中，根据是 GET 还是 POST 请求来做相应的操作，如果是 GET 请求，那么返回一个空表单。 如果是 POST 请求，那么将数据进行校验。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> forms <span class="keyword">import</span> MessageBoarForm</span><br><span class="line"></span><br><span class="line"><span class="comment"># views.py</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">IndexView</span><span class="params">(View)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get</span><span class="params">(self, request)</span>:</span></span><br><span class="line">        form = MessageBoarForm()</span><br><span class="line">        <span class="keyword">return</span> render(request, <span class="string">'index.html'</span>, &#123;<span class="string">'form'</span>: form&#125;)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">post</span><span class="params">(self, request)</span>:</span></span><br><span class="line">        form = MessageBoardForm(request.POST):</span><br><span class="line">        <span class="keyword">if</span> form.is_valid():</span><br><span class="line">            title = form.cleaned_data.get(<span class="string">'title'</span>)</span><br><span class="line">            content = form.cleaned_data.get(<span class="string">'content'</span>)</span><br><span class="line">            email = form.cleaned_data.get(<span class="string">'email'</span>)</span><br><span class="line">            reply = form.cleaned_data.get(<span class="string">'reply'</span>)</span><br><span class="line">            <span class="keyword">return</span> HttpRessponse(<span class="string">'success'</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            print(form.errors)</span><br><span class="line">            <span class="keyword">return</span> HttpResponse(<span class="string">'fail'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>如果浏览器是 GET 请求的话，就返回一个 form 给模板，模板就可以根据 form 来生成一个表单的 html 代码。在使用 POST 请求的时候，就根据提交上来的数据，构建一个新的表单，这个表单是用来验证数据是否合法的。如果数据验证通过了，那么就可以通过 cleaned_data 来获取相应的数据。</p>
+<figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"># index.html</span></span><br><span class="line"><span class="xml"><span class="meta">&lt;!DOCTYPE html&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>表单页面<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"index"</span> <span class="attr">method</span>=<span class="string">"post"</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">table</span>&gt;</span></span></span><br><span class="line"><span class="xml">        </span><span class="template-variable">&#123;&#123; form.as_table &#125;&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"提交"</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">table</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<p>用 form.as_table 可以在 html 中直接生成表单，将 forms.py 中的 Filed 字段渲染到前端页面中。</p>
+<h2 id="表单验证数据"><a href="#表单验证数据" class="headerlink" title="表单验证数据"></a>表单验证数据</h2><p>在 form 类中，可以用 Field 对象数据验证，希望前端提交的数据是什么类型，那么就使用什么类型的 Field。</p>
+<h3 id="CharField"><a href="#CharField" class="headerlink" title="CharField"></a>CharField</h3><p>用来接收文本，参数：</p>
+<ul>
+<li>max_length: 这个字段值的最大小长度。</li>
+<li>min_length: 这个字段值的最小长度。</li>
+<li>required: 这个字段是否是必须的。默认是必须的。</li>
+<li>error_meddages: 在某个条件验证失败的时候，给出错误信息。</li>
+</ul>
+<h3 id="EmailField"><a href="#EmailField" class="headerlink" title="EmailField"></a>EmailField</h3><p>用来接收邮件，会自动验证邮件是否合法。错误信息的 key：required、invalid。</p>
+<h3 id="FloatField"><a href="#FloatField" class="headerlink" title="FloatField"></a>FloatField</h3><p>用来接收浮点数类型，并且如果验证通过后，会将这个字段的值转换为浮点类型。<br>参数:</p>
+<ul>
+<li>max_value: 最大的值。</li>
+<li>min_value：最小的值<br>错误信息的 key: required、invalid、max_value、min_value。</li>
+</ul>
+<h3 id="IntegerField"><a href="#IntegerField" class="headerlink" title="IntegerField"></a>IntegerField</h3><p>用来接收整形，并且验证通过后，会将这个字段的值转换为整形。<br>参数：</p>
+<ul>
+<li>max_value: 最大的值。</li>
+<li>min_value：最小的值。<br>错误信息的 key：required、invalid、max_value、min_value。</li>
+</ul>
+<h3 id="URLField"><a href="#URLField" class="headerlink" title="URLField"></a>URLField</h3><p>用来接收 url 格式的字符串。<br>错误信息的 key: required、invalid。</p>
+<h2 id="验证器"><a href="#验证器" class="headerlink" title="验证器"></a>验证器</h2><p>上面的 Field 字段之所以可以对数据类型进行校验，其实本质上也是使用了验证器，验证器都在 validators 类中，可以在 Field 中提供validators 参数来指定验证器。常用验证器</p>
+<ul>
+<li>MaxValueValidator：验证最大值。</li>
+<li>MinValueValidator：验证最小值。</li>
+<li>MinLengthValidator：验证最小长度。</li>
+<li>MaxLengthValidator：验证最大长度。</li>
+<li>EmailValidator：验证是否是邮箱格式。</li>
+<li>URLValidator：验证是否是URL格式。</li>
+<li>RegexValidator：如果还需要更加复杂的验证，那么我们可以通过正则表达式的验证 RegexValidator。<br>比如现在要验证手机号码是否合格，那么我们可以通过以下代码实现：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyForm</span><span class="params">(forms.Form)</span>:</span></span><br><span class="line">     telephone = forms.CharField(validators=[validators.RegexValidator(<span class="string">"1[345678]\d&#123;9&#125;"</span>,message=<span class="string">'请输入正确格式的手机号码！'</span>)])</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="自定义验证器"><a href="#自定义验证器" class="headerlink" title="自定义验证器"></a>自定义验证器</h2><p>当内置的验证器不能满足需要，就可以自己定义验证器。针对某个一个字段进行验证，只需要在 form 类中，定义一个 “clean_字段名” 要验证的字段名的方法。在对数据验证的时候就会自动调用这个方法。对这个字段进行验证，如果验证通过就返回这个数据。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyForm</span><span class="params">(forms.Form)</span>:</span></span><br><span class="line">    telephone = forms.CharField(validators=[validators.RegexValidator(<span class="string">"1[345678]\d&#123;9&#125;"</span>,message=<span class="string">'请输入正确格式的手机号码！'</span>)])</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">clean_telephone</span><span class="params">(self)</span>:</span></span><br><span class="line">        telephone = telephone.cleaned_data.get(<span class="string">'telephone'</span>)</span><br><span class="line">        exists = User.objects.filter(telephone=telephone).exists()</span><br><span class="line">        <span class="keyword">if</span> exists:</span><br><span class="line">            <span class="keyword">raise</span> forms.ValidationError(<span class="string">"手机号码已经存在！"</span>)</span><br><span class="line">        <span class="keyword">return</span> telephone</span><br></pre></td></tr></table></figure></p>
+<p>如果同时要对多个字段进行验证，那么就需要重写 clean 方法。比如对两次输入的密码进行验证。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyForm</span><span class="params">(forms.Form)</span>:</span></span><br><span class="line">    telephone = forms.CharField(validators=[validators.RegexValidator(<span class="string">"1[345678]\d&#123;9&#125;"</span>,message=<span class="string">'请输入正确格式的手机号码！'</span>)])</span><br><span class="line">    pwd1 = forms.CharField(max_length=<span class="number">12</span>)</span><br><span class="line">    pwd2 = forms.CharField(max_length=<span class="number">12</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">clean</span><span class="params">(self)</span>:</span></span><br><span class="line">        cleaned_data = super().clean()</span><br><span class="line">        pwd1 = cleaned_data.get(<span class="string">'pwd1'</span>)</span><br><span class="line">        pwd2 = cleaned_data.get(<span class="string">'pwd2'</span>)</span><br><span class="line">        <span class="keyword">if</span> pwd1 != pwd2:</span><br><span class="line">            <span class="keyword">raise</span> forms.ValidationError(<span class="string">'两个密码不一致！'</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> cleaned_data</span><br></pre></td></tr></table></figure></p>
+<h2 id="提取错误信息"><a href="#提取错误信息" class="headerlink" title="提取错误信息"></a>提取错误信息</h2><p>如果验证失败了，那么有一些错误信息是我们需要传给前端的。这时候我们可以通过以下属性来获取：</p>
+<ul>
+<li>form.errors：这个属性获取的错误信息是一个包含了html标签的错误信息。</li>
+<li>form.errors.get_json_data()：这个方法获取到的是一个字典类型的错误信息。将某个字段的名字作为key，错误信息作为值的一个字典。</li>
+<li>form.as_json()：这个方法是将form.get_json_data()返回的字典dump成json格式的字符串，方便进行传输。<br>返回的错误消息<figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">'username'</span>: [&#123;<span class="string">'message'</span>: <span class="string">'Enter a valid URL.'</span>, <span class="string">'code'</span>: <span class="string">'invalid'</span>&#125;, &#123;<span class="string">'message'</span>: <span class="string">'Ensure this value has at most 4 characters (it has 22).'</span>, <span class="string">'code'</span>: <span class="string">'max_length'</span>&#125;]&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>上述方法获取的字段的错误值，都是一个比较复杂的数据，为了简单化只需要将需要去的错误信息返回给前端。可以定义一个方法<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_errors_message</span><span class="params">(<span class="keyword">self</span>)</span></span><span class="symbol">:</span></span><br><span class="line">    errors = <span class="keyword">self</span>.errors.get_json_data()</span><br><span class="line">    new_message = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> key,messages_dict <span class="keyword">in</span> errors.items()<span class="symbol">:</span></span><br><span class="line">        messages = []</span><br><span class="line">        <span class="keyword">for</span> message <span class="keyword">in</span> <span class="symbol">messages_dict:</span></span><br><span class="line">            messages.append(message[<span class="string">'message'</span>])</span><br><span class="line">        new_message[key] = messages</span><br><span class="line">    <span class="keyword">return</span> new_message</span><br></pre></td></tr></table></figure></p>
+<p>form 表单字段都有一个 errors_message 参数是用来保存提示的错误信息，当字段验证不通过时，这个参数的值将作为错误消息抛出，所以可以利用这个参数的值，自定义错误消息。</p>
+<h2 id="ModelForm"><a href="#ModelForm" class="headerlink" title="ModelForm"></a>ModelForm</h2><p>在写表单的时候，如果发现表单中的 Field 和模型中的 Field 基本一样。而且表单中需要验证的数据也是模型中需要保存的。那么就可以将模型中的字段和表单中的字段进行绑定。<br><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># models.py</span></span><br><span class="line"><span class="title">from</span> django.db <span class="keyword">import</span> models</span><br><span class="line"><span class="title">from</span> django.core <span class="keyword">import</span> validators</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="type">Article</span>(<span class="title">models</span>.<span class="type">Model</span>):</span></span><br><span class="line"><span class="class">    title = models.<span class="type">CharField</span>(<span class="title">max_lengt</span>=10, <span class="title">validators</span>=[<span class="title">validators</span>.<span class="type">MinlengthValidator</span>(<span class="title">limit_valu</span>=30)])</span></span><br><span class="line"><span class="class">    content = models.<span class="type">TextField</span>()</span></span><br><span class="line"><span class="class">    author = models.<span class="type">CharField</span>(<span class="title">max_length</span>=100)</span></span><br></pre></td></tr></table></figure></p>
+<p>在写表单的时候<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># forms.py</span></span><br><span class="line"><span class="keyword">from</span> django <span class="keyword">import</span> forms</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyForm</span><span class="params">(forms.ModelForm)</span>:</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">        model = Article</span><br><span class="line">        fields = <span class="string">"__all__"</span></span><br></pre></td></tr></table></figure></p>
+<p>MyForm 继承 forms.ModelForm , 然后在表单中定义一个 Meta 类，在 Meta 类中指定了 model=Article , 这个属性就是指定要绑定的 models 类。fields=”<strong>all</strong>“ 这属性指定将 Article 模型中所有的字段都复制过来进行验证。如果只是要对模型中的几个字段进行验证。那么就给 fields 指定一个列表。<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 需要验证的字段列表</span></span><br><span class="line">      <span class="attribute">fields</span> = [<span class="string">'title'</span>, <span class="string">'content'</span>]</span><br></pre></td></tr></table></figure></p>
+<p>如果要验证的字段比较多，可以用 exclude 来代替 fields。exclude 属性将不需要的字段排除掉<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 不需要验证的字段</span></span><br><span class="line">     <span class="attribute">exclude</span> = [<span class="string">'author'</span>]</span><br></pre></td></tr></table></figure></p>
+<h2 id="自定错误消息"><a href="#自定错误消息" class="headerlink" title="自定错误消息"></a>自定错误消息</h2><p>使用 ModelForm ，因为字段都不是在表单中定义的，而是在模型中，因此错误消息无法在字段中定义，那么这个时候可以在 Meta 类中，定义 error_messages, 然后把相应错误消息写到里面去。<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyForm</span></span>(forms.ModelForm):</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:<span class="type"></span></span></span><br><span class="line">        model = Article</span><br><span class="line">        exlcude = [<span class="string">'author'</span>]</span><br><span class="line">        error_messages = &#123;</span><br><span class="line">            <span class="string">'title'</span>: &#123;</span><br><span class="line">                <span class="string">'max_length'</span>: <span class="string">'最多不能超过30个字符'</span>,</span><br><span class="line">                <span class="string">'min_length'</span>: <span class="string">'最少不能少于3个字符'</span></span><br><span class="line">            &#125;，</span><br><span class="line">            <span class="string">'content'</span>: &#123;</span><br><span class="line">                <span class="string">'required'</span>: <span class="string">'必须输入content'</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="save方法"><a href="#save方法" class="headerlink" title="save方法"></a>save方法</h2><p>ModelForm 还有 save 方法，可以在验证完成后直接调用 save 方法，就可以将这个数据保存到数据库中。<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># views.py</span><br><span class="line"><span class="keyword">form</span> = MyForm(requst.<span class="keyword">POST</span>)</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">form</span>.is_valid():</span><br><span class="line">    <span class="keyword">form</span>.<span class="keyword">save</span>()</span><br><span class="line">    <span class="keyword">return</span> HttpResponse('succes')</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="keyword">print</span>(<span class="keyword">form</span>.errors.get_json_data())</span><br><span class="line">    <span class="keyword">return</span> HttpResponse('fail')</span><br></pre></td></tr></table></figure></p>
+<p>直接进行保存要保证 models 需要的字段，都被表单验证通过了。如果表单验证的只是个别字段，那么可以在 form.save(commit=False) 中传递 commit=False 参数，就只会生成这个模型对象，而不把对象真正插入到数据库中就不会报错。再获得其他要保存的字段后再进行 save() 操作。<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">form</span> = MyForm(requst.POST)</span><br><span class="line"><span class="keyword">if</span> <span class="selector-tag">form</span>.is_valid():</span><br><span class="line">    <span class="selector-tag">article</span> = <span class="selector-tag">form</span>.save(commit=False)</span><br><span class="line">    <span class="selector-tag">article</span><span class="selector-class">.author</span> = <span class="string">'threefire'</span></span><br><span class="line">    <span class="selector-tag">article</span>.save()</span><br><span class="line">    return HttpResponse(<span class="string">'succes'</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    print(<span class="selector-tag">form</span><span class="selector-class">.error</span><span class="selector-class">.get_json_data</span>())</span><br><span class="line">    return HttpResponse(<span class="string">'fail'</span>)</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Django2-0/" rel="tag"># Django2.0</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/15/错误页面处理/" rel="next" title="错误页面处理">
+                <i class="fa fa-chevron-left"></i> 错误页面处理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="http://piuib58oz.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181205230447.jpg" alt="Threefire">
+            
+              <p class="site-author-name" itemprop="name">Threefire</p>
+              <p class="site-description motion-element" itemprop="description">记录我的学习生活</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Luffy357" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ljy1042537@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/Liang3Fire" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#在-Django-中使用表单"><span class="nav-number">1.</span> <span class="nav-text">在 Django 中使用表单</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#表单验证数据"><span class="nav-number">2.</span> <span class="nav-text">表单验证数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CharField"><span class="nav-number">2.1.</span> <span class="nav-text">CharField</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#EmailField"><span class="nav-number">2.2.</span> <span class="nav-text">EmailField</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FloatField"><span class="nav-number">2.3.</span> <span class="nav-text">FloatField</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IntegerField"><span class="nav-number">2.4.</span> <span class="nav-text">IntegerField</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#URLField"><span class="nav-number">2.5.</span> <span class="nav-text">URLField</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#验证器"><span class="nav-number">3.</span> <span class="nav-text">验证器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义验证器"><span class="nav-number">4.</span> <span class="nav-text">自定义验证器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提取错误信息"><span class="nav-number">5.</span> <span class="nav-text">提取错误信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ModelForm"><span class="nav-number">6.</span> <span class="nav-text">ModelForm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定错误消息"><span class="nav-number">7.</span> <span class="nav-text">自定错误消息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#save方法"><span class="nav-number">8.</span> <span class="nav-text">save方法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Threefire</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
