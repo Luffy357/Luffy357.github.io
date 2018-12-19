@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Django2.0,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="memcached 是一个高性能的分布式的内存对象缓存系统。将一些经常需要用到又不太重要的数据缓存到内存中，来分担数据库的压力。memcache 是通过在内存里维护一个统一的巨大哈希表。memcached 能存储各种各样的数据，包括图像、视频、文件、数据的检索结果。">
+<meta name="keywords" content="Django2.0">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Memcached">
+<meta property="og:url" content="https://luffy357.github.io/2018/12/19/Memcached/index.html">
+<meta property="og:site_name" content="Three Fire">
+<meta property="og:description" content="memcached 是一个高性能的分布式的内存对象缓存系统。将一些经常需要用到又不太重要的数据缓存到内存中，来分担数据库的压力。memcache 是通过在内存里维护一个统一的巨大哈希表。memcached 能存储各种各样的数据，包括图像、视频、文件、数据的检索结果。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-12-19T16:15:09.090Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Memcached">
+<meta name="twitter:description" content="memcached 是一个高性能的分布式的内存对象缓存系统。将一些经常需要用到又不太重要的数据缓存到内存中，来分担数据库的压力。memcache 是通过在内存里维护一个统一的巨大哈希表。memcached 能存储各种各样的数据，包括图像、视频、文件、数据的检索结果。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://luffy357.github.io/2018/12/19/Memcached/">
+
+
+
+
+
+  <title>Memcached | Three Fire</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Three Fire</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">三火的个人博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://luffy357.github.io/2018/12/19/Memcached/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Threefire">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://piuib58oz.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181205230447.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Three Fire">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Memcached</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-19T22:20:55+08:00">
+                2018-12-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>memcached 是一个高性能的分布式的内存对象缓存系统。将一些经常需要用到又不太重要的数据缓存到内存中，来分担数据库的压力。memcache 是通过在内存里维护一个统一的巨大哈希表。memcached 能存储各种各样的数据，包括图像、视频、文件、数据的检索结果。<br><a id="more"></a></p>
+<h2 id="安装-memcached"><a href="#安装-memcached" class="headerlink" title="安装 memcached"></a>安装 memcached</h2><p>1.windows:</p>
+<ul>
+<li>安装: 官网下载 memcached.exe 文件，在命令行运行 memcached.exe -d install</li>
+<li>启动: memcached.exe -d start<br>2.linux(ubuntu):</li>
+<li>安装: sudo apt install memcached</li>
+<li><p>启动:<br> cd /usr/local/memcached/bin<br> ./memcached -d start</p>
+<p>其他命令：</p>
+</li>
+<li>-d: 在后台运行</li>
+<li>-m: 指定能使用的内存</li>
+<li>-p: 指定端口号</li>
+<li>-l: 别的机器通过那个 IP 连接到服务器的 memcached。<br>要使用以上参数必须 使用 /usr/bin/memcached 的方式来运行。比如通过 service memcached start 启动的 memcached 那么只能本机连接，其他机器无法访问。</li>
+</ul>
+<h2 id="telnet-操作-memcached"><a href="#telnet-操作-memcached" class="headerlink" title="telnet 操作 memcached"></a>telnet 操作 memcached</h2><p>telnet 连接 memcache: telnet 127.0.0.1[IP地址] 11211[端口号]<br>memcached 保存数据是以键值对的形式存在的。</p>
+<h3 id="常用命令："><a href="#常用命令：" class="headerlink" title="常用命令："></a>常用命令：</h3><ul>
+<li><p>set: 添加数据，有这个 key 就覆盖，没有就添加</p>
+<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;set username<span class="string">[key]</span> <span class="number">0</span>\<span class="number">1</span><span class="string">[是否压缩]</span> <span class="number">120</span><span class="string">[过期时间]</span> <span class="number">10</span><span class="string">[字符长度]</span></span><br><span class="line">&gt;threefire<span class="string">[value]</span></span><br><span class="line">&gt;STORED</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>add: 向 memcached 中添加数据，有相同的 key 就报错。</p>
+<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;add username<span class="string">[key]</span> <span class="number">0</span>\<span class="number">1</span><span class="string">[是否压缩]</span> <span class="number">120</span><span class="string">[保存时间]</span> <span class="number">10</span><span class="string">[字符长度]</span></span><br><span class="line">&gt;threefire<span class="string">[value]</span></span><br><span class="line">&gt;STORED</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>get：通过 key 获取数据</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="builtin-name">get</span> username</span><br><span class="line">&gt;threefire</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>delete: 删除数据</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash">delete username</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">NOT_FOUND</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>flush_all: 删除 memcached 中的所有数据</p>
+</li>
+<li><p>incr: 对数字类型的值进行相加操作，都必须是数字类型，否则会报错</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;set age <span class="number">0</span> <span class="number">120</span> <span class="number">1</span></span><br><span class="line">&gt;<span class="number">5</span></span><br><span class="line">&gt;STORED</span><br><span class="line">&gt;incr age <span class="number">5</span></span><br><span class="line"><span class="number">10</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>decr: 给数字类型的值进行相减操作。都必须是数字类型，否则会报错</p>
+</li>
+<li>stats: 查看 memcached 当前的状态。<figure class="highlight hsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">STAT</span> get_hits： get命令命中了多少次</span><br><span class="line"><span class="keyword">STAT</span> get_misses： get命令get空了多少次</span><br><span class="line"><span class="keyword">STAT</span> curr_items： 当前 memcached 中的键值对的个数</span><br><span class="line"><span class="keyword">STAT</span> total_connections: 从 memcached 开启到现在总共的连接数</span><br><span class="line"><span class="keyword">STAT</span> curr_connections: 当前的连接数</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="python-操作-memcached"><a href="#python-操作-memcached" class="headerlink" title="python 操作 memcached"></a>python 操作 memcached</h2><p>1、安装 python-memcached: pip install python-memcached<br>2、建立连接:<br><figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import memecache</span><br><span class="line">mc = memcache.Client(['127.0.0.1:<span class="number">1121</span>1', '192.168.0.1:<span class="number">1121</span>1'], debug=True)</span><br><span class="line"><span class="meta"># memcached 可以是分布式的可以部署到多台机器上，所有可以填入多个 IP</span></span><br></pre></td></tr></table></figure></p>
+<p>3、设置数据:<br><figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mc.<span class="keyword">set</span>(<span class="string">'username'</span>, <span class="string">'threefire'</span>, <span class="keyword">time</span>=<span class="number">60</span>)</span><br><span class="line"><span class="comment"># 一次性添加多条数据</span></span><br><span class="line">mc.set_multi(&#123;<span class="string">'email'</span>: <span class="string">'xxx@qq.com'</span>, <span class="string">'telphone'</span>: <span class="string">'11112222'</span>&#125;, <span class="keyword">time</span>=<span class="number">60</span>)</span><br></pre></td></tr></table></figure></p>
+<p>4、获取数据：<br><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mc.<span class="built_in">get</span>(<span class="string">'telphone'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>5、删除数据：<br><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mc.<span class="keyword">delete</span>(<span class="string">'email'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>6、自增长：delta 默认为 1<br><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mc.incr(<span class="symbol">'age</span>'，<span class="keyword">delta</span>=<span class="number">10</span>)</span><br></pre></td></tr></table></figure></p>
+<p>7、自减少：<br><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mc.decr(<span class="symbol">'age</span>', <span class="keyword">delta</span>=<span class="number">5</span>)</span><br></pre></td></tr></table></figure></p>
+<h2 id="memcached的安全性"><a href="#memcached的安全性" class="headerlink" title="memcached的安全性"></a>memcached的安全性</h2><p>因为 memcached 的操作不需要任何用户名和密码。知道 ip 地址和端口号就可以链接。所有存在安全问题。为了不让别人轻易访问到，可以限制访问 IP 和 更改端口的形式。</p>
+<ul>
+<li>使用 -l 参数设置为只有本机可以链接。</li>
+<li>使用防火墙，关闭 11211 端口<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ufw <span class="builtin-name">enable</span> # 开启防火墙</span><br><span class="line">ufw <span class="builtin-name">disable</span> # 关闭防火墙</span><br><span class="line">ufw<span class="built_in"> default </span>deny # 防火墙以禁止的方式打开，默认是关闭那些没有开启的端口</span><br><span class="line">ufw deny 端口号 # 关闭某个端口</span><br><span class="line">ufw allow 端口号 # 开启某个端口</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="在-Django-中使用-memcached"><a href="#在-Django-中使用-memcached" class="headerlink" title="在 Django 中使用 memcached"></a>在 Django 中使用 memcached</h2><p>首先在 settings.py 总配置好缓存<br><figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">CACHES = &#123;</span><br><span class="line">    'default': &#123;</span><br><span class="line">        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',</span><br><span class="line">        'LOCATION': [</span><br><span class="line">        '127.0.0.1:<span class="number">1121</span>1',</span><br><span class="line">        '192.168.0.1:<span class="number">1121</span>1'</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>配置好 memcached 的缓存后，再 Django 项目中就可以操作 memcached 了<br><figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">from django.core.<span class="keyword">cache</span> <span class="keyword">import</span> <span class="keyword">cache</span></span><br><span class="line"></span><br><span class="line">def index(request):</span><br><span class="line">    <span class="keyword">cache</span>.<span class="built_in">set</span>(<span class="string">'abc'</span>,<span class="string">'zhiliao'</span>,<span class="number">60</span>)</span><br><span class="line">    print(<span class="keyword">cache</span>.get(<span class="string">'abc'</span>))</span><br><span class="line">    response = HttpResponse(<span class="string">'index'</span>)</span><br><span class="line">    <span class="keyword">return</span> response</span><br></pre></td></tr></table></figure></p>
+<p>需要注意的是，django在存储数据到memcached中的时候，不会将指定的key存储进去，而是会对key进行一些处理。比如会加一个前缀，会加一个版本号。如果想要自己加前缀，那么可以在settings.CACHES中添加KEY_FUNCTION参数<br><figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CACHES = &#123;</span><br><span class="line">    <span class="string">'default'</span>: &#123;</span><br><span class="line">        <span class="string">'BACKEND'</span>: <span class="string">'django.core.cache.backends.memcached.MemcachedCache'</span>,</span><br><span class="line">        <span class="string">'LOCATION'</span>: <span class="string">'127.0.0.1:11211'</span>,</span><br><span class="line">        <span class="string">'KEY_FUNCTION'</span>: lambda key,prefix_key,version:<span class="string">"django:%s"</span><span class="meta">%key</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Django2-0/" rel="tag"># Django2.0</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/18/文件上传/" rel="next" title="文件上传">
+                <i class="fa fa-chevron-left"></i> 文件上传
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="http://piuib58oz.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181205230447.jpg" alt="Threefire">
+            
+              <p class="site-author-name" itemprop="name">Threefire</p>
+              <p class="site-description motion-element" itemprop="description">记录我的学习生活</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Luffy357" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ljy1042537@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/Liang3Fire" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-memcached"><span class="nav-number">1.</span> <span class="nav-text">安装 memcached</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#telnet-操作-memcached"><span class="nav-number">2.</span> <span class="nav-text">telnet 操作 memcached</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常用命令："><span class="nav-number">2.1.</span> <span class="nav-text">常用命令：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python-操作-memcached"><span class="nav-number">3.</span> <span class="nav-text">python 操作 memcached</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#memcached的安全性"><span class="nav-number">4.</span> <span class="nav-text">memcached的安全性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在-Django-中使用-memcached"><span class="nav-number">5.</span> <span class="nav-text">在 Django 中使用 memcached</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Threefire</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
