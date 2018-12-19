@@ -117,18 +117,18 @@
 
 
 
-<meta name="description" content="浏览器在向服务器发起请求中，有不同的请求方法，相应的服务器会根据不同的请求做不同的处理。例如：GET 请求一般用来向服务器索取数据，不会改变服务器的状态。而 POST 请求一般用来向服务器提交数据，会对服务器的状态进行更改。为了安全服务器应该对不同的请求进行不同的处理。所以可以给视图进行设置只允许特定的求情访问。">
+<meta name="description" content="要实现上传文件，前端必须有特定的上传文件代码，Django 只需要对这个文件做保存。">
 <meta name="keywords" content="Django2.0">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Django限制请求">
-<meta property="og:url" content="https://luffy357.github.io/2018/12/12/Django限制请求/index.html">
+<meta property="og:title" content="文件上传">
+<meta property="og:url" content="https://luffy357.github.io/2018/12/18/文件上传/index.html">
 <meta property="og:site_name" content="Three Fire">
-<meta property="og:description" content="浏览器在向服务器发起请求中，有不同的请求方法，相应的服务器会根据不同的请求做不同的处理。例如：GET 请求一般用来向服务器索取数据，不会改变服务器的状态。而 POST 请求一般用来向服务器提交数据，会对服务器的状态进行更改。为了安全服务器应该对不同的请求进行不同的处理。所以可以给视图进行设置只允许特定的求情访问。">
+<meta property="og:description" content="要实现上传文件，前端必须有特定的上传文件代码，Django 只需要对这个文件做保存。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-12T14:02:46.377Z">
+<meta property="og:updated_time" content="2018-12-18T16:47:58.322Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Django限制请求">
-<meta name="twitter:description" content="浏览器在向服务器发起请求中，有不同的请求方法，相应的服务器会根据不同的请求做不同的处理。例如：GET 请求一般用来向服务器索取数据，不会改变服务器的状态。而 POST 请求一般用来向服务器提交数据，会对服务器的状态进行更改。为了安全服务器应该对不同的请求进行不同的处理。所以可以给视图进行设置只允许特定的求情访问。">
+<meta name="twitter:title" content="文件上传">
+<meta name="twitter:description" content="要实现上传文件，前端必须有特定的上传文件代码，Django 只需要对这个文件做保存。">
 
 
 
@@ -158,13 +158,13 @@
 
 
 
-  <link rel="canonical" href="https://luffy357.github.io/2018/12/12/Django限制请求/">
+  <link rel="canonical" href="https://luffy357.github.io/2018/12/18/文件上传/">
 
 
 
 
 
-  <title>Django限制请求 | Three Fire</title>
+  <title>文件上传 | Three Fire</title>
   
 
 
@@ -291,7 +291,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://luffy357.github.io/2018/12/12/Django限制请求/">
+    <link itemprop="mainEntityOfPage" href="https://luffy357.github.io/2018/12/18/文件上传/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Threefire">
@@ -308,7 +308,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Django限制请求</h1>
+          <h1 class="post-title" itemprop="name headline">文件上传</h1>
         
 
         <div class="post-meta">
@@ -320,8 +320,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-12T22:00:50+08:00">
-                2018-12-12
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-18T23:42:42+08:00">
+                2018-12-18
               </time>
             
 
@@ -380,13 +380,17 @@
       
 
       
-        <p>浏览器在向服务器发起请求中，有不同的请求方法，相应的服务器会根据不同的请求做不同的处理。例如：GET 请求一般用来向服务器索取数据，不会改变服务器的状态。而 POST 请求一般用来向服务器提交数据，会对服务器的状态进行更改。为了安全服务器应该对不同的请求进行不同的处理。所以可以给视图进行设置只允许特定的求情访问。<br><a id="more"></a></p>
-<h2 id="限制请求的装饰器"><a href="#限制请求的装饰器" class="headerlink" title="限制请求的装饰器"></a>限制请求的装饰器</h2><p>  Django 内置的视图装饰器可以给视图提供一些限制，用来限制请求的方法。</p>
-<h3 id="require-http-methods"><a href="#require-http-methods" class="headerlink" title="require_http_methods:"></a>require_http_methods:</h3><p> 可以传递一个允许访问方法的列表。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.http.decorators.http <span class="keyword">import</span> require_http_methods</span><br><span class="line"></span><br><span class="line"><span class="meta">@require_http_methods(['GET', 'POST'])</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">(request)</span>:</span></span><br><span class="line">   <span class="keyword">pass</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="require-GET"><a href="#require-GET" class="headerlink" title="require_GET:"></a>require_GET:</h3><p> 只允许 GET 方法访问<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.http.decorators.http <span class="keyword">import</span> require_GET</span><br><span class="line"></span><br><span class="line"><span class="meta">@require_GET</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">(request)</span>:</span></span><br><span class="line">   <span class="keyword">pass</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="require-POST"><a href="#require-POST" class="headerlink" title="require_POST:"></a>require_POST:</h3><p>只允许 POST 方法访问<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.http.decorators.http <span class="keyword">import</span> require_POST</span><br><span class="line"></span><br><span class="line"><span class="meta">@require_POST</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">(request)</span>:</span></span><br><span class="line">   <span class="keyword">pass</span></span><br></pre></td></tr></table></figure></p>
-<h2 id="页面重定向"><a href="#页面重定向" class="headerlink" title="页面重定向"></a>页面重定向</h2><p>页面重定向就是访问一个 URL 的时候让它跳转到另一个 URL，重定向也分永久重定向和暂时重定向，当然用户访问一个需要登录的页面时，如果该用户没有登录就重定向到登录页面。永久重定向的 http 状态码是301，暂时重定向的 http 状态码是 302。</p>
-<p>在 Django 中，重定向使用 redirect 来实现：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">redirect(to, *args, permanent=<span class="keyword">False</span>, **kwargs)</span><br><span class="line"><span class="comment"># to: 一个url，</span></span><br><span class="line"><span class="comment"># permanent: 是否是一个永久重定向，默认为 False</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># views.py</span></span><br><span class="line"><span class="keyword">from</span> django.shortcuts <span class="keyword">import</span> reverse,redirect</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">profile</span><span class="params">(request)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> request.GET.get(<span class="string">"username"</span>):</span><br><span class="line">        <span class="keyword">return</span> HttpResponse(<span class="string">"%s，欢迎来到个人中心页面！"</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> redirect(reverse(<span class="string">"user:login"</span>))</span><br></pre></td></tr></table></figure></p>
+        <p>要实现上传文件，前端必须有特定的上传文件代码，Django 只需要对这个文件做保存。<br><a id="more"></a></p>
+<h2 id="前端代码"><a href="#前端代码" class="headerlink" title="前端代码"></a>前端代码</h2><p>1、在前端中，使用 form 标签，必须指定 enctype=”multipart/form-data”<br>2、在 form 标签中添加一个 input 标签，并且 type=”file”。<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="selector-tag">form</span> action=<span class="string">""</span> method=<span class="string">"post"</span> enctype=<span class="string">"multipart/form-data"</span>&gt;</span><br><span class="line">    &lt;<span class="selector-tag">input</span> type=<span class="string">"file"</span> name=<span class="string">"myfile"</span>&gt;</span><br><span class="line">    &lt;<span class="selector-tag">input</span> type<span class="string">"submile"</span> name=<span class="string">'提交'</span>&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure></p>
+<h2 id="后端代码"><a href="#后端代码" class="headerlink" title="后端代码"></a>后端代码</h2><p>后端主要是接收文件，并存储文件。接收方法和 POST 的方法一样，只不过是通过 FILES 来实现。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># views.py</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">IndexView</span><span class="params">(View)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">post</span><span class="params">(request)</span>:</span></span><br><span class="line">        myfiles = request.FILES.get(<span class="string">'myfile'</span>)</span><br><span class="line">        <span class="keyword">with</span> open(<span class="string">'somefile.txt'</span>, <span class="string">'wb'</span>) <span class="keyword">as</span> fp:</span><br><span class="line">            <span class="keyword">for</span> chunk <span class="keyword">in</span> file.chunks():</span><br><span class="line">                fp.write(ckunk)</span><br><span class="line">        <span class="keyword">return</span> HttpResponse(<span class="string">"succes"</span>)</span><br></pre></td></tr></table></figure></p>
+<h2 id="使用模型来处理上传的文件"><a href="#使用模型来处理上传的文件" class="headerlink" title="使用模型来处理上传的文件"></a>使用模型来处理上传的文件</h2><p>在定义模型的时候，可以给存储文件的字段指定为 FielField，这 Field 可以传递一个 upload_to 参数，用来指定上传上来的文件保存在那里。如果要指定文件夹保存参数值为该文件夹路径。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># models.py</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Article</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    title = models.CharFiels(max_length=<span class="number">100</span>)</span><br><span class="line">    contetn = models.TextField()</span><br><span class="line">    thumbnail = models.FileField(upload_to=<span class="string">"%Y%m%d"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># views.py</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">IndexView</span><span class="params">(View)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">post</span><span class="params">(request)</span>:</span></span><br><span class="line">        title = request.POST.get(<span class="string">'title'</span>)</span><br><span class="line">        content = request.POST.get(<span class="string">'content'</span>)</span><br><span class="line">        myfiles = request.FILES.get(<span class="string">'myfile'</span>)</span><br><span class="line">        article = Article.object.create(title=tilte, content=content, thumbnail=myfiles)</span><br><span class="line">        article.save</span><br><span class="line">        <span class="keyword">return</span> HttpResponse(<span class="string">"succes"</span>)</span><br></pre></td></tr></table></figure></p>
+<p>%Y%m%d 将以年月日创建文件夹来保存不同时间上传的文件。</p>
+<h2 id="指定-MEDIA-ROOT-和-MEDIA-URL："><a href="#指定-MEDIA-ROOT-和-MEDIA-URL：" class="headerlink" title="指定 MEDIA_ROOT 和 MEDIA_URL："></a>指定 MEDIA_ROOT 和 MEDIA_URL：</h2><p>除了通过 upload_to 指定上传文件的目录，还可以用 MEDIA_ROOT，指定了 MEDIA_ROOT 就不需要指定 upload_to。如果同时指定了，那么 MEDIA_ROOT 指定的文件夹将包含 upload_to 指定文件夹。MEDIA_URL 指定要访问上传文件的路径<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># settings.py</span></span><br><span class="line"><span class="attr">MEDIA_ROOT</span> = os.path.join(BASE_DIR, <span class="string">'media'</span>)</span><br><span class="line"><span class="attr">MEDIA_URL</span> = <span class="string">'/media/'</span></span><br></pre></td></tr></table></figure></p>
+<p>在 urls.py 添加 MEDIA_ROOT 目录下的访问路径<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">from djagno<span class="selector-class">.conf</span><span class="selector-class">.urls</span><span class="selector-class">.static</span> import static</span><br><span class="line"></span><br><span class="line">urlptterns = [</span><br><span class="line">    path(<span class="string">''</span>, views.index),</span><br><span class="line">]+ static(settings<span class="selector-class">.MEDIA_URL</span>, document_root=settings.MEDIA_ROOT)</span><br></pre></td></tr></table></figure></p>
+<h2 id="限制上传文件扩展名"><a href="#限制上传文件扩展名" class="headerlink" title="限制上传文件扩展名"></a>限制上传文件扩展名</h2><p>因为是以模板的形式保存文就，如果要限制上传的文件类型。就需要用到表单验证。<br>首先通过 FileExtensionValidata 验证器对文件类型进行限制。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># models.py </span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Article</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    title = models.CharField(max_length=<span class="number">100</span>)</span><br><span class="line">    content = models.TextField()</span><br><span class="line">    thumbnial = models.FileField(upload_to=<span class="string">'%Y%m%d'</span>, validators=[validators.FileExtensionValidator([<span class="string">'txt'</span>, <span class="string">'pdf'</span>])])</span><br><span class="line"></span><br><span class="line"><span class="comment"># forms.py</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ArticleForm</span><span class="params">(forms.ModelForm)</span>:</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">        model = Article</span><br><span class="line">        fields = <span class="string">"__all__"</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="上传图片"><a href="#上传图片" class="headerlink" title="上传图片"></a>上传图片</h2><p>上传图片和上文件是一样的，只不过把 FileField 改为 ImageField就行，并且 Django 会自动判断上传的图片是否符合格式要求。如果不是就会验证失败。<br><figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">class Article(<span class="keyword">models</span>.<span class="keyword">Model</span>):</span><br><span class="line">    title = <span class="keyword">models</span>.CharField(max_length=<span class="number">100</span>)</span><br><span class="line">    content = <span class="keyword">models</span>.TextField()</span><br><span class="line">    thumbnail = <span class="keyword">models</span>.ImageField(upload_to=<span class="string">"%Y/%m/%d/"</span>)</span><br></pre></td></tr></table></figure></p>
+<p>虽然 Django 会自动验证图片是否合格，但还是要定义表单验证。<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyForm</span></span>(forms.ModelForm):</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:<span class="type"></span></span></span><br><span class="line">        model = Article</span><br><span class="line">        fields = <span class="string">"__all__"</span></span><br></pre></td></tr></table></figure></p>
+<p>注意: 使用 ImageField, 必须要先安装 Pillow 库：pip install pillow</p>
 
       
     </div>
@@ -417,8 +421,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/12/10/ORM模型迁移/" rel="next" title="ORM模型迁移">
-                <i class="fa fa-chevron-left"></i> ORM模型迁移
+              <a href="/2018/12/17/Django表单/" rel="next" title="Django表单">
+                <i class="fa fa-chevron-left"></i> Django表单
               </a>
             
           </div>
@@ -426,10 +430,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/12/12/HttpRequest对象/" rel="prev" title="HttpRequest对象">
-                HttpRequest对象 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -585,7 +585,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#限制请求的装饰器"><span class="nav-number">1.</span> <span class="nav-text">限制请求的装饰器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#require-http-methods"><span class="nav-number">1.1.</span> <span class="nav-text">require_http_methods:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#require-GET"><span class="nav-number">1.2.</span> <span class="nav-text">require_GET:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#require-POST"><span class="nav-number">1.3.</span> <span class="nav-text">require_POST:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#页面重定向"><span class="nav-number">2.</span> <span class="nav-text">页面重定向</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前端代码"><span class="nav-number">1.</span> <span class="nav-text">前端代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后端代码"><span class="nav-number">2.</span> <span class="nav-text">后端代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用模型来处理上传的文件"><span class="nav-number">3.</span> <span class="nav-text">使用模型来处理上传的文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指定-MEDIA-ROOT-和-MEDIA-URL："><span class="nav-number">4.</span> <span class="nav-text">指定 MEDIA_ROOT 和 MEDIA_URL：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#限制上传文件扩展名"><span class="nav-number">5.</span> <span class="nav-text">限制上传文件扩展名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#上传图片"><span class="nav-number">6.</span> <span class="nav-text">上传图片</span></a></li></ol></div>
             
 
           </div>
