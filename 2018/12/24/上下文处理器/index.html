@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="Dajgno2.0,">
+  <meta name="keywords" content="Django2.0,">
 
 
 
@@ -124,14 +124,14 @@
 
 
 <meta name="description" content="上下文处理器是可以返回一些数据，在全局模板中都可以使用。比如用户登录的信息在很多页面都需要使用，不可能每个视图都去获取 session 信息。这个时候就可以使用上下文处理器。">
-<meta name="keywords" content="Dajgno2.0">
+<meta name="keywords" content="Django2.0">
 <meta property="og:type" content="article">
 <meta property="og:title" content="上下文处理器">
 <meta property="og:url" content="https://luffy357.github.io/2018/12/24/上下文处理器/index.html">
 <meta property="og:site_name" content="Three Fire">
 <meta property="og:description" content="上下文处理器是可以返回一些数据，在全局模板中都可以使用。比如用户登录的信息在很多页面都需要使用，不可能每个视图都去获取 session 信息。这个时候就可以使用上下文处理器。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-25T17:52:37.785Z">
+<meta property="og:updated_time" content="2018-12-26T14:34:40.248Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="上下文处理器">
 <meta name="twitter:description" content="上下文处理器是可以返回一些数据，在全局模板中都可以使用。比如用户登录的信息在很多页面都需要使用，不可能每个视图都去获取 session 信息。这个时候就可以使用上下文处理器。">
@@ -387,7 +387,7 @@
 
       
         <p>上下文处理器是可以返回一些数据，在全局模板中都可以使用。比如用户登录的信息在很多页面都需要使用，不可能每个视图都去获取 session 信息。这个时候就可以使用上下文处理器。<br><a id="more"></a></p>
-<h2 id="Django内置的上下文处理器"><a href="#Django内置的上下文处理器" class="headerlink" title="Django内置的上下文处理器"></a>Django内置的上下文处理器</h2><p>在 settings.py 中 TEMPLATES.OPTIONS.context_processors 中，有许多内置的上下文处理器。这些上下文处理器有如下作用<br>1、django.template.context_processors.debug<br>   增加一个 debug 和 sql_queries 变量。在模板中可以通过他来查看到一些数据库查询。<br>2、django.template.context_processors.request<br>   增加一个 request 变量。这个 request 变量也就是在视图函数只能的第一个参数。<br>   在模板中也可以直接使用这个变量。<br>3、django.template.context_processors.auth<br>   Django 内置的用户系统，这个上下文处理器会增加一个 user 对象。<br>4、django.template.context_processors.messages<br>   增加一个 messages 变量。可以利用这变量将错误消息放入其中。然后在模板中使用。<br>   ，示例如下<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># views.py</span></span><br><span class="line"><span class="comment"># 将错误消息放入 messages中</span></span><br><span class="line">errors = form.get_error()</span><br><span class="line"><span class="keyword">for</span> <span class="builtin-name">error</span> <span class="keyword">in</span> errors:</span><br><span class="line">    messages.<span class="builtin-name">info</span>(request, error)</span><br><span class="line"></span><br><span class="line"><span class="comment"># template/xxx.html</span></span><br><span class="line"><span class="comment"># 在模板中显示错误消息</span></span><br><span class="line">&#123;% <span class="keyword">for</span> message <span class="keyword">in</span> messages %&#125;</span><br><span class="line">    &#123;&#123; message &#125;&#125;</span><br><span class="line">&#123;% endfor %&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="Django内置的上下文处理器"><a href="#Django内置的上下文处理器" class="headerlink" title="Django内置的上下文处理器"></a>Django内置的上下文处理器</h2><p>在 settings.py 中 TEMPLATES.OPTIONS.context_processors 中，有许多内置的上下文处理器。这些上下文处理器有如下作用<br>1、django.template.context_processors.debug<br>   增加一个 debug 和 sql_queries 变量。在模板中可以通过他来查看到一些数据库查询。<br>2、django.template.context_processors.request<br>   增加一个 request 变量。这个 request 变量也就是在视图函数只能的第一个参数。<br>   在模板中也可以直接使用这个变量。<br>3、django.template.context_processors.auth<br>   Django 内置的用户系统，这个上下文处理器会增加一个 user 对象。<br>4、django.template.context_processors.messages<br>   增加一个 messages 变量。可以利用这变量将错误消息放入其中。然后在模板中使用。<br>   ，示例如下<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># views.py</span></span><br><span class="line"><span class="keyword">from</span> django.contrib import messages</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将错误消息放入 messages中</span></span><br><span class="line">errors = form.get_error()</span><br><span class="line"><span class="keyword">for</span> <span class="builtin-name">error</span> <span class="keyword">in</span> errors:</span><br><span class="line">    messages.<span class="builtin-name">info</span>(request, error)</span><br><span class="line"></span><br><span class="line"><span class="comment"># template/xxx.html</span></span><br><span class="line"><span class="comment"># 在模板中显示错误消息</span></span><br><span class="line">&#123;% <span class="keyword">for</span> message <span class="keyword">in</span> messages %&#125;</span><br><span class="line">    &#123;&#123; message &#125;&#125;</span><br><span class="line">&#123;% endfor %&#125;</span><br></pre></td></tr></table></figure></p>
 <p>5、django.template.context_processors.media<br>在模板中可以读取 MEDIA_URL 。比如想要在模板中使用上传的文件，那么这时候就需要使用 settings.py 中设置的 MEDIA_URL 来拼接 url。示例代码如下<br><figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"</span></span></span><span class="template-variable">&#123;&#123; MEDIA_URL &#125;&#125;</span><span class="xml"><span class="tag"><span class="string"></span></span></span><span class="template-variable">&#123;&#123;文件相对路径&#125;&#125;</span><span class="xml"><span class="tag"><span class="string">"</span>" <span class="attr">alt</span>=<span class="string">""</span>&gt;</span></span></span><br></pre></td></tr></table></figure></p>
 <p>6、django.template.context_processors.static<br>在模板中可以使用 STATIC_URL。也就是在模板中不用每次都 load static 标签<br>可以直接使用。<br>7、django.template.context_processors.csrf<br>在模板中可以使用 csrf_token 变量来生成一个 csrf_token。在模板中的每个 form 标签的地方都要做 csrf 验证。如果不在 form 表单中。<br><figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"># 在 form 表单中</span></span><br><span class="line"><span class="xml"></span><span class="template-tag">&#123;% <span class="name"><span class="name">csrf_token</span></span> %&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml"># 不在 form 表单中</span></span><br><span class="line"><span class="xml"></span><span class="template-variable">&#123;&#123; csrf_token &#125;&#125;</span><span class="xml"></span></span><br></pre></td></tr></table></figure></p>
 <h2 id="自定义shangx文处理器"><a href="#自定义shangx文处理器" class="headerlink" title="自定义shangx文处理器"></a>自定义shangx文处理器</h2><p>现有需要如下，每个页面都需要判断用户是否登录，不可能在每个视图中写一个判断函数。这时候就需要一个上下文处理器，来获取 session 或者 cookie 中是否有 user信息。如果有就判定用户已经登录，没有则没有登录。在模板中就只需要调用这个上下文就可判断了。<br>1、根据这个上下文处理器是属于哪个app，然后在这个app中创建一个文件专门用来存储上下文处理器。比如context_processors.py。或者是也可以专门创建一个Python包，用来存储所有的上下文处理器。<br>2、在定义的上下文处理器文件中，定义一个函数，这个函数只有一个request参数。这个函数中处理完自己的逻辑后，把需要返回给模板的数据，通过字典的形式返回。如果不需要返回任何数据，那么也必须返回一个空的字典<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># front/context_processors.py</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">front_user</span><span class="params">(request)</span>:</span></span><br><span class="line">    user_id = request.session.get(<span class="string">'user_id'</span>)</span><br><span class="line">    context = &#123;&#125;</span><br><span class="line">    <span class="keyword">if</span> user_id:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            user = User.objects.get(pk=user_id)</span><br><span class="line">            context[<span class="string">'front_user'</span>] = user</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">    <span class="keyword">return</span> context</span><br></pre></td></tr></table></figure></p>
@@ -410,7 +410,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Dajgno2-0/" rel="tag"># Dajgno2.0</a>
+            <a href="/tags/Django2-0/" rel="tag"># Django2.0</a>
           
         </div>
       
@@ -432,6 +432,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/26/中间件/" rel="prev" title="中间件">
+                中间件 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -510,7 +514,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

@@ -123,18 +123,18 @@
 
 
 
-<meta name="description" content="cookie和session1、cookie：在网站中，http请求是无状态的。也就是说即使第一次和服务器连接后并且登录成功后，第二次请求服务器依然不能知道当前请求是哪个用户。cookie的出现就是为了解决这个问题，第一次登录后服务器返回一些数据（cookie）给浏览器，然后浏览器保存在本地，当该用户发送第二次请求的时候，就会自动的把上次请求存储的cookie数据自动的携带给服务器，服务器通过浏览">
+<meta name="description" content="因为浏览器与服务器通讯使用的是 HTTP 协议，而 http 请求是无状态的为了能够使服务器分清那个浏览器发过来的请求，引入 cookie 技术。">
 <meta name="keywords" content="Django2.0">
 <meta property="og:type" content="article">
 <meta property="og:title" content="cookie和sessionn">
 <meta property="og:url" content="https://luffy357.github.io/2018/12/20/cookie和sessionn/index.html">
 <meta property="og:site_name" content="Three Fire">
-<meta property="og:description" content="cookie和session1、cookie：在网站中，http请求是无状态的。也就是说即使第一次和服务器连接后并且登录成功后，第二次请求服务器依然不能知道当前请求是哪个用户。cookie的出现就是为了解决这个问题，第一次登录后服务器返回一些数据（cookie）给浏览器，然后浏览器保存在本地，当该用户发送第二次请求的时候，就会自动的把上次请求存储的cookie数据自动的携带给服务器，服务器通过浏览">
+<meta property="og:description" content="因为浏览器与服务器通讯使用的是 HTTP 协议，而 http 请求是无状态的为了能够使服务器分清那个浏览器发过来的请求，引入 cookie 技术。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-20T16:34:30.809Z">
+<meta property="og:updated_time" content="2018-12-26T14:32:30.880Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="cookie和sessionn">
-<meta name="twitter:description" content="cookie和session1、cookie：在网站中，http请求是无状态的。也就是说即使第一次和服务器连接后并且登录成功后，第二次请求服务器依然不能知道当前请求是哪个用户。cookie的出现就是为了解决这个问题，第一次登录后服务器返回一些数据（cookie）给浏览器，然后浏览器保存在本地，当该用户发送第二次请求的时候，就会自动的把上次请求存储的cookie数据自动的携带给服务器，服务器通过浏览">
+<meta name="twitter:description" content="因为浏览器与服务器通讯使用的是 HTTP 协议，而 http 请求是无状态的为了能够使服务器分清那个浏览器发过来的请求，引入 cookie 技术。">
 
 
 
@@ -386,7 +386,8 @@
       
 
       
-        <h2 id="cookie和session"><a href="#cookie和session" class="headerlink" title="cookie和session"></a>cookie和session</h2><p>1、cookie：在网站中，http请求是无状态的。也就是说即使第一次和服务器连接后并且登录成功后，第二次请求服务器依然不能知道当前请求是哪个用户。cookie的出现就是为了解决这个问题，第一次登录后服务器返回一些数据（cookie）给浏览器，然后浏览器保存在本地，当该用户发送第二次请求的时候，就会自动的把上次请求存储的cookie数据自动的携带给服务器，服务器通过浏览器携带的数据就能判断当前用户是哪个了。cookie存储的数据量有限，不同的浏览器有不同的存储大小，但一般不超过4KB。因此使用cookie只能存储一些小量的数据。</p>
+        <p>因为浏览器与服务器通讯使用的是 HTTP 协议，而 http 请求是无状态的为了能够使服务器分清那个浏览器发过来的请求，引入 cookie 技术。<br><a id="more"></a> </p>
+<h2 id="cookie和session"><a href="#cookie和session" class="headerlink" title="cookie和session"></a>cookie和session</h2><p>1、cookie：在网站中，http请求是无状态的。也就是说即使第一次和服务器连接后并且登录成功后，第二次请求服务器依然不能知道当前请求是哪个用户。cookie的出现就是为了解决这个问题，第一次登录后服务器返回一些数据（cookie）给浏览器，然后浏览器保存在本地，当该用户发送第二次请求的时候，就会自动的把上次请求存储的cookie数据自动的携带给服务器，服务器通过浏览器携带的数据就能判断当前用户是哪个了。cookie存储的数据量有限，不同的浏览器有不同的存储大小，但一般不超过4KB。因此使用cookie只能存储一些小量的数据。</p>
 <p>2、session: session和cookie的作用有点类似，都是为了存储用户相关的信息。不同的是，cookie是存储在本地浏览器，session是一个思路、一个概念、一个服务器存储授权信息的解决方案，不同的服务器，不同的框架，不同的语言有不同的实现。虽然实现不一样，但是他们的目的都是服务器为了方便存储数据的。session的出现，是为了解决cookie存储数据不安全的问题的。</p>
 <p>3、cookie和session使用：web开发发展至今，cookie和session的使用已经出现了一些非常成熟的方案。在如今的市场或者企业里，一般有两种存储方式：</p>
 <ul>
@@ -555,7 +556,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
