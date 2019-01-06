@@ -123,18 +123,18 @@
 
 
 
-<meta name="description" content="SQL 注入就是通过把 SQL 命令插入到表单或者页面请求的查询字符串中，最终达到欺骗服务器执行恶意的 SQL 命令，就是利用现有的应用程序，将恶意的 SQL 命令注入到后台数据库引擎执行的能力， 它可以通过在 Web 表单中输入恶意 SQL 语句得到一个存在安全漏洞的网站上的数据库，而不是按照设计者意图无执行 SQL 语句。 场景如现在数据库中有一个 front_user 表1234class">
+<meta name="description" content="SQL 注入就是通过把 SQL 命令插入到表单或者页面请求的查询字符串中，最终达到欺骗服务器执行恶意的 SQL 命令，就是利用现有的应用程序，将恶意的 SQL 命令注入到后台数据库引擎执行的能力， 它可以通过在 Web 表单中输入恶意 SQL 语句得到一个存在安全漏洞的网站上的数据库，而不是按照设计者意图无执行 SQL 语句。">
 <meta name="keywords" content="Django2.0">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SQL注入攻击">
 <meta property="og:url" content="https://luffy357.github.io/2019/01/03/SQL注入攻击/index.html">
 <meta property="og:site_name" content="Three Fire">
-<meta property="og:description" content="SQL 注入就是通过把 SQL 命令插入到表单或者页面请求的查询字符串中，最终达到欺骗服务器执行恶意的 SQL 命令，就是利用现有的应用程序，将恶意的 SQL 命令注入到后台数据库引擎执行的能力， 它可以通过在 Web 表单中输入恶意 SQL 语句得到一个存在安全漏洞的网站上的数据库，而不是按照设计者意图无执行 SQL 语句。 场景如现在数据库中有一个 front_user 表1234class">
+<meta property="og:description" content="SQL 注入就是通过把 SQL 命令插入到表单或者页面请求的查询字符串中，最终达到欺骗服务器执行恶意的 SQL 命令，就是利用现有的应用程序，将恶意的 SQL 命令注入到后台数据库引擎执行的能力， 它可以通过在 Web 表单中输入恶意 SQL 语句得到一个存在安全漏洞的网站上的数据库，而不是按照设计者意图无执行 SQL 语句。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-03T17:15:03.996Z">
+<meta property="og:updated_time" content="2019-01-03T17:18:11.694Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SQL注入攻击">
-<meta name="twitter:description" content="SQL 注入就是通过把 SQL 命令插入到表单或者页面请求的查询字符串中，最终达到欺骗服务器执行恶意的 SQL 命令，就是利用现有的应用程序，将恶意的 SQL 命令注入到后台数据库引擎执行的能力， 它可以通过在 Web 表单中输入恶意 SQL 语句得到一个存在安全漏洞的网站上的数据库，而不是按照设计者意图无执行 SQL 语句。 场景如现在数据库中有一个 front_user 表1234class">
+<meta name="twitter:description" content="SQL 注入就是通过把 SQL 命令插入到表单或者页面请求的查询字符串中，最终达到欺骗服务器执行恶意的 SQL 命令，就是利用现有的应用程序，将恶意的 SQL 命令注入到后台数据库引擎执行的能力， 它可以通过在 Web 表单中输入恶意 SQL 语句得到一个存在安全漏洞的网站上的数据库，而不是按照设计者意图无执行 SQL 语句。">
 
 
 
@@ -386,7 +386,7 @@
       
 
       
-        <p>SQL 注入就是通过把 SQL 命令插入到表单或者页面请求的查询字符串中，最终达到欺骗服务器执行恶意的 SQL 命令，就是利用现有的应用程序，将恶意的 SQL 命令注入到后台数据库引擎执行的能力， 它可以通过在 Web 表单中输入恶意 SQL 语句得到一个存在安全漏洞的网站上的数据库，而不是按照设计者意图无执行 SQL 语句。</p>
+        <p>SQL 注入就是通过把 SQL 命令插入到表单或者页面请求的查询字符串中，最终达到欺骗服务器执行恶意的 SQL 命令，就是利用现有的应用程序，将恶意的 SQL 命令注入到后台数据库引擎执行的能力， 它可以通过在 Web 表单中输入恶意 SQL 语句得到一个存在安全漏洞的网站上的数据库，而不是按照设计者意图无执行 SQL 语句。<br><a id="more"></a></p>
 <h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>如现在数据库中有一个 front_user 表<br><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="type">User</span>(<span class="title">models</span>.<span class="type">Model</span>):</span></span><br><span class="line"><span class="class">    telephone = models.<span class="type">CharField</span>(<span class="title">max_length</span>=11)</span></span><br><span class="line"><span class="class">    username = models.<span class="type">CharField</span>(<span class="title">max_length</span>=100)</span></span><br><span class="line"><span class="class">    password = models.<span class="type">CharField</span>(<span class="title">max_length</span>=100)</span></span><br></pre></td></tr></table></figure></p>
 <p>当用原生 sql 语句实现需求时<br>1、实现一个根据用户 id 获取用户详情的视图<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">def <span class="built_in">index</span>(request):</span><br><span class="line">    user_id = request.GET.<span class="built_in">get</span>(<span class="string">'user_id'</span>)</span><br><span class="line">    <span class="built_in">cursor</span> = connection.<span class="built_in">cursor</span>()</span><br><span class="line">    <span class="built_in">cursor</span>.<span class="keyword">execute</span>(<span class="string">"select id, usename from front_user where id=%s"</span> % user_id)</span><br><span class="line">    rows = <span class="built_in">cursor</span>.fetchall()</span><br><span class="line">    <span class="keyword">for</span> row in row<span class="variable">s:</span></span><br><span class="line">        <span class="keyword">print</span>(row)</span><br><span class="line">    <span class="keyword">return</span> HttpRponse(<span class="string">'success'</span>)</span><br></pre></td></tr></table></figure></p>
 <p>这样表面上看没有问题，但是如果用户传的 user_id 是 1 or 1=1，那么获取这个字符拼接后就是这样<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select id,username <span class="keyword">from</span> front_user where <span class="attribute">id</span>=1 <span class="keyword">or</span> <span class="attribute">1</span>=1</span><br></pre></td></tr></table></figure></p>
