@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|20:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Django2.0,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Django 有一个内置的授权系统，用来处理用户、分组、权限以及基于 cookie 的会话系统。 Django 的授权系统包括验证和授权两个部分。验证时验证这个用户是否是他声称的人(比如用户名和密码验证，角色验证), 授权是给与他相应的权限。Django 内置的权限系统包括用户、权限、分组、一个可以配置的密码哈希系统和可拔插的后台管理系统。">
+<meta name="keywords" content="Django2.0">
+<meta property="og:type" content="article">
+<meta property="og:title" content="扩展内置User模型">
+<meta property="og:url" content="https://luffy357.github.io/2019/01/07/扩展内置User模型/index.html">
+<meta property="og:site_name" content="Three Fire">
+<meta property="og:description" content="Django 有一个内置的授权系统，用来处理用户、分组、权限以及基于 cookie 的会话系统。 Django 的授权系统包括验证和授权两个部分。验证时验证这个用户是否是他声称的人(比如用户名和密码验证，角色验证), 授权是给与他相应的权限。Django 内置的权限系统包括用户、权限、分组、一个可以配置的密码哈希系统和可拔插的后台管理系统。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-01-08T15:59:37.787Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="扩展内置User模型">
+<meta name="twitter:description" content="Django 有一个内置的授权系统，用来处理用户、分组、权限以及基于 cookie 的会话系统。 Django 的授权系统包括验证和授权两个部分。验证时验证这个用户是否是他声称的人(比如用户名和密码验证，角色验证), 授权是给与他相应的权限。Django 内置的权限系统包括用户、权限、分组、一个可以配置的密码哈希系统和可拔插的后台管理系统。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://luffy357.github.io/2019/01/07/扩展内置User模型/">
+
+
+
+
+
+  <title>扩展内置User模型 | Three Fire</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Three Fire</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">三火的个人博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://luffy357.github.io/2019/01/07/扩展内置User模型/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Threefire">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://piuib58oz.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181205230447.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Three Fire">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">扩展内置User模型</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-07T20:41:32+08:00">
+                2019-01-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Django 有一个内置的授权系统，用来处理用户、分组、权限以及基于 cookie 的会话系统。 Django 的授权系统包括验证和授权两个部分。验证时验证这个用户是否是他声称的人(比如用户名和密码验证，角色验证), 授权是给与他相应的权限。<br>Django 内置的权限系统包括用户、权限、分组、一个可以配置的密码哈希系统和可拔插的后台管理系统。<br><a id="more"></a></p>
+<p>##使用授权系统<br>在创建 Django 项目的时候，就已经集成了授权系统。在 settings.py 中有关于授权系统的配置如下。</p>
+<ul>
+<li>INSTALLED_APPS:<br>1、django.contrib.auth: 包含了一个核心授权框架，以及大部分的模型定义。<br>2、django.contrib.contenttypes: Content Type 系统，可以用来关联模型和权限。</li>
+<li>中间件:<br>1、SessionMiddleware: 用来管理 session。<br>2、AuthenticationMiddleware: 用来处理和当前 session 相关联的用户。</li>
+</ul>
+<p>##User模型<br>User 模型是这个框架的核心部分。它的路径是 django.contrib.auth.models.User。 它有以下字段：</p>
+<ul>
+<li>username: 用户名。150个字符以内，可以包含数字和英文字符，以及_、@、+、.和-字符，不能为空，且必须唯一。</li>
+<li>first_name：姓氏，在30个字符以内，可以为空。</li>
+<li>last_name: 名字，在150个字符以内，可以为空。</li>
+<li>email: 邮箱，可以为空。</li>
+<li>password: 密码，经过哈希过后的密码。</li>
+<li>groups: 分组, 一个用户可以属于多个分组，一个分组可以拥有多个用户。 groups 这个字段是跟 Group 的一个多对多的关系。</li>
+<li>user_permissions: 权限。一个用户可以拥有多个权限，一个权限可以被多个用户所有和 Permission 属于一种多对多的关系。</li>
+<li>is_staff: 是否可以进入到 admin 的后台站点。意为是否是员工。</li>
+<li>is_ active：是否是可用的，对于一些想要删除账号的数据,我们设置这个值为 False 就可以了，而不是真正的从数据库中删除。</li>
+<li>is_superuser: 是否是超级管理员，那么拥有整个网站的所有权限。</li>
+<li>last_login: 上次登录的时间。</li>
+<li>date_joined: 账号创建的时间。</li>
+</ul>
+<h2 id="User模型的基本用法。"><a href="#User模型的基本用法。" class="headerlink" title="User模型的基本用法。"></a>User模型的基本用法。</h2><h3 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h3><p>通过 create_user 方法可以快速的创建用户，这个方法必须要传递 username、email、password。<br><figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># views.py</span></span><br><span class="line">from django.contrib.auth.models <span class="keyword">import</span> User</span><br><span class="line"></span><br><span class="line">def create_user(request):<span class="type"></span></span><br><span class="line"><span class="type">    </span># 这个方法创建的用户保存在 auth_user 表中</span><br><span class="line">    <span class="keyword">new</span><span class="type">_user</span> = User.objects.create_user(<span class="string">'threefire'</span>, <span class="string">'xxx@qq.com'</span>, <span class="string">'11111'</span>)</span><br><span class="line">    <span class="keyword">new</span><span class="type">_user</span>.save()</span><br><span class="line">    <span class="keyword">return</span> HttpRponse(<span class="string">'succed'</span>)</span><br></pre></td></tr></table></figure></p>
+<h3 id="创建超级用户"><a href="#创建超级用户" class="headerlink" title="创建超级用户"></a>创建超级用户</h3><p>创建超级用户的方式有两种，一种是在命令行使用命令。后面会提示输入必须字段。<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage<span class="selector-class">.py</span> createsuperuser</span><br></pre></td></tr></table></figure></p>
+<p>一种是通过 create_superuser 方法，和创建普通用户一样。</p>
+<h2 id="修改密码"><a href="#修改密码" class="headerlink" title="修改密码"></a>修改密码</h2><p>因为密码是经过加密处理后才能存储进去的，所以如果要修改密码，不能直接修改 pssword 字段，而需要通过调用 set_password 来达到修改密码的目的。<br><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">user</span> = <span class="keyword">User</span>.objects.get(username=<span class="string">'threefire'</span>)</span><br><span class="line"><span class="keyword">user</span>.set_password(<span class="string">'新密码'</span>)</span><br><span class="line"><span class="keyword">user</span>.save()</span><br></pre></td></tr></table></figure></p>
+<h2 id="登录验证"><a href="#登录验证" class="headerlink" title="登录验证"></a>登录验证</h2><p>Django 的验证系统可以直接实现登录的验证功能，通过 django.contrib.auth.authenticate 就可以实现。这个方法只能通过 username 和 password 来进行验证。<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.contrib.auth import authenticate</span><br><span class="line"></span><br><span class="line">user = authenticate(<span class="attribute">username</span>=<span class="string">'threefire'</span>, <span class="attribute">password</span>=<span class="string">'111111'</span>)</span><br><span class="line"><span class="comment"># 如果验证通过会返回一个user对象</span></span><br><span class="line"><span class="keyword">if</span><span class="built_in"> user </span>is <span class="keyword">not</span> None：</span><br><span class="line">    # 验证通过要执行的代码</span><br><span class="line"><span class="keyword">else</span>：</span><br><span class="line">    # 验证没有通过执行的代码</span><br></pre></td></tr></table></figure></p>
+<h2 id="扩展用户模型"><a href="#扩展用户模型" class="headerlink" title="扩展用户模型"></a>扩展用户模型</h2><p>如果 Django 内置的 user 模型不能满足需求，比如在验证用户登录的时候，需要用手机号或者邮箱验证。或者需要增加新的字段。那么就需要扩展用户模型。扩展用户模型有多种方式。</p>
+<h3 id="1、设置Proxy模型"><a href="#1、设置Proxy模型" class="headerlink" title="1、设置Proxy模型"></a>1、设置Proxy模型</h3><p>如果对 Django 提供的字段，已经验证的方法都满意，无需其他改动，只需要在原有的基础上增加一些操作的方法。那么可以使用代理的模式。<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.contrib.auth.models import User</span><br><span class="line"></span><br><span class="line">class Person(User):</span><br><span class="line">    class Meta:</span><br><span class="line">       <span class="built_in"> proxy </span>= <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">    @classmethod</span><br><span class="line">    def get_blacklist(cls):</span><br><span class="line">        return cls.objects.filter(<span class="attribute">is_active</span>=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure></p>
+<p>定义一个代理类，继承 User，并且在 Meta 中设置 proxy=True。 说明这个只是 User的一个代理模型，并不会影响原来 User 模型在数据库中表的结构，也不需要做映射。如果想要获取所有黑名单的人，就可以通过 Person.get_blacklist() 来取到。代理类就是对父类的方法扩展，而不用去修改源码。User.objects.all() 和 person.objects.all() 是等价的。因为都是从 User 这个模型中获取所有的数据。</p>
+<h3 id="2、一对一设置外键"><a href="#2、一对一设置外键" class="headerlink" title="2、一对一设置外键"></a>2、一对一设置外键</h3><p>如果想在内置的 User 模型上添加其他字段，那么可以使用一对一外键的方式。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.contrib.auth.models <span class="keyword">import</span> User</span><br><span class="line"><span class="keyword">from</span> django.dispatch <span class="keyword">import</span> receiver</span><br><span class="line"><span class="keyword">from</span> django.db.models.signals <span class="keyword">import</span> post_save</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserExtension</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    extension = models.OneToOneField(User, on_delete=models.CASCADE, related_name=<span class="string">'extension'</span>)</span><br><span class="line">    telephone = models.CharField(max_length=<span class="number">100</span>)</span><br><span class="line">    school = models.CharField(max_length=<span class="number">100</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@receiver(post_save, sender=User)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">create_user_extension</span><span class="params">(sender, instance, created, **kwargs)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> created:</span><br><span class="line">        UserExtension.objects.create(user=instance)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        instance.extension.save()</span><br><span class="line"></span><br><span class="line"><span class="comment"># views.py</span></span><br><span class="line"><span class="comment"># 通过手机号码验证</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">my_authenticate</span><span class="params">(telephone, password)</span>:</span></span><br><span class="line">    user = User.objects.filter(extension__telephone=telephone).first()</span><br><span class="line">    <span class="keyword">if</span> user:</span><br><span class="line">        is_correct = User.check_password(password)</span><br><span class="line">        <span class="keyword">if</span> is_correct:</span><br><span class="line">            <span class="keyword">return</span> user</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">None</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">None</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">one_view</span><span class="params">(request)</span>:</span></span><br><span class="line">    <span class="comment"># user = User.objects.create_user(username='threefire', email='xxx@qq.com', password='111111')</span></span><br><span class="line">    <span class="comment"># 通过一对一外键创建字段</span></span><br><span class="line">    <span class="comment"># user.extension.telephone = '18800003333'</span></span><br><span class="line">    <span class="comment"># 自定义验证登录</span></span><br><span class="line">    user = my_authenticate(telephone=<span class="string">'18800003333'</span>, password=<span class="string">'111111'</span>)</span><br><span class="line">    <span class="keyword">if</span> user：</span><br><span class="line">       <span class="comment"># 验证成功代码</span></span><br><span class="line">    <span class="keyword">else</span>：</span><br><span class="line">       <span class="comment"># 验证失败代码</span></span><br></pre></td></tr></table></figure></p>
+<p>定义一个 UserExtension 模型，与 User 模型是一对一关系。要增加新的字段就添加到 UserExtension 上。 因为扩展的模型和 User 模型是一对一模型，那么在创建了一个 User对象时，也必须创建一个 UserExtension 对象。要知道 User 对象什么时候创建了对象。就见监控 User 的 save 方法。只要 User 调用了 save 方法。就创建一个 UserExtension 和 User 进行绑定。create_user_extension 就是实现这个功能。</p>
+<h3 id="3、继承-AbstractUser"><a href="#3、继承-AbstractUser" class="headerlink" title="3、继承 AbstractUser"></a>3、继承 AbstractUser</h3><p>这个类是 User 的父类，所以如果不想修改原来的 User ， 就可以继承 AbstractUser 对 User 类重写。可以重定义登录验证的字段，增加一些字段。<br><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class User(AbstractUser):</span><br><span class="line">    <span class="attr">telephone</span> = models.CharField(<span class="attr">max_length=11,</span> <span class="attr">unique=True)</span></span><br><span class="line">    <span class="attr">school</span> = models.CharField(<span class="attr">max_length=100)</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 登录时使用 authenticate 验证的字段</span></span><br><span class="line">    <span class="attr">USERNAME_FIELD</span> = 'telephone'</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 指定 objects 调用的方法</span></span><br><span class="line">    <span class="attr">objects</span> = UserManager()</span><br></pre></td></tr></table></figure></p>
+<p>重写 objects 对象。因为 create_user 这些创建用户的方法还是原始 User 对象上面的。 对象上的。如果不重写这个方法，那么还是要传递原始 User 之前定义的字段，就达不到想要的效果。<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserManager</span>(<span class="title">BaseUserManager</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_create_user</span><span class="params">(<span class="keyword">self</span>, telephone, username, password, **kwargs)</span></span><span class="symbol">:</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> <span class="symbol">telephone:</span></span><br><span class="line">            raise ValueError(<span class="string">'必须要传递手机号'</span>)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> <span class="symbol">password:</span></span><br><span class="line">            raise ValueError(<span class="string">'必须要传递密码'</span>)</span><br><span class="line">        user = <span class="keyword">self</span>.model(telephone=telephone, username=username, **kwargs)</span><br><span class="line">        user.set_password(password)</span><br><span class="line">        user.save()</span><br><span class="line">        <span class="keyword">return</span> user</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">create_user</span><span class="params">(<span class="keyword">self</span>, telephone, username, password, **kwargs)</span></span><span class="symbol">:</span></span><br><span class="line">        kwargs[<span class="string">'is_superuser'</span>] = False</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">self</span>._create_user(telephone=telephone, password=password, username=username, **kwargs)</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">create_superuser</span><span class="params">(<span class="keyword">self</span>, telephone, username, password, **kwargs)</span></span><span class="symbol">:</span></span><br><span class="line">        kwargs[<span class="string">'is_superuser'</span>] = True</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">self</span>._create_user(telephone=telephone, password=password, username=username, **kwargs)</span><br></pre></td></tr></table></figure></p>
+<p>还需要在 settings 中配置好 AUTH_USER_MODEL=youapp.user ,因为这种方式破坏了原来 User 模型的表结构，所以必须要在第一次 migrate 前定义好，或者删除所以表进行重新映射。</p>
+<h3 id="4、继承AbstractBaseUser-模型"><a href="#4、继承AbstractBaseUser-模型" class="headerlink" title="4、继承AbstractBaseUser 模型"></a>4、继承AbstractBaseUser 模型</h3><p>如果想修改默认的验证方式，并且不想要原来 User 模型上的一些字段，那么就可以自定义一个模型，然后继承自 AbstractBaseUser , 再添加你想要的字段。在对 Django 比较了解情况下才用这样方式，因为改动较多。<br>如果你想修改默认的验证方式，并且对于原来User模型上的一些字段不想要，那么可以自定义一个模型，然后继承自AbstractBaseUser，再添加你想要的字段。这种方式会比较麻烦，最好是确定自己对Django比较了解才推荐使用。步骤如下：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span>(<span class="title">AbstractBaseUser</span>,<span class="title">PermissionsMixin</span>):</span></span><br><span class="line">    email = models.EmailField(unique=True)</span><br><span class="line">    username = models.CharField(max_length=<span class="number">150</span>)</span><br><span class="line">    telephone = models.CharField(max_length=<span class="number">11</span>,unique=True)</span><br><span class="line">    is_active = models.BooleanField(default=True)</span><br><span class="line"></span><br><span class="line">    USERNAME_FIELD = <span class="string">'telephone'</span></span><br><span class="line">    REQUIRED_FIELDS = []</span><br><span class="line"></span><br><span class="line">    objects = UserManager()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_full_name</span><span class="params">(<span class="keyword">self</span>)</span></span><span class="symbol">:</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">self</span>.username</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_short_name</span><span class="params">(<span class="keyword">self</span>)</span></span><span class="symbol">:</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">self</span>.username</span><br></pre></td></tr></table></figure>
+<p>其中password和last_login是在AbstractBaseUser中已经添加好了的，我们直接继承就可以了。然后我们再添加我们想要的字段。比如email、username、telephone等。这样就可以实现自己想要的字段了。但是因为我们重写了User，所以应该尽可能的模拟User模型：</p>
+<ul>
+<li>USERNAME_FIELD：用来描述User模型名字字段的字符串，作为唯一的标识。如果没有修改，那么会使用USERNAME来作为唯一字段。</li>
+<li>REQUIRED_FIELDS：一个字段名列表，用于当通过createsuperuser管理命令创建一个用户时的提示。</li>
+<li>is_active：一个布尔值，用于标识用户当前是否可用。</li>
+<li>get_full_name()：获取完整的名字。</li>
+<li>get_short_name()：一个比较简短的用户名。</li>
+<li>重新定义UserManager：我们还需要定义自己的UserManager，因为默认的UserManager在创建用户的时候使用的是username和password，那么我们要替换成telephone。示例代码如下：<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserManager</span>(<span class="title">BaseUserManager</span>):</span></span><br><span class="line">    use_in_migrations = True</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_create_user</span><span class="params">(<span class="keyword">self</span>,telephone,password,**extra_fields)</span></span><span class="symbol">:</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> <span class="symbol">telephone:</span></span><br><span class="line">            raise ValueError(<span class="string">"请填入手机号码！"</span>)</span><br><span class="line">        user = <span class="keyword">self</span>.model(telephone=telephone,*extra_fields)</span><br><span class="line">        user.set_password(password)</span><br><span class="line">        user.save()</span><br><span class="line">        <span class="keyword">return</span> user</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">create_user</span><span class="params">(<span class="keyword">self</span>,telephone,password,**extra_fields)</span></span><span class="symbol">:</span></span><br><span class="line">        extra_fields.setdefault(<span class="string">'is_superuser'</span>,False)</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">self</span>._create_user(telephone,password)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">create_superuser</span><span class="params">(<span class="keyword">self</span>,telephone,password,**extra_fields)</span></span><span class="symbol">:</span></span><br><span class="line">        extra_fields[<span class="string">'is_superuser'</span>] = True</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">self</span>._create_user(telephone,password)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>在创建了新的User模型后，还需要在settings中配置好。配置AUTH_USER_MODEL=’appname.User’。</p>
+<p>如何使用这个自定义的模型：比如以后我们有一个Article模型，需要通过外键引用这个User模型，那么可以通过以下两种方式引用。<br>第一种就是直接将User导入到当前文件中。示例代码如下：<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.db import models</span><br><span class="line"><span class="keyword">from</span> myauth.models import User</span><br><span class="line">class Article(models.Model):</span><br><span class="line">    title = models.CharField(<span class="attribute">max_length</span>=100)</span><br><span class="line">    content = models.TextField()</span><br><span class="line">    author = models.ForeignKey(User, <span class="attribute">on_delete</span>=models.CASCADE)</span><br></pre></td></tr></table></figure></p>
+<p>这种方式是可以行得通的。但是为了更好的使用性，建议还是将User抽象出来，使用 from django.contrib.auth import get_user_model来表示。示例代码如下：<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.db import models</span><br><span class="line"><span class="keyword">from</span> django.conf import settings</span><br><span class="line"><span class="keyword">from</span> django.contrib.auth import get_user_model</span><br><span class="line"></span><br><span class="line">class Article(models.Model):</span><br><span class="line">    title = models.CharField(<span class="attribute">max_length</span>=100)</span><br><span class="line">    content = models.TextField()</span><br><span class="line">    author = models.ForeignKey(get_user_model(), <span class="attribute">on_delete</span>=models.CASCADE)</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Django2-0/" rel="tag"># Django2.0</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/03/SQL注入攻击/" rel="next" title="SQL注入攻击">
+                <i class="fa fa-chevron-left"></i> SQL注入攻击
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/08/权限和分组/" rel="prev" title="权限和分组">
+                权限和分组 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="http://piuib58oz.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181205230447.jpg" alt="Threefire">
+            
+              <p class="site-author-name" itemprop="name">Threefire</p>
+              <p class="site-description motion-element" itemprop="description">记录我的学习生活</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Luffy357" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ljy1042537@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/Liang3Fire" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#User模型的基本用法。"><span class="nav-number">1.</span> <span class="nav-text">User模型的基本用法。</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建用户"><span class="nav-number">1.1.</span> <span class="nav-text">创建用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建超级用户"><span class="nav-number">1.2.</span> <span class="nav-text">创建超级用户</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改密码"><span class="nav-number">2.</span> <span class="nav-text">修改密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#登录验证"><span class="nav-number">3.</span> <span class="nav-text">登录验证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#扩展用户模型"><span class="nav-number">4.</span> <span class="nav-text">扩展用户模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、设置Proxy模型"><span class="nav-number">4.1.</span> <span class="nav-text">1、设置Proxy模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、一对一设置外键"><span class="nav-number">4.2.</span> <span class="nav-text">2、一对一设置外键</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、继承-AbstractUser"><span class="nav-number">4.3.</span> <span class="nav-text">3、继承 AbstractUser</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、继承AbstractBaseUser-模型"><span class="nav-number">4.4.</span> <span class="nav-text">4、继承AbstractBaseUser 模型</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Threefire</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
