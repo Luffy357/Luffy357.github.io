@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|20:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="gulp,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="gulp 是一种自动化开发流程的工具，配置好 gulp 后，可以自动处理好一些工作，比如写完 css 后，要压缩成 .min.css,写完 js 后，要做混淆和压缩，图片压缩等。gulp 都可以完成。">
+<meta name="keywords" content="gulp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端工具 gulp">
+<meta property="og:url" content="https://luffy357.github.io/2019/01/16/gulp/index.html">
+<meta property="og:site_name" content="Three Fire">
+<meta property="og:description" content="gulp 是一种自动化开发流程的工具，配置好 gulp 后，可以自动处理好一些工作，比如写完 css 后，要压缩成 .min.css,写完 js 后，要做混淆和压缩，图片压缩等。gulp 都可以完成。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-01-16T17:22:21.306Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端工具 gulp">
+<meta name="twitter:description" content="gulp 是一种自动化开发流程的工具，配置好 gulp 后，可以自动处理好一些工作，比如写完 css 后，要压缩成 .min.css,写完 js 后，要做混淆和压缩，图片压缩等。gulp 都可以完成。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://luffy357.github.io/2019/01/16/gulp/">
+
+
+
+
+
+  <title>前端工具 gulp | Three Fire</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Three Fire</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">三火的个人博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://luffy357.github.io/2019/01/16/gulp/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Threefire">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://piuib58oz.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181205230447.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Three Fire">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">前端工具 gulp</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-16T00:30:23+08:00">
+                2019-01-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/工具/" itemprop="url" rel="index">
+                    <span itemprop="name">工具</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>gulp 是一种自动化开发流程的工具，配置好 gulp 后，可以自动处理好一些工作，比如写完 css 后，要压缩成 .min.css,写完 js 后，要做混淆和压缩，图片压缩等。gulp 都可以完成。<br><a id="more"></a></p>
+<h2 id="安装gulp"><a href="#安装gulp" class="headerlink" title="安装gulp"></a>安装gulp</h2><h3 id="1、创建本地包管理环境"><a href="#1、创建本地包管理环境" class="headerlink" title="1、创建本地包管理环境"></a>1、创建本地包管理环境</h3><p>使用 npm init 命令在本地生成一个 package.json 文件。这个文件是用来记录当前项目前端依赖了哪些包，以后别人拿这个项目后，不需要 node_modules 文件夹(依赖包都在这个文件夹)，只需要执行 npm install 命令，就会自动把 package.json 下 devDependencies 中指定的依赖包安装好。</p>
+<h3 id="2、安装gulp"><a href="#2、安装gulp" class="headerlink" title="2、安装gulp"></a>2、安装gulp</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装在系统级目录中</span></span><br><span class="line">npm <span class="keyword">install</span> gulp -g</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装在本地</span></span><br><span class="line">npm <span class="keyword">install</span> gulp <span class="comment">--save-dev</span></span><br></pre></td></tr></table></figure>
+<p>“–save-dev” 就是将安装的包添加到 package.json 下的 devDependencies 依赖中，以后通过 npm install 即可自动安装。devDependencies 这个是用来记录开发环境中使用的包，如果想要记录生产环境中使用的包，那么在安装包的时候使用 “npm install xx –save” 就会记录到 package.json 下的 dependencies 中， dependencies 是专门用来记录生产环境下的依赖包的。</p>
+<h3 id="3、创建gulp任务"><a href="#3、创建gulp任务" class="headerlink" title="3、创建gulp任务"></a>3、创建gulp任务</h3><p>要使用 gulp 来流程化开发工作，首先要在项目的根目录下创建一个 gulpfile.js 文件，然后在 gulpfile.js 中写如下代码。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 变量 gulp 调用 gulp包 --&gt;</span></span><br><span class="line">var gulp = require('gulp');</span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 监控 名为 greet 的任务, 执行函数中代码 --&gt;</span></span><br><span class="line">gulp.task('greet', function () &#123;</span><br><span class="line">    console.log('hello world');</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>通过 require 语句引用已经安装的第三方依赖包，这个 require 只能是引用当前项目的，不能引用全局下的。require 语句是 node.js 独有的，只能在node.js 环境下使用。</li>
+<li>gulp.task 是用来创建一个任务。gulp.task 的第一参数是命令的名字，第二个参数是一个函数，就是执行这个命令的时候会做什么事情，都写在这个函数里面。</li>
+<li>写完以下代码后，以后如果想要执行 greet 命令，那么只需要进入到项目所在的路径，然后终端使用 gulp greet 即可执行。</li>
+</ul>
+<p>4、创建处理css文件的任务<br>gulp 只是提供一个框架，如果要实现一些复杂的功能，比如 css 压缩，那么还需要安装一下 gulp-cssnano 插件，gulp 相关的插件安装也是通过 npm 命令安装，安装方式跟其他包是一模一样的。对 css 文件的处理，需要做的事情就是压缩，然后在将压缩后的文件放到指定目录下(不要与原来的css文件重合)，<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装 gulp-cssnano</span></span><br><span class="line">&gt;&gt;&gt; npm install gulp-cssnano --save-dev</span><br><span class="line"></span><br><span class="line"><span class="comment"># gulpfile.js</span></span><br><span class="line"><span class="keyword">var</span> cssnano = <span class="keyword">require</span>(<span class="string">'gulp-cssnano'</span>)</span><br><span class="line"></span><br><span class="line">gulp.task(<span class="string">'css'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span><br><span class="line">    gulp.src(<span class="string">'.css/*.css'</span>)</span><br><span class="line">    .pipe(cssnano())</span><br><span class="line">    .pipe(gulp.dest(<span class="string">'.css/dist/'</span>))</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>gulp.task：创建一个 css 处理任务</li>
+<li>gulp.src：找到当前 css 目录下所有以 .css 结尾的 css 文件。</li>
+<li>pipe：管道方法，将上一个方法返回结果传给另一个处理器。如以上 cssnano</li>
+<li>gulp.dest: 将处理完后的文件，放到指定目录下。</li>
+</ul>
+<p>5、修改文件名<br>压缩完 css 文件后，如果还想给文件改个名字，比如增加一个 .min.css<br>的后缀，这样就可以轻易分辨出那是压缩处理后的文件了，要实现这个功能需要 “gulp-rename” 插件。<br><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; npm install gulp-<span class="built_in">rename</span> <span class="comment">--save-dev</span></span><br><span class="line"></span><br><span class="line"># gulpfile.js</span><br><span class="line">var <span class="built_in">rename</span> = <span class="built_in">require</span>(<span class="string">'gulp-rename'</span>)</span><br><span class="line"></span><br><span class="line">gulp.task(<span class="string">'css'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span></span>&#123;</span><br><span class="line">    gulp.src(<span class="string">'.css/*.css'</span>)</span><br><span class="line">    .pipe(cssnano)</span><br><span class="line">    .pipe(<span class="built_in">rename</span>(&#123;<span class="string">'suffix'</span>: <span class="string">".min"</span>&#125;))</span><br><span class="line">    .pipe(gulp.dest(<span class="string">'.css/dist/'</span>))</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>.pipe(rename({‘suffix’: ‘.min’})): 使用 rename 方法，并且传递一个对象参数，指定修改名字的规则为添加一个 .min 后缀名。gulp-rename 插件还有其他指定文件名的方式，参考文档 “<a href="https://www.npmjs.com/package/gulp-rename&quot;。" target="_blank" rel="noopener">https://www.npmjs.com/package/gulp-rename&quot;。</a></li>
+</ul>
+<p>6、创建处理js文件任务<br>处理 js 文件，需要 gulp-uglify 插件<br><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; npm install gulp-uglify <span class="comment">--save-dev</span></span><br><span class="line"></span><br><span class="line"># var uglify = <span class="built_in">require</span>(<span class="string">'gulp-uglify'</span>)</span><br><span class="line"></span><br><span class="line">gulp.task(<span class="string">'js'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span><br><span class="line">    gulp.src(<span class="string">'.js/*.js'</span>)</span><br><span class="line">    .pipe(uglify())</span><br><span class="line">    .pipe(<span class="built_in">rename</span>(&#123;<span class="string">"suffix"</span>: <span class="string">".min"</span>&#125;))</span><br><span class="line">    .pipe(gulp.desk(<span class="string">'.dist/js/'</span>))</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>pipe(uglify())： 处理 js 文件压缩和修改变量名等处理，更多参数查看”</li>
+<li><a href="https://github.com/mishoo/UglifyJS2#minify-options&quot;" target="_blank" rel="noopener">https://github.com/mishoo/UglifyJS2#minify-options&quot;</a></li>
+</ul>
+<p>7、合并多个文件<br>在网页开发中，为了加快网页的渲染速度，有时候会将多个文件压缩成一个文件，从而减少请求的次数，要拼接文件，需要 “gulp-concat” 插件<br><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; npm install gulp-<span class="built_in">concat</span> <span class="comment">--save-dev</span></span><br><span class="line"></span><br><span class="line"># gulpfile.js</span><br><span class="line">var <span class="built_in">concat</span> = <span class="built_in">require</span>(<span class="string">'gulp-concat'</span>)</span><br><span class="line"></span><br><span class="line">gulp.task(<span class="string">'js'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span><br><span class="line">    gulp.src(<span class="string">'.js/*.js'</span>)</span><br><span class="line">    .pipe(<span class="built_in">concat</span>(<span class="string">'index.min.js'</span>))</span><br><span class="line">    .pipe(uglify())</span><br><span class="line">    .pipe(<span class="built_in">rename</span>(&#123;<span class="string">"suffix"</span>: <span class="string">".min"</span>&#125;))</span><br><span class="line">    .pipe(gulp.desk(<span class="string">'.dist/js/'</span>))</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure></p>
+<p>8、压缩图片<br>压缩图片可以减少图片的大小，可以采用 “gulp-imagemin”插件来实现<br>未必免对图片重复压缩可以使用 “gulp-cache” 插件。<br><figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; <span class="built_in">npm</span> install gulp-imagemin --save-dev</span><br><span class="line">&gt;&gt;&gt; <span class="built_in">npm</span> install gulp-cache --save-dev</span><br><span class="line"></span><br><span class="line"><span class="comment"># gulpfile.js</span></span><br><span class="line"><span class="keyword">var</span> imagemin = <span class="built_in">require</span>(<span class="string">'gulp-imagemin'</span>);</span><br><span class="line"><span class="keyword">var</span> cache = <span class="built_in">require</span>(<span class="string">'gulp-cache'</span>);</span><br><span class="line"></span><br><span class="line">gulp.task(<span class="string">'imgae'</span>, <span class="keyword">function</span>()&#123;</span><br><span class="line">    gulp.src(<span class="string">'./images/*.*'</span>)</span><br><span class="line">    .pipe(cache(imagemin()))</span><br><span class="line">    .pipe(gulp.dest(<span class="string">'dist/images/'</span>))</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure></p>
+<p>9、检测代码修改，自动刷新浏览器<br>以上所有的任务，我们都需要手动在终端去执行，这样太麻烦。gulp 可以监听文件，只要文件有修改，我们就可以让它去执行一些任务<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">gulp.task(<span class="string">'watch'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">// 监听所有的 css 文件，然后执行 css 这个任务</span></span><br><span class="line">    gulp.watch(<span class="string">".css/*.css"</span>, [<span class="string">'css'</span>])</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure></p>
+<p>以后只要在终端执行了 gulp watch 命令就可以监听 css 文件，然后自动执行 css 任务。</p>
+<p>10、更改文件后，自动刷新浏览器<br>以上实现更改一些 css 文件后，可以自动执行处理 css 的任务，但还需要手动刷新浏览器才能看到效果。要自动刷新浏览器，可以使用 browser-sync 插件。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; npm install browser-sync --save-dev</span><br><span class="line"></span><br><span class="line"><span class="comment"># gulpfile.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> gulp = <span class="keyword">require</span>(<span class="string">"gulp"</span>)</span><br><span class="line"><span class="keyword">var</span> cssnano = <span class="keyword">require</span>(<span class="string">"gulp-cssnano"</span>)</span><br><span class="line"><span class="keyword">var</span> rename = <span class="keyword">require</span>(<span class="string">"gulp-rename"</span>)</span><br><span class="line"><span class="keyword">var</span> bs = <span class="keyword">require</span>(<span class="string">"browser-sync"</span>).create()</span><br><span class="line"></span><br><span class="line">gulp.task(<span class="string">"bs"</span>,<span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    bs.init(&#123;</span><br><span class="line">        <span class="string">'server'</span>: &#123;</span><br><span class="line">            <span class="string">'baseDir'</span>: <span class="string">'./'</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义一个处理css文件改动的任务</span></span><br><span class="line">gulp.task(<span class="string">"css"</span>,<span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    gulp.src(<span class="string">"./css/*.css"</span>)</span><br><span class="line">    .pipe(cssnano())</span><br><span class="line">    .pipe(rename(&#123;<span class="string">"suffix"</span>:<span class="string">".min"</span>&#125;))</span><br><span class="line">    .pipe(gulp.dest(<span class="string">"./css/dist/"</span>))</span><br><span class="line">    .pipe(bs.stream())</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义一个监听的任务</span></span><br><span class="line">gulp.task(<span class="string">"watch"</span>,<span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    gulp.watch(<span class="string">"./css/*.css"</span>,[<span class="string">'css'</span>])</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 执行gulp server开启服务器</span></span><br><span class="line">gulp.task(<span class="string">"server"</span>,[<span class="string">'bs'</span>,<span class="string">'watch'</span>])</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>bs任务：这个任务开启一个 3000 端口，以后我们在访问html页面的时候，就需要通过<a href="http://127.0.0.1:3000的方式来访问了。然后接下来我们还定义了一个server任务。这个任务会去执行bs和watch任务，只要修改了css文件，那么就会执行css的任务，然后就会自动刷新浏览器。" target="_blank" rel="noopener">http://127.0.0.1:3000的方式来访问了。然后接下来我们还定义了一个server任务。这个任务会去执行bs和watch任务，只要修改了css文件，那么就会执行css的任务，然后就会自动刷新浏览器。</a><br>browser-sync更多的教程请参考：”<a href="http://www.browsersync.cn/docs/gulp/&quot;。" target="_blank" rel="noopener">http://www.browsersync.cn/docs/gulp/&quot;。</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/gulp/" rel="tag"># gulp</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/09/Redis数据库/" rel="next" title="Redis数据库">
+                <i class="fa fa-chevron-left"></i> Redis数据库
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="http://piuib58oz.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181205230447.jpg" alt="Threefire">
+            
+              <p class="site-author-name" itemprop="name">Threefire</p>
+              <p class="site-description motion-element" itemprop="description">记录我的学习生活</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Luffy357" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ljy1042537@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/Liang3Fire" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装gulp"><span class="nav-number">1.</span> <span class="nav-text">安装gulp</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、创建本地包管理环境"><span class="nav-number">1.1.</span> <span class="nav-text">1、创建本地包管理环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、安装gulp"><span class="nav-number">1.2.</span> <span class="nav-text">2、安装gulp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、创建gulp任务"><span class="nav-number">1.3.</span> <span class="nav-text">3、创建gulp任务</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Threefire</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
