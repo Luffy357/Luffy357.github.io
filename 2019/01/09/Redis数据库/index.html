@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="Three Fire">
 <meta property="og:description" content="redis 是一种 nosql 数据库，他的数据是保存在内存中，同时 redis 可以定时把内存数据同步到磁盘，既可以将数据持久化，并且比 memcached 支持更多的数据结构(string, list列表, set集合, sorted set有序集合，hash表)文档参考: “http://redisdoc.com/index.html&amp;quot;">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-15T16:01:01.390Z">
+<meta property="og:updated_time" content="2019-01-17T09:45:58.794Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis数据库">
 <meta name="twitter:description" content="redis 是一种 nosql 数据库，他的数据是保存在内存中，同时 redis 可以定时把内存数据同步到磁盘，既可以将数据持久化，并且比 memcached 支持更多的数据结构(string, list列表, set集合, sorted set有序集合，hash表)文档参考: “http://redisdoc.com/index.html&amp;quot;">
@@ -394,57 +394,169 @@
 <p>4、停止<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo<span class="built_in"> service </span>redis-server stop</span><br></pre></td></tr></table></figure></p>
 <h2 id="对redis的操作"><a href="#对redis的操作" class="headerlink" title="对redis的操作"></a>对redis的操作</h2><p>对redis的操作可以用两种方式，第一种方式采用redis-cli，第二种方式采用编程语言，如pyhton和Java等。<br>1、使用redis-cli对redis进行字符串操作</p>
 <p>2、启动redis：<br><figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo servic redis-<span class="keyword">server</span> start</span><br></pre></td></tr></table></figure></p>
-<p>3、连接 redis-server：<br><figure class="highlight plain"><figcaption><span>-h [ip] - p [端口]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line"></span><br><span class="line">4、添加：</span><br></pre></td></tr></table></figure></p>
-<p>set key value<br>set username threefire<br><figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">将字符串值 <span class="built_in">value</span> 关联到 <span class="built_in">key</span>。如果 <span class="built_in">key</span> 已经持有其他值，<span class="built_in">set</span> 命令就是覆写旧值，无视其类型。并且默认的过期时间是永久，即永不过期。</span><br><span class="line"></span><br><span class="line"><span class="number">5</span>、删除：</span><br></pre></td></tr></table></figure></p>
-<p>del key<br>del username<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="number">6</span>、设置过期时间：</span><br></pre></td></tr></table></figure></p>
-<p>expire key timeout(单位为秒)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">也可以在设置值的时候，一同指定过期时间。</span><br></pre></td></tr></table></figure></p>
-<p>set key value EX timeout<br>或者<br>setex key timeout value<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="number">7</span>、查看过期时间</span><br></pre></td></tr></table></figure></p>
-<p>ttl key<br>ttl username<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="number">8</span>、查看当前 redis 中的所有 <span class="type">key</span>：</span><br></pre></td></tr></table></figure></p>
-<p>keys *<br><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="section">9、列表操作:</span></span><br><span class="line"> + 在列表左边添加元素：</span><br></pre></td></tr></table></figure></p>
-<p>lpush key value<br><figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">将值 <span class="built_in">value</span> 插入到列表 <span class="built_in">key</span> 的表头。如果 kye 不存在，一个空列表会被创建并执行 lpush 操作。当 <span class="built_in">key</span> 存在但不是列表类型时，将返回一个错误。</span><br><span class="line"> + 在列表右边添加元素：</span><br></pre></td></tr></table></figure></p>
-<p>rpush key value<br><figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">将值 <span class="built_in">value</span> 插入到列表 <span class="built_in">key</span> 的表尾。如果 <span class="built_in">key</span> 不存在，一个空列表会被创建并执行 RPUSH 操作。当 <span class="built_in">key</span> 存在但不是列表类型时，返回一个错误。</span><br><span class="line"> + 查看列表中的元素：</span><br></pre></td></tr></table></figure></p>
-<p>lrange key start stop<br><figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">返回列表 key  指定区间内的元素，区间以偏移量 start 和stop 指定，如果要左边的第一个到最后一个 <span class="keyword">lrange</span> key <span class="number">0</span> <span class="number">-1</span>。</span><br><span class="line"></span><br><span class="line"> + 移除列表中的元素：</span><br><span class="line">  - 移除并返回列表 key 的头元素</span><br></pre></td></tr></table></figure></p>
-<p>lpop key<br><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">- </span>移除并返回列表的尾元素</span><br></pre></td></tr></table></figure></p>
-<p>rpop key<br><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">- </span>同时移除多个并返回列表 key 的的元素</span><br></pre></td></tr></table></figure></p>
-<h1 id="删除key这个列表中count个value"><a href="#删除key这个列表中count个value" class="headerlink" title="删除key这个列表中count个value"></a>删除key这个列表中count个value</h1><p>lrem key count value<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">+ </span>指定返回第几个元素：</span><br></pre></td></tr></table></figure></p>
-<p>lindex key index<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">+ </span>获取列表中的元素个数</span><br></pre></td></tr></table></figure></p>
-<p>llen key<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">+ </span>删除指定元素：</span><br></pre></td></tr></table></figure></p>
-<p>lrem key count value<br><figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">根据参数 <span class="built_in">count</span> 的值，移除列表中与参数 <span class="built_in">value</span> 相等的元素。<span class="built_in">count</span> 的值可以是以下几种：</span><br><span class="line"> + <span class="built_in">count</span>&gt;<span class="number">0</span>: 从表头开始向表尾搜索，移除与 <span class="built_in">value</span> 相等的元素，数量为 <span class="built_in">count</span>。</span><br><span class="line"> + <span class="built_in">count</span>&lt;<span class="number">0</span>: 从表尾开始向表头搜索，移除与 <span class="built_in">value</span> 相等的元素，数量为 <span class="built_in">count</span> 的绝对值。</span><br><span class="line"> + <span class="built_in">count</span>=<span class="number">0</span>：移除表中所有与 <span class="built_in">value</span> 相等的值。</span><br><span class="line"></span><br><span class="line"><span class="number">10</span>、<span class="built_in">set</span> 集合的操作</span><br><span class="line"> + 添加元素:</span><br></pre></td></tr></table></figure></p>
-<p>sadd set value1 value2….<br>如：<br>sadd name liang liu<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">+ </span>查看元素：</span><br></pre></td></tr></table></figure></p>
-<p>smembers set<br>如：<br>smembers name<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">+ </span>移除元素：可以同时移除多个值</span><br></pre></td></tr></table></figure></p>
-<p>srem set value…<br>如 srem name liang<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">+ </span>查看元素个数：</span><br></pre></td></tr></table></figure></p>
-<p>scard set<br>如 scard name<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">+ </span>获取多个集合的交集：</span><br></pre></td></tr></table></figure></p>
-<p>sinter set1 set2<br>如<br>sinter name1 name2<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">+ </span>获取多个集合的并集：</span><br></pre></td></tr></table></figure></p>
-<p> sunion set1 set2<br> 如<br> sunion name1 name2<br> <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">+ </span>获取多个集合的差集：</span><br></pre></td></tr></table></figure></p>
-<p>sdiff set1 set2<br>如：<br>sdiff name1 name2<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">11、<span class="built_in">hash</span> 哈希操作：</span><br><span class="line">哈希表就相当于保存的字典</span><br><span class="line"> + 添加一个新值</span><br></pre></td></tr></table></figure></p>
-<p>hset key field value<br>如<br>hset web baidu baidu.com<br><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">将哈希表 key 中的域 <span class="meta">field</span> 的值设为 value。如果 key 不存在，一个新的哈希表被创建并进行 HSET 操作。如果域 <span class="meta">field</span> 已经存在于哈希表中，旧值将被覆盖。</span><br><span class="line"> + 获取哈希中的 <span class="meta">field</span> 对应的值：</span><br></pre></td></tr></table></figure></p>
-<p>hget key field<br>如：<br>hget web baidu<br><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ 删除 <span class="meta">field</span> 中的某个 <span class="meta">field</span>:</span><br></pre></td></tr></table></figure></p>
-<p>hdel key field<br>如：<br>hdel web baidu<br><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ 获取某个哈希中所有的 <span class="meta">field</span> 和 value：</span><br></pre></td></tr></table></figure></p>
-<p>hgetall key<br><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ 获取某个哈希中所有的 <span class="meta">field</span>：</span><br></pre></td></tr></table></figure></p>
-<p>hkey key<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">+ </span>获取某个哈希中所有的值：</span><br></pre></td></tr></table></figure></p>
-<p>hvals key<br><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ 判断哈希中是否存在某个 <span class="meta">field</span>：</span><br></pre></td></tr></table></figure></p>
-<p>hexists key field<br>如<br>hexists web baidu<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">+ </span>获取哈希中总共的键值对：</span><br></pre></td></tr></table></figure></p>
-<p>hlen field<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="number">12</span>、事务操作</span><br><span class="line">Redis 事务可以一次执行多个命令，事务具有以下特征</span><br><span class="line"> + 隔离操作：事务中的所有命令都会序列化、按顺序地执行、不会被其他命令打扰。</span><br><span class="line"> + 原子操作：事务中的命令要么全部被执行，要么全部都不执行。</span><br><span class="line"> + 开启一个事务：</span><br></pre></td></tr></table></figure></p>
-<p>multi<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">+ </span>执行事务：</span><br></pre></td></tr></table></figure></p>
-<p>exec<br><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">会将在 <span class="keyword">multi </span>和 exec 中的操作一并提交</span><br><span class="line">+ 取消事务：</span><br></pre></td></tr></table></figure></p>
-<p>discard<br><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">会将 <span class="keyword">multi </span>后的所有命令取消</span><br><span class="line">+ 监视一个或者多个 key：</span><br></pre></td></tr></table></figure></p>
-<p>watch key…<br><figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">监视一个(或多个)<span class="built_in">key</span>， 如果在事务执行之前这个(或这些)<span class="built_in">key</span> 被其他命令所改动，那么事务将被打断。</span><br><span class="line"> + 取消所有 <span class="built_in">key</span> 的监视</span><br></pre></td></tr></table></figure></p>
-<p>unwatch<br><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="section">13、发布/订阅操作:</span></span><br><span class="line"> + 给某个频道发布消息:</span><br></pre></td></tr></table></figure></p>
-<p>publish channel message<br><figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"> + 订阅某个频道的消息</span><br><span class="line"></span><br><span class="line"><span class="number">14</span>、持久化：redis提供了两种数据备份方式，一种是RDB，另外一种是AOF，以下将详细介绍这两种备份策略：</span><br><span class="line">####RDB </span><br><span class="line">默认开启，关闭：把配置文件中所有的save都注释，就是关闭了。</span><br><span class="line"> + 同步机制: 可以指定某个时间内发生多少个命令进行同步。比如<span class="number">1</span>分钟内发生了<span class="number">2</span>次命令，就做一次同步。</span><br><span class="line"> + 存储内容：存储的是redis里面的具体的值</span><br><span class="line"> + 优点：</span><br><span class="line">  （<span class="number">1</span>）存储数据到文件中会进行压缩，文件体积比aof小。</span><br><span class="line">  （<span class="number">2</span>）因为存储的是redis具体的值，并且会经过压缩，因此在恢复的时候速度比AOF快。（<span class="number">3</span>）非常适用于备份。</span><br><span class="line">   缺点： </span><br><span class="line">  （<span class="number">1</span>）RDB在多少时间内发生了多少写操作的时候就会出发同步机制，因为采用压缩机制，RDB在同步的时候都重新保存整个Redis中的数据，因此你一般会设置在最少<span class="number">5</span>分钟才保存一次数据。在这种情况下，一旦服务器故障，会造成<span class="number">5</span>分钟的数据丢失。</span><br><span class="line">  （<span class="number">2</span>）在数据保存进RDB的时候，Redis会fork出一个子进程用来同步，在数据量比较大的时候，可能会非常耗时。</span><br><span class="line"></span><br><span class="line">####AOF </span><br><span class="line">开启：在配置文件中appendonly yes即开启了aof，为no关闭。</span><br><span class="line"> + 同步机制: 每秒同步或者每次发生命令后同步</span><br><span class="line"> + 存储内容：存储的是执行的更新数据的操作命令</span><br><span class="line">  优点： </span><br><span class="line"> （<span class="number">1</span>）AOF的策略是每秒钟或者每次发生写操作的时候都会同步，因此即使服务器故障，最多只会丢失<span class="number">1</span>秒的数据。 </span><br><span class="line"> （<span class="number">2</span>）AOF存储的是Redis命令，并且是直接追加到aof文件后面，因此每次备份的时候只要添加新的数据进去就可以了。</span><br><span class="line"> （<span class="number">3</span>）如果AOF文件比较大了，那么Redis会进行重写，只保留最小的命令集合。</span><br><span class="line">  缺点：</span><br><span class="line"> （<span class="number">1</span>）AOF文件因为没有压缩，因此体积比RDB大。 </span><br><span class="line"> （<span class="number">2</span>）AOF是在每秒或者每次写操作都进行备份，因此如果并发量比较大，效率可能有点慢。</span><br><span class="line"> （<span class="number">3</span>）AOF文件因为存储的是命令，因此在灾难恢复的时候Redis会重新运行AOF中的命令，速度不及RDB。</span><br><span class="line"> 参考文档：<span class="string">" http://redisdoc.com/topic/persistence.html#redis "</span></span><br><span class="line"></span><br><span class="line"><span class="number">15</span>、安全：在配置文件中，设置 requirepass password，那么客户连接的时候就需要密码。配置文件路径<span class="string">"etc/redis/reid.conf"</span>。</span><br><span class="line">两种方式登录：</span><br><span class="line"> + 在启动时添加 <span class="string">"-a"</span> 参数，后面加密码</span><br><span class="line"> + 启动之后，使用<span class="string">"auth"</span> 命令授权</span><br><span class="line"></span><br><span class="line">## Python 操作redis</span><br><span class="line"><span class="number">1</span>、安装 python-redis:</span><br></pre></td></tr></table></figure></p>
-<p>pip install redis<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">2、新建一个文件比如 <span class="selector-tag">redis_test</span><span class="selector-class">.py</span>, 然后初始化一个 <span class="selector-tag">redis</span> 实例变量，并且在 <span class="selector-tag">ubuntu</span> 虚拟机中开启 <span class="selector-tag">redis</span>。比如虚拟机的<span class="selector-tag">ip</span>地址为 192<span class="selector-class">.168</span><span class="selector-class">.0</span><span class="selector-class">.1</span></span><br></pre></td></tr></table></figure></p>
-<p>from redis import Redis</p>
-<p>redis_test = Redis(host=’192.168.0.1’, port=6379, password=xxx)<br><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="number">3</span>、对字符串的操作：操作 redis 的方法名称，与在 redis-<span class="keyword">cli</span> 中一样</span><br></pre></td></tr></table></figure></p>
-<h1 id="添加一个值，过期时间为60秒"><a href="#添加一个值，过期时间为60秒" class="headerlink" title="添加一个值，过期时间为60秒"></a>添加一个值，过期时间为60秒</h1><p>redis_test.set(‘username’, ‘threefire’, ex=60)</p>
-<h1 id="获取一个值"><a href="#获取一个值" class="headerlink" title="获取一个值"></a>获取一个值</h1><p>redis_test.get(‘username’)</p>
-<h1 id="删除一个值"><a href="#删除一个值" class="headerlink" title="删除一个值"></a>删除一个值</h1><p>redis_test.del(‘username’)<br><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="number">4</span>、对列表操作：也是和 redis-<span class="keyword">cli</span> 中操作一样</span><br></pre></td></tr></table></figure></p>
-<h1 id="在列表左边添加一个值"><a href="#在列表左边添加一个值" class="headerlink" title="在列表左边添加一个值"></a>在列表左边添加一个值</h1><p>redis_test.lpush(‘languages’, ‘python’)</p>
-<h1 id="获取有一个值"><a href="#获取有一个值" class="headerlink" title="获取有一个值"></a>获取有一个值</h1><p>redis_test.lrange(‘languages’, 0, -1)<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="number">5</span>、对集合操作</span><br></pre></td></tr></table></figure></p>
-<h1 id="添加一个元素"><a href="#添加一个元素" class="headerlink" title="添加一个元素"></a>添加一个元素</h1><p>redis_test.sadd(‘team’, ‘xiaoxue’)</p>
-<h1 id="获取所有元素"><a href="#获取所有元素" class="headerlink" title="获取所有元素"></a>获取所有元素</h1><p>redis_test.smembers(‘team’)<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="number">6</span>、对哈希的操作：</span><br></pre></td></tr></table></figure></p>
-<h1 id="添加一个值"><a href="#添加一个值" class="headerlink" title="添加一个值"></a>添加一个值</h1><p>redis_test.hset(‘web’, ‘baidu’, ‘baidu.com’)</p>
-<h1 id="获取哈希中的所有值"><a href="#获取哈希中的所有值" class="headerlink" title="获取哈希中的所有值"></a>获取哈希中的所有值</h1><p>redis_test.hgetall(‘web’)<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="number">7</span>、事务操作</span><br></pre></td></tr></table></figure></p>
-<h1 id="定义一个实例"><a href="#定义一个实例" class="headerlink" title="定义一个实例"></a>定义一个实例</h1><p>pip = redis.pipeline()<br>pip.incr(‘Bank1’)<br>pip.desc(‘Bank2’)</p>
-<h1 id="执行事务"><a href="#执行事务" class="headerlink" title="执行事务"></a>执行事务</h1><p>pip.execute()<br><code>`</code></p>
+<p>3、连接 redis-server：<br><figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli -h <span class="string">[ip]</span> - p <span class="string">[端口]</span></span><br></pre></td></tr></table></figure></p>
+<p>4、添加：<br><figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> key <span class="comment">value</span></span><br><span class="line"><span class="keyword">set</span> <span class="comment">username threefire</span></span><br></pre></td></tr></table></figure></p>
+<p>将字符串值 value 关联到 key。如果 key 已经持有其他值，set 命令就是覆写旧值，无视其类型。并且默认的过期时间是永久，即永不过期。</p>
+<p>5、删除：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">del</span> key</span><br><span class="line"><span class="selector-tag">del</span> username</span><br></pre></td></tr></table></figure></p>
+<p>6、设置过期时间：<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">expire key <span class="keyword">timeout</span>(单位为秒)</span><br></pre></td></tr></table></figure></p>
+<p>也可以在设置值的时候，一同指定过期时间。<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="keyword">key</span> <span class="keyword">value</span> EX <span class="keyword">timeout</span></span><br><span class="line">或者</span><br><span class="line">setex <span class="keyword">key</span> <span class="keyword">timeout</span> <span class="keyword">value</span></span><br></pre></td></tr></table></figure></p>
+<p>7、查看过期时间<br><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">ttl key</span></span><br><span class="line"><span class="attribute">ttl username</span></span><br></pre></td></tr></table></figure></p>
+<p>8、查看当前 redis 中的所有 key：<br><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">keys</span> *</span><br></pre></td></tr></table></figure></p>
+<p>9、列表操作:</p>
+<ul>
+<li>在列表左边添加元素：<figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lpush <span class="built_in">key</span> <span class="built_in">value</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>将值 value 插入到列表 key 的表头。如果 kye 不存在，一个空列表会被创建并执行 lpush 操作。当 key 存在但不是列表类型时，将返回一个错误。</p>
+<ul>
+<li>在列表右边添加元素：<figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpush <span class="built_in">key</span> <span class="built_in">value</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>将值 value 插入到列表 key 的表尾。如果 key 不存在，一个空列表会被创建并执行 RPUSH 操作。当 key 存在但不是列表类型时，返回一个错误。</p>
+<ul>
+<li>查看列表中的元素：<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">lrange</span> key start stop</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>返回列表 key  指定区间内的元素，区间以偏移量 start 和stop 指定，如果要左边的第一个到最后一个 lrange key 0 -1。</p>
+<ul>
+<li><p>移除列表中的元素：</p>
+<ul>
+<li><p>移除并返回列表 key 的头元素</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">lpop key</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>移除并返回列表的尾元素</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">rpop key</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>同时移除多个并返回列表 key 的的元素</p>
+<figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 删除<span class="built_in">key</span>这个列表中<span class="built_in">count</span>个<span class="built_in">value</span></span><br><span class="line">lrem <span class="built_in">key</span> <span class="built_in">count</span> <span class="built_in">value</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>指定返回第几个元素：</p>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">lindex</span> key index</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取列表中的元素个数</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">llen key</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>删除指定元素：<figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lrem <span class="built_in">key</span> <span class="built_in">count</span> <span class="built_in">value</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>根据参数 count 的值，移除列表中与参数 value 相等的元素。count 的值可以是以下几种：</p>
+<ul>
+<li>count&gt;0: 从表头开始向表尾搜索，移除与 value 相等的元素，数量为 count。</li>
+<li>count&lt;0: 从表尾开始向表头搜索，移除与 value 相等的元素，数量为 count 的绝对值。</li>
+<li>count=0：移除表中所有与 value 相等的值。</li>
+</ul>
+<p>10、set 集合的操作</p>
+<ul>
+<li><p>添加元素:</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">sadd</span></span> <span class="keyword">set</span> value1 <span class="comment">value2....</span></span><br><span class="line">如：</span><br><span class="line">sadd <span class="comment">name liang liu</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看元素：</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">smembers <span class="keyword">set</span></span><br><span class="line">如：</span><br><span class="line">smembers <span class="built_in">name</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>移除元素：可以同时移除多个值</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">srem</span></span> <span class="keyword">set</span> value...</span><br><span class="line">如 srem <span class="comment">name liang</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看元素个数：</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scard <span class="keyword">set</span></span><br><span class="line">如 scard <span class="built_in">name</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取多个集合的交集：</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sinter <span class="keyword">set</span>1 <span class="keyword">set</span>2</span><br><span class="line">如</span><br><span class="line">sinter name1 name2</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取多个集合的并集：</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sunion <span class="keyword">set</span>1 <span class="keyword">set</span>2</span><br><span class="line">如</span><br><span class="line">sunion name1 name2</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取多个集合的差集：</p>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sdiff set<span class="number">1</span> set<span class="number">2</span></span><br><span class="line">如：</span><br><span class="line">sdiff <span class="symbol">name1</span> <span class="symbol">name2</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>11、hash 哈希操作：<br>哈希表就相当于保存的字典</p>
+<ul>
+<li>添加一个新值<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">hset</span> key <span class="meta">field</span> value</span><br><span class="line">如</span><br><span class="line"><span class="symbol">hset</span> web <span class="keyword">baidu </span><span class="keyword">baidu.com</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>将哈希表 key 中的域 field 的值设为 value。如果 key 不存在，一个新的哈希表被创建并进行 HSET 操作。如果域 field 已经存在于哈希表中，旧值将被覆盖。</p>
+<ul>
+<li><p>获取哈希中的 field 对应的值：</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">hget</span> key <span class="meta">field</span></span><br><span class="line">如：</span><br><span class="line"><span class="symbol">hget</span> web <span class="keyword">baidu</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除 field 中的某个 field:</p>
+<figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">hdel</span> <span class="built_in">key</span> field</span><br><span class="line">如：</span><br><span class="line"><span class="built_in">hdel</span> web baidu</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取某个哈希中所有的 field 和 value：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">hgetall key</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取某个哈希中所有的 field：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">hkey key</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取某个哈希中所有的值：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">hvals key</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>判断哈希中是否存在某个 field：</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">hexists</span> key <span class="meta">field</span></span><br><span class="line">如</span><br><span class="line"><span class="symbol">hexists</span> web <span class="keyword">baidu</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取哈希中总共的键值对：</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">hlen</span> <span class="meta">field</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>12、事务操作<br>Redis 事务可以一次执行多个命令，事务具有以下特征</p>
+<ul>
+<li>隔离操作：事务中的所有命令都会序列化、按顺序地执行、不会被其他命令打扰。</li>
+<li>原子操作：事务中的命令要么全部被执行，要么全部都不执行。</li>
+<li><p>开启一个事务：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">multi</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>执行事务：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">exec</span></span><br></pre></td></tr></table></figure>
+<p>会将在 multi 和 exec 中的操作一并提交</p>
+</li>
+<li><p>取消事务：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">discard</span></span><br></pre></td></tr></table></figure>
+<p>会将 multi 后的所有命令取消</p>
+</li>
+<li>监视一个或者多个 key：<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">watch</span></span> key...</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>监视一个(或多个)key， 如果在事务执行之前这个(或这些)key 被其他命令所改动，那么事务将被打断。</p>
+<ul>
+<li>取消所有 key 的监视<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">unwatch</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>13、发布/订阅操作:</p>
+<ul>
+<li><p>给某个频道发布消息:</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">publish channel <span class="keyword">message</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>订阅某个频道的消息</p>
+</li>
+</ul>
+<p>14、持久化：redis提供了两种数据备份方式，一种是RDB，另外一种是AOF，以下将详细介绍这两种备份策略：</p>
+<p>####RDB<br>默认开启，关闭：把配置文件中所有的save都注释，就是关闭了。</p>
+<ul>
+<li>同步机制: 可以指定某个时间内发生多少个命令进行同步。比如1分钟内发生了2次命令，就做一次同步。</li>
+<li>存储内容：存储的是redis里面的具体的值</li>
+<li>优点：<br>（1）存储数据到文件中会进行压缩，文件体积比aof小。<br>（2）因为存储的是redis具体的值，并且会经过压缩，因此在恢复的时候速度比AOF快。（3）非常适用于备份。<br>缺点：<br>（1）RDB在多少时间内发生了多少写操作的时候就会出发同步机制，因为采用压缩机制，RDB在同步的时候都重新保存整个Redis中的数据，因此你一般会设置在最少5分钟才保存一次数据。在这种情况下，一旦服务器故障，会造成5分钟的数据丢失。<br>（2）在数据保存进RDB的时候，Redis会fork出一个子进程用来同步，在数据量比较大的时候，可能会非常耗时。</li>
+</ul>
+<p>####AOF<br>开启：在配置文件中appendonly yes即开启了aof，为no关闭。</p>
+<ul>
+<li>同步机制: 每秒同步或者每次发生命令后同步</li>
+<li>存储内容：存储的是执行的更新数据的操作命令<br>优点：<br>（1）AOF的策略是每秒钟或者每次发生写操作的时候都会同步，因此即使服务器故障，最多只会丢失1秒的数据。<br>（2）AOF存储的是Redis命令，并且是直接追加到aof文件后面，因此每次备份的时候只要添加新的数据进去就可以了。<br>（3）如果AOF文件比较大了，那么Redis会进行重写，只保留最小的命令集合。<br>缺点：<br>（1）AOF文件因为没有压缩，因此体积比RDB大。<br>（2）AOF是在每秒或者每次写操作都进行备份，因此如果并发量比较大，效率可能有点慢。<br>（3）AOF文件因为存储的是命令，因此在灾难恢复的时候Redis会重新运行AOF中的命令，速度不及RDB。<br>参考文档：” <a href="http://redisdoc.com/topic/persistence.html#redis" target="_blank" rel="noopener">http://redisdoc.com/topic/persistence.html#redis</a> “</li>
+</ul>
+<p>15、安全：在配置文件中，设置 requirepass password，那么客户连接的时候就需要密码。配置文件路径”etc/redis/reid.conf”。<br>两种方式登录：</p>
+<ul>
+<li>在启动时添加 “-a” 参数，后面加密码</li>
+<li>启动之后，使用”auth” 命令授权</li>
+</ul>
+<h2 id="Python-操作redis"><a href="#Python-操作redis" class="headerlink" title="Python 操作redis"></a>Python 操作redis</h2><p>1、安装 python-redis:<br><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip <span class="keyword">install</span> redis</span><br></pre></td></tr></table></figure></p>
+<p>2、新建一个文件比如 redis_test.py, 然后初始化一个 redis 实例变量，并且在 ubuntu 虚拟机中开启 redis。比如虚拟机的ip地址为 192.168.0.1<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> redis import Redis</span><br><span class="line"></span><br><span class="line">redis_test = Redis(<span class="attribute">host</span>=<span class="string">'192.168.0.1'</span>, <span class="attribute">port</span>=6379, <span class="attribute">password</span>=xxx)</span><br></pre></td></tr></table></figure></p>
+<p>3、对字符串的操作：操作 redis 的方法名称，与在 redis-cli 中一样<br><figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># 添加一个值，过期时间为60秒</span></span><br><span class="line">redis_test.<span class="keyword">set</span>(<span class="string">'username'</span>, <span class="string">'threefire'</span>, ex=<span class="number">60</span>)</span><br><span class="line"><span class="meta"># 获取一个值</span></span><br><span class="line">redis_test.<span class="keyword">get</span>(<span class="string">'username'</span>)</span><br><span class="line"><span class="meta"># 删除一个值</span></span><br><span class="line">redis_test.del(<span class="string">'username'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>4、对列表操作：也是和 redis-cli 中操作一样<br><figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在列表左边添加一个值</span></span><br><span class="line">redis_test.lpush(<span class="string">'languages'</span>, <span class="string">'python'</span>)</span><br><span class="line"><span class="comment"># 获取有一个值</span></span><br><span class="line">redis_test.<span class="keyword">lrange</span>(<span class="string">'languages'</span>, <span class="number">0</span>, <span class="number">-1</span>)</span><br></pre></td></tr></table></figure></p>
+<p>5、对集合操作<br><figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># 添加一个元素</span></span><br><span class="line">redis_test.sadd(<span class="string">'team'</span>, <span class="string">'xiaoxue'</span>)</span><br><span class="line"><span class="meta"># 获取所有元素</span></span><br><span class="line">redis_test.smembers(<span class="string">'team'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>6、对哈希的操作：<br><figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># 添加一个值</span></span><br><span class="line">redis_test.hset(<span class="string">'web'</span>, <span class="string">'baidu'</span>, <span class="string">'baidu.com'</span>)</span><br><span class="line"><span class="meta"># 获取哈希中的所有值</span></span><br><span class="line">redis_test.hgetall(<span class="string">'web'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>7、事务操作<br><figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># 定义一个实例</span></span><br><span class="line">pip = redis.pipeline()</span><br><span class="line">pip.incr(<span class="string">'Bank1'</span>)</span><br><span class="line">pip.desc(<span class="string">'Bank2'</span>)</span><br><span class="line"><span class="meta"># 执行事务</span></span><br><span class="line">pip.execute()</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -643,7 +755,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#redis-使用场景"><span class="nav-number">1.</span> <span class="nav-text">redis 使用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#redis在ubuntu系统中的安装与启动"><span class="nav-number">2.</span> <span class="nav-text">redis在ubuntu系统中的安装与启动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对redis的操作"><span class="nav-number">3.</span> <span class="nav-text">对redis的操作</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#删除key这个列表中count个value"><span class="nav-number"></span> <span class="nav-text">删除key这个列表中count个value</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加一个值，过期时间为60秒"><span class="nav-number"></span> <span class="nav-text">添加一个值，过期时间为60秒</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#获取一个值"><span class="nav-number"></span> <span class="nav-text">获取一个值</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#删除一个值"><span class="nav-number"></span> <span class="nav-text">删除一个值</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#在列表左边添加一个值"><span class="nav-number"></span> <span class="nav-text">在列表左边添加一个值</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#获取有一个值"><span class="nav-number"></span> <span class="nav-text">获取有一个值</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加一个元素"><span class="nav-number"></span> <span class="nav-text">添加一个元素</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#获取所有元素"><span class="nav-number"></span> <span class="nav-text">获取所有元素</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加一个值"><span class="nav-number"></span> <span class="nav-text">添加一个值</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#获取哈希中的所有值"><span class="nav-number"></span> <span class="nav-text">获取哈希中的所有值</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#定义一个实例"><span class="nav-number"></span> <span class="nav-text">定义一个实例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#执行事务"><span class="nav-number"></span> <span class="nav-text">执行事务</span></a></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#redis-使用场景"><span class="nav-number">1.</span> <span class="nav-text">redis 使用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#redis在ubuntu系统中的安装与启动"><span class="nav-number">2.</span> <span class="nav-text">redis在ubuntu系统中的安装与启动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对redis的操作"><span class="nav-number">3.</span> <span class="nav-text">对redis的操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python-操作redis"><span class="nav-number">4.</span> <span class="nav-text">Python 操作redis</span></a></li></ol></div>
             
 
           </div>
