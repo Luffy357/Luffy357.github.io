@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="Three Fire">
 <meta property="og:description" content="浏览器在向服务器发起请求中，有不同的请求方法，相应的服务器会根据不同的请求做不同的处理。例如：GET 请求一般用来向服务器索取数据，不会改变服务器的状态。而 POST 请求一般用来向服务器提交数据，会对服务器的状态进行更改。为了安全服务器应该对不同的请求进行不同的处理。所以可以给视图进行设置只允许特定的求情访问。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-12T14:02:46.377Z">
+<meta property="og:updated_time" content="2019-07-17T15:18:52.509Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Django限制请求">
 <meta name="twitter:description" content="浏览器在向服务器发起请求中，有不同的请求方法，相应的服务器会根据不同的请求做不同的处理。例如：GET 请求一般用来向服务器索取数据，不会改变服务器的状态。而 POST 请求一般用来向服务器提交数据，会对服务器的状态进行更改。为了安全服务器应该对不同的请求进行不同的处理。所以可以给视图进行设置只允许特定的求情访问。">
@@ -182,7 +182,7 @@
 
 </head>
 
-<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
@@ -192,7 +192,7 @@
   <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta ">
     
@@ -292,20 +292,20 @@
   
   
 
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
   
   <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://luffy357.github.io/2018/12/12/Django限制请求/">
 
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Threefire">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content>
       <meta itemprop="image" content="http://piuib58oz.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181205230447.jpg">
     </span>
 
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Three Fire">
     </span>
 
@@ -348,7 +348,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/学习笔记/" itemprop="url" rel="index">
                     <span itemprop="name">学习笔记</span>
                   </a>
@@ -390,7 +390,7 @@
 <h2 id="限制请求的装饰器"><a href="#限制请求的装饰器" class="headerlink" title="限制请求的装饰器"></a>限制请求的装饰器</h2><p>  Django 内置的视图装饰器可以给视图提供一些限制，用来限制请求的方法。</p>
 <h3 id="require-http-methods"><a href="#require-http-methods" class="headerlink" title="require_http_methods:"></a>require_http_methods:</h3><p> 可以传递一个允许访问方法的列表。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.http.decorators.http <span class="keyword">import</span> require_http_methods</span><br><span class="line"></span><br><span class="line"><span class="meta">@require_http_methods(['GET', 'POST'])</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">(request)</span>:</span></span><br><span class="line">   <span class="keyword">pass</span></span><br></pre></td></tr></table></figure></p>
 <h3 id="require-GET"><a href="#require-GET" class="headerlink" title="require_GET:"></a>require_GET:</h3><p> 只允许 GET 方法访问<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.http.decorators.http <span class="keyword">import</span> require_GET</span><br><span class="line"></span><br><span class="line"><span class="meta">@require_GET</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">(request)</span>:</span></span><br><span class="line">   <span class="keyword">pass</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="require-POST"><a href="#require-POST" class="headerlink" title="require_POST:"></a>require_POST:</h3><p>只允许 POST 方法访问<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.http.decorators.http <span class="keyword">import</span> require_POST</span><br><span class="line"></span><br><span class="line"><span class="meta">@require_POST</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">(request)</span>:</span></span><br><span class="line">   <span class="keyword">pass</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="require-POST"><a href="#require-POST" class="headerlink" title="require_POST:"></a>require_POST:</h3><p>只允许 POST 方法访问<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.views.decorators.http <span class="keyword">import</span> require_POST</span><br><span class="line"></span><br><span class="line"><span class="meta">@require_POST</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">(request)</span>:</span></span><br><span class="line">   <span class="keyword">pass</span></span><br></pre></td></tr></table></figure></p>
 <h2 id="页面重定向"><a href="#页面重定向" class="headerlink" title="页面重定向"></a>页面重定向</h2><p>页面重定向就是访问一个 URL 的时候让它跳转到另一个 URL，重定向也分永久重定向和暂时重定向，当然用户访问一个需要登录的页面时，如果该用户没有登录就重定向到登录页面。永久重定向的 http 状态码是301，暂时重定向的 http 状态码是 302。</p>
 <p>在 Django 中，重定向使用 redirect 来实现：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">redirect(to, *args, permanent=<span class="keyword">False</span>, **kwargs)</span><br><span class="line"><span class="comment"># to: 一个url，</span></span><br><span class="line"><span class="comment"># permanent: 是否是一个永久重定向，默认为 False</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># views.py</span></span><br><span class="line"><span class="keyword">from</span> django.shortcuts <span class="keyword">import</span> reverse,redirect</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">profile</span><span class="params">(request)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> request.GET.get(<span class="string">"username"</span>):</span><br><span class="line">        <span class="keyword">return</span> HttpResponse(<span class="string">"%s，欢迎来到个人中心页面！"</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> redirect(reverse(<span class="string">"user:login"</span>))</span><br></pre></td></tr></table></figure></p>
 
@@ -499,7 +499,7 @@
 
       <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
               <img class="site-author-image" itemprop="image" src="http://piuib58oz.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181205230447.jpg" alt="Threefire">
             
@@ -514,7 +514,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-count">30</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -536,7 +536,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
