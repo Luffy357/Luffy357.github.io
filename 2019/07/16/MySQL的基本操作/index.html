@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="Three Fire">
 <meta property="og:description" content="数据库(database)：保存有组织的数据的容器，数据库有表(table)组成，每个表又由一个或者多个列(column)组成。MySQL 数据库是一种关系型数据库。关系描述的是两个实体之间的对应规则，包括(一对一、一对多、多对多)。在关系型数据库中一行就是一个对象。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-17T15:33:22.231Z">
+<meta property="og:updated_time" content="2019-07-18T13:54:16.097Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL的基本操作">
 <meta name="twitter:description" content="数据库(database)：保存有组织的数据的容器，数据库有表(table)组成，每个表又由一个或者多个列(column)组成。MySQL 数据库是一种关系型数据库。关系描述的是两个实体之间的对应规则，包括(一对一、一对多、多对多)。在关系型数据库中一行就是一个对象。">
@@ -424,7 +424,51 @@
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">DATABASE</span> 库名;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> 表名;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h2 id="数据库的增删改查"><a href="#数据库的增删改查" class="headerlink" title="数据库的增删改查"></a>数据库的增删改查</h2><h3 id="改-ALTER"><a href="#改-ALTER" class="headerlink" title="改 ALTER"></a>改 ALTER</h3>
+<h2 id="数据库的增删改查"><a href="#数据库的增删改查" class="headerlink" title="数据库的增删改查"></a>数据库的增删改查</h2><h3 id="改-ALTER"><a href="#改-ALTER" class="headerlink" title="改 ALTER"></a>改 ALTER</h3><ul>
+<li><p>增加列</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> 表名 <span class="keyword">ADD</span> 列名 属性/类型;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改列的 属性 类型</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> 表名 <span class="keyword">MODIFY</span> 列名 属性/类型;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改列名</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> 表名 <span class="keyword">CHANGE</span> 原列名 新列名;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除表中的某个列</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> 表名 <span class="keyword">DROP</span> 列名;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除表</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> 表名;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="增加"><a href="#增加" class="headerlink" title="增加"></a>增加</h2><ul>
+<li><p>增加数据行 INSERT 关键字</p>
+<ul>
+<li><p>全列插入 值和表的字段一一对应</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 占位符: 只有主键字段才有占位符的概率(0, NULL, default)</span></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> studens <span class="keyword">VALUES</span>(<span class="number">0</span>, <span class="string">'小乔'</span>, <span class="number">18</span>, <span class="number">1</span>/<span class="number">25</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>指定列插入</p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># <span class="keyword">insert</span> <span class="keyword">into</span> 表名 (列<span class="number">1</span>, 列<span class="number">2</span>,...) <span class="keyword">values</span> (值<span class="number">1</span>, 值<span class="number">2</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> studens (name, birthday) <span class="keyword">VALUES</span> (<span class="string">'大乔'</span>， <span class="number">2</span>/<span class="number">15</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>多行插入 批量插入</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> studens <span class="keyword">VALUES</span>(<span class="number">0</span>, <span class="string">'小乔'</span>, <span class="number">18</span>, <span class="number">1</span>/<span class="number">25</span>), (<span class="number">0</span>, <span class="string">'诸葛亮'</span>, <span class="number">49</span>, <span class="number">5</span>/<span class="number">23</span>),(...);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> studens (<span class="keyword">name</span>, birthday) <span class="keyword">VALUES</span> (<span class="string">'大乔'</span>， <span class="number">2</span>/<span class="number">15</span>), (<span class="string">'周瑜'</span>， <span class="number">8</span>/<span class="number">15</span>), (...);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h2><ul>
+<li>修改数据行中的值 UPDATE<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将 students 表中的 id=5 的数据行中 的 age 字段值改为 28</span></span><br><span class="line"><span class="keyword">UPDATE</span> studens <span class="keyword">SET</span> age = <span class="number">28</span> <span class="keyword">WHERE</span> <span class="keyword">id</span>=<span class="number">5</span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><ul>
+<li>删除数据行 DELETE<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> <span class="keyword">id</span>=<span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h2><ul>
+<li>从数据表中拿出想要的数据<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 取出某个表中所有数据</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> students;</span><br><span class="line"><span class="comment"># 取出指定字段</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span>, age <span class="keyword">FROM</span> students;</span><br><span class="line"><span class="comment"># 根据条件取出指定行的指定字段</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span>, age <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> <span class="keyword">id</span>=<span class="number">5</span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
       
     </div>
     
@@ -618,7 +662,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#关系型数据库的设计都遵守‘三范式’"><span class="nav-number">1.</span> <span class="nav-text">关系型数据库的设计都遵守‘三范式’</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-MySQL"><span class="nav-number">2.</span> <span class="nav-text">使用 MySQL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库的增删改查"><span class="nav-number">3.</span> <span class="nav-text">数据库的增删改查</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#改-ALTER"><span class="nav-number">3.1.</span> <span class="nav-text">改 ALTER</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#关系型数据库的设计都遵守‘三范式’"><span class="nav-number">1.</span> <span class="nav-text">关系型数据库的设计都遵守‘三范式’</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-MySQL"><span class="nav-number">2.</span> <span class="nav-text">使用 MySQL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库的增删改查"><span class="nav-number">3.</span> <span class="nav-text">数据库的增删改查</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#改-ALTER"><span class="nav-number">3.1.</span> <span class="nav-text">改 ALTER</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#增加"><span class="nav-number">4.</span> <span class="nav-text">增加</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改"><span class="nav-number">5.</span> <span class="nav-text">修改</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除"><span class="nav-number">6.</span> <span class="nav-text">删除</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查询"><span class="nav-number">7.</span> <span class="nav-text">查询</span></a></li></ol></div>
             
 
           </div>
