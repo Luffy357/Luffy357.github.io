@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="Three Fire">
 <meta property="og:description" content="数据库(database)：保存有组织的数据的容器，数据库有表(table)组成，每个表又由一个或者多个列(column)组成。MySQL 数据库是一种关系型数据库。关系描述的是两个实体之间的对应规则，包括(一对一、一对多、多对多)。在关系型数据库中一行就是一个对象。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-18T13:54:16.097Z">
+<meta property="og:updated_time" content="2019-07-20T16:38:28.992Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL的基本操作">
 <meta name="twitter:description" content="数据库(database)：保存有组织的数据的容器，数据库有表(table)组成，每个表又由一个或者多个列(column)组成。MySQL 数据库是一种关系型数据库。关系描述的是两个实体之间的对应规则，包括(一对一、一对多、多对多)。在关系型数据库中一行就是一个对象。">
@@ -393,6 +393,9 @@
 <li>第三范式： 引用主键<br>后一个范式都是在前一个范式的基础上建立的。</li>
 </ul>
 <h2 id="使用-MySQL"><a href="#使用-MySQL" class="headerlink" title="使用 MySQL"></a>使用 MySQL</h2><ul>
+<li><p>查看数据库版本</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">VERSION</span>();</span><br></pre></td></tr></table></figure>
+</li>
 <li><p>登录 mysql</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u 用户名 -<span class="selector-tag">p</span> 密码</span><br></pre></td></tr></table></figure>
 </li>
@@ -421,7 +424,7 @@
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> <span class="keyword">CREATE</span> <span class="keyword">DATABASE</span> 库名;</span><br><span class="line"><span class="keyword">SHOW</span> <span class="keyword">CREATE</span> <span class="keyword">TABLE</span> 表名;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>创建数据库、表</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">DATABASE</span> 库名;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> 表名;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">DATABASE</span> 库名;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> 表名(</span><br><span class="line">  字段<span class="number">1</span> 数据类型 约束条件</span><br><span class="line">  字段n 数据类型 约束条件</span><br><span class="line">  );</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h2 id="数据库的增删改查"><a href="#数据库的增删改查" class="headerlink" title="数据库的增删改查"></a>数据库的增删改查</h2><h3 id="改-ALTER"><a href="#改-ALTER" class="headerlink" title="改 ALTER"></a>改 ALTER</h3><ul>
@@ -508,6 +511,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2019/07/20/MySQL查询/" rel="prev" title="MySQL查询">
+                MySQL查询 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -585,7 +592,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">31</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

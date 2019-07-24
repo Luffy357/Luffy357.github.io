@@ -297,6 +297,223 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://luffy357.github.io/2019/07/20/MySQL查询/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Threefire">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="http://piuib58oz.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181205230447.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Three Fire">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/20/MySQL查询/" itemprop="url">MySQL查询</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-20T17:36:10+08:00">
+                2019-07-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="MySQL-的查询操作"><a href="#MySQL-的查询操作" class="headerlink" title="MySQL 的查询操作"></a>MySQL 的查询操作</h2><ul>
+<li><p>查询所有字段</p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> 表名;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查询指字段</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT 列<span class="number">1</span>, 列<span class="number">2</span> FROM 表名；</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>as 给表、字段起别名<br>为了更好的显示结果,可以给字段起别名。但需要注意别名只有在该条 SQL 语句中有效</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span> <span class="keyword">FROM</span> students <span class="keyword">as</span> 学生;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span> <span class="keyword">as</span> 名字, age <span class="keyword">as</span> 年龄 <span class="keyword">FROM</span> students;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>完整的查询语句<br>在多表查询时,为避免混淆需要加上表名或数据库名</p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> 表名.列名 <span class="keyword">FROM</span> 表名;</span><br><span class="line"><span class="keyword">SELECT</span> 数据库名.表名.列名 <span class="keyword">FROM</span> 表名;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查询去重 DISTINCT</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将身高没有重复的数据取出来</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> height <span class="keyword">from</span> students;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 当 distinct 后面有多个字段，只有当查询的多列的查询结果完全相同才能去重</span></span><br><span class="line"><span class="comment"># 同时满足多个字段相同才能去重</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> height, gender <span class="keyword">from</span> students;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>条件查询 WHERE</p>
+<ul>
+<li><p>比较运算符</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> 表名 <span class="keyword">WHERE</span> 条件；</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span> <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> age &gt; <span class="number">18</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>逻辑运算符<br>逻辑运算符 ‘and’、’or’、’not’。与或非</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 'and' 必须同时满足所有的条件</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span> <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> age = <span class="number">12</span> <span class="keyword">and</span> height = <span class="number">170</span>；</span><br><span class="line"></span><br><span class="line"><span class="comment"># 'or' 只需要满足其中一个条件</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span> <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> age = <span class="number">35</span> <span class="keyword">or</span> age= <span class="number">12</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 'not' 相当于取反操作</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span> <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> <span class="keyword">not</span> gender = <span class="string">'女'</span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>模糊查询 LIKE<br>使用’百分号’、’下滑线’代替任意字符。百分号表示可有可无一个或者多个字符<br>一个下滑线表示一个字符</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 取出表中梁姓的名字</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> <span class="keyword">name</span> <span class="keyword">LIKE</span> <span class="string">'梁%'</span>;</span><br><span class="line"><span class="comment"># 取出表中名字为两个字符的名字</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> <span class="keyword">name</span> <span class="keyword">LIKE</span> <span class="string">'__'</span>；</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>范围查询</p>
+<ul>
+<li><p>IN 表示在一个非连续的范围内</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> age <span class="keyword">IN</span> (<span class="number">12</span>, <span class="number">18</span>, <span class="number">35</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment"># 某个可表示的联系范围</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> age &gt; <span class="number">18</span> <span class="keyword">AND</span> age &lt; <span class="number">50</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 不存在某个范围</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> age <span class="keyword">NOT</span> <span class="keyword">IN</span> (<span class="number">12</span>, <span class="number">18</span>, <span class="number">35</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>BETWEEN 表示在某个范围之间</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> age <span class="keyword">BETWEEN</span> <span class="number">18</span> <span class="keyword">AND</span> <span class="number">45</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 不在这个范围内</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> age <span class="keyword">NOT</span> <span class="keyword">BETWEEN</span> <span class="number">18</span> ADN <span class="number">45</span>；</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>空判断<br>做空判断时不可以用比较运算符，因为 NULL 是一种特殊的值。不能进行比较要用 is 判断<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 身高的空判断</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> height <span class="keyword">IS</span> <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 不为空的判断</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> <span class="keyword">NOT</span> height <span class="keyword">IS</span> <span class="literal">NULL</span>;</span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> height <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 错误写法</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> height <span class="keyword">NOT</span> <span class="keyword">IS</span> <span class="literal">NULL</span>；</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>排序<br>ASC: 从下到大为升序，DESC: 从大到小为降序。<br>ORDER BY 默认为升序排序</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 对身高进行升序排序</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> students <span class="keyword">ORDER</span> <span class="keyword">BY</span> heigth <span class="keyword">ASC</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 对年龄进行降序排序</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> students <span class="keyword">ORDER</span> <span class="keyword">BY</span> age DSEC;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 多个字段排序</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> students <span class="keyword">ORDER</span> <span class="keyword">BY</span> height <span class="keyword">DESC</span>， age <span class="keyword">ASC</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查询年龄在18到34岁之间的女性，身高从高到矮排序, 如果身高相同的情况下按照年龄从小到大排序</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> age <span class="keyword">BETWEEN</span> <span class="number">18</span> <span class="keyword">and</span> <span class="number">34</span> <span class="keyword">AND</span> gender=<span class="number">2</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> height DSEC, age <span class="keyword">ASC</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>聚合函数<br>COUNT 总数统计，以行作为单位统计个数</p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(*) <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> gender = <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+<p>MAX 最大值</p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">MAX</span>(age) <span class="keyword">FROM</span> students;</span><br></pre></td></tr></table></figure>
+<p>MIN 最小值</p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">MIN</span>(age) <span class="keyword">FROM</span> students;</span><br></pre></td></tr></table></figure>
+<p>SUM 求和</p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">SUM</span>(height) <span class="keyword">FROM</span> students;</span><br></pre></td></tr></table></figure>
+<p>AVG 平均值</p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">AVG</span>(age) <span class="keyword">FROM</span> students;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>分组<br>GROUP BY 分组的目的就是为了进行聚合统计</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 按性别分组，就可以直接知道有多少种性别</span></span><br><span class="line">SELECT gender <span class="keyword">FROM</span> students<span class="built_in"> GROUP </span>BY gender;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算各个分组中有多少人数</span></span><br><span class="line">SELECT gender COUNT(*) <span class="keyword">FROM</span> students<span class="built_in"> GROUP </span>BY gender;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示每个分组中的名字</span></span><br><span class="line">SELECT gender, GROUP_CONCAT(name) <span class="keyword">FROM</span> students<span class="built_in"> GROUP </span>BY gender;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查询每种性别中的平均年龄avg(age), 最大年龄,平均身高,最高身高, 分组是为了更好的统计</span></span><br><span class="line">SELECT gender, AVG(age), MAX(age), AVG(height), MAX(height) <span class="keyword">FROM</span> students<span class="built_in"> GROUP </span>BY gender;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>HAVING 分组后进一步的筛选<br>分组之后不能使用 WHERE 做条件筛选只能用 HAVING<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 只想知道男性的人数</span></span><br><span class="line">SELECT gender, COUNT(*) <span class="keyword">FROM</span> students<span class="built_in"> GROUP </span>BY gender HAVING <span class="attribute">gender</span>=1;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查询平均年龄超过30岁的性别, 及姓名</span></span><br><span class="line">SELECT gender, GROUP_CONCAT(name) <span class="keyword">FROM</span> studetns<span class="built_in"> GROUP </span>BY gender HAVING AVG(age)&gt;30;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>分页<br>LIMIT 指定跳过一些数据，然后显示多少条。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># LIMIT start,count</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> students <span class="keyword">LIMIT</span> <span class="number">4</span>,<span class="number">5</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>连接查询<br>连接查询 将两个表中的数据按照设置的连接条件进行筛选, 符合连接条件的数据才能够被筛选出来<br>table1 INNER JOIN table2 ON 条件</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查找每个学生属于哪个班级，班级保存在classes中</span></span><br><span class="line"><span class="keyword">SELECT</span> students.name, classes.name <span class="keyword">FROM</span> studens <span class="keyword">INNER</span> <span class="keyword">JOIN</span> classes <span class="keyword">on</span> students.cls_id = classes.id;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>外连接查询<br>使用 INNER JOIN 连接查询，不符合条件的数据将不显示。如果想显示就可以使用外连接<br>LEFT JOIN 左外连接查询，不符合条件的将使用 NULL 填充<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 左外连接就是以 LEFT JOIN 左边的数据库为主，显示其所有结果。右侧没有匹配的用 NULL 填充</span></span><br><span class="line"><span class="keyword">SELECT</span> s.name, c.name <span class="keyword">FROM</span> studens <span class="keyword">as</span> s <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> classes <span class="keyword">as</span> c <span class="keyword">ON</span> s.cls_id = c.id;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>RIGHT JOIN 右外连接，与左连接的意义相反。</p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://luffy357.github.io/2019/07/16/MySQL的基本操作/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1571,157 +1788,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://luffy357.github.io/2019/01/03/clickjacking攻击/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Threefire">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="http://piuib58oz.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181205230447.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Three Fire">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/03/clickjacking攻击/" itemprop="url">clickjacking攻击</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-03T21:45:43+08:00">
-                2019-01-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/学习笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">学习笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>clickjacking 攻击又称作点击劫持攻击，是一种在网页中将恶意代码等隐藏在看似无害的内容之下，并诱使用户点击的手段。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/01/03/clickjacking攻击/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </p></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1769,7 +1840,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">31</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
