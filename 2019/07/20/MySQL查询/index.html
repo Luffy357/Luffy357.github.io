@@ -123,18 +123,18 @@
 
 
 
-<meta name="description" content="MySQL 的查询操作 查询所有字段 1SELECT * FROM 表名;  查询指字段 1SELECT 列1, 列2 FROM 表名；  as 给表、字段起别名为了更好的显示结果,可以给字段起别名。但需要注意别名只有在该条 SQL 语句中有效 12SELECT name FROM students as 学生;SELECT name as 名字, age as 年龄 FROM students;">
+<meta name="description" content="MySQL 的查询操作 查询所有字段 1SELECT * FROM 表名;  查询字段 1SELECT 列1, 列2 FROM 表名；  as 给表、字段起别名为了更好的显示结果,可以给字段起别名。但需要注意别名只有在该条 SQL 语句中有效 12SELECT name FROM students as 学生;SELECT name as 名字, age as 年龄 FROM students;">
 <meta name="keywords" content="SQL">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL查询">
 <meta property="og:url" content="https://luffy357.github.io/2019/07/20/MySQL查询/index.html">
 <meta property="og:site_name" content="Three Fire">
-<meta property="og:description" content="MySQL 的查询操作 查询所有字段 1SELECT * FROM 表名;  查询指字段 1SELECT 列1, 列2 FROM 表名；  as 给表、字段起别名为了更好的显示结果,可以给字段起别名。但需要注意别名只有在该条 SQL 语句中有效 12SELECT name FROM students as 学生;SELECT name as 名字, age as 年龄 FROM students;">
+<meta property="og:description" content="MySQL 的查询操作 查询所有字段 1SELECT * FROM 表名;  查询字段 1SELECT 列1, 列2 FROM 表名；  as 给表、字段起别名为了更好的显示结果,可以给字段起别名。但需要注意别名只有在该条 SQL 语句中有效 12SELECT name FROM students as 学生;SELECT name as 名字, age as 年龄 FROM students;">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-24T23:45:09.770Z">
+<meta property="og:updated_time" content="2019-08-02T15:38:25.006Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL查询">
-<meta name="twitter:description" content="MySQL 的查询操作 查询所有字段 1SELECT * FROM 表名;  查询指字段 1SELECT 列1, 列2 FROM 表名；  as 给表、字段起别名为了更好的显示结果,可以给字段起别名。但需要注意别名只有在该条 SQL 语句中有效 12SELECT name FROM students as 学生;SELECT name as 名字, age as 年龄 FROM students;">
+<meta name="twitter:description" content="MySQL 的查询操作 查询所有字段 1SELECT * FROM 表名;  查询字段 1SELECT 列1, 列2 FROM 表名；  as 给表、字段起别名为了更好的显示结果,可以给字段起别名。但需要注意别名只有在该条 SQL 语句中有效 12SELECT name FROM students as 学生;SELECT name as 名字, age as 年龄 FROM students;">
 
 
 
@@ -386,11 +386,12 @@
       
 
       
-        <h2 id="MySQL-的查询操作"><a href="#MySQL-的查询操作" class="headerlink" title="MySQL 的查询操作"></a>MySQL 的查询操作</h2><ul>
+        <p><-- more !--></--></p>
+<h2 id="MySQL-的查询操作"><a href="#MySQL-的查询操作" class="headerlink" title="MySQL 的查询操作"></a>MySQL 的查询操作</h2><ul>
 <li><p>查询所有字段</p>
 <figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> 表名;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>查询指字段</p>
+<li><p>查询字段</p>
 <figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT 列<span class="number">1</span>, 列<span class="number">2</span> FROM 表名；</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>as 给表、字段起别名<br>为了更好的显示结果,可以给字段起别名。但需要注意别名只有在该条 SQL 语句中有效</p>
@@ -430,7 +431,7 @@
 </ul>
 </li>
 <li><p>排序<br>ASC: 从下到大为升序，DESC: 从大到小为降序。<br>ORDER BY 默认为升序排序</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 对身高进行升序排序</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> students <span class="keyword">ORDER</span> <span class="keyword">BY</span> heigth <span class="keyword">ASC</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 对年龄进行降序排序</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> students <span class="keyword">ORDER</span> <span class="keyword">BY</span> age DSEC;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 多个字段排序</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> students <span class="keyword">ORDER</span> <span class="keyword">BY</span> height <span class="keyword">DESC</span>， age <span class="keyword">ASC</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查询年龄在18到34岁之间的女性，身高从高到矮排序, 如果身高相同的情况下按照年龄从小到大排序</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> age <span class="keyword">BETWEEN</span> <span class="number">18</span> <span class="keyword">and</span> <span class="number">34</span> <span class="keyword">AND</span> gender=<span class="number">2</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> height DSEC, age <span class="keyword">ASC</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 对身高进行升序排序</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> students <span class="keyword">ORDER</span> <span class="keyword">BY</span> heigth <span class="keyword">ASC</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 对年龄进行降序排序</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> students <span class="keyword">ORDER</span> <span class="keyword">BY</span> age DSEC;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 多个字段排序</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> students <span class="keyword">ORDER</span> <span class="keyword">BY</span> height <span class="keyword">DESC</span>, age <span class="keyword">ASC</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查询年龄在18到34岁之间的女性，身高从高到矮排序, 如果身高相同的情况下按照年龄从小到大排序</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> age <span class="keyword">BETWEEN</span> <span class="number">18</span> <span class="keyword">and</span> <span class="number">34</span> <span class="keyword">AND</span> gender=<span class="number">2</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> height DSEC, age <span class="keyword">ASC</span>;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>聚合函数<br>COUNT 总数统计，以行作为单位统计个数</p>
 <figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(*) <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> gender = <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
@@ -446,7 +447,7 @@
 <li><p>分组<br>GROUP BY 分组的目的就是为了进行聚合统计</p>
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 按性别分组，就可以直接知道有多少种性别</span></span><br><span class="line">SELECT gender <span class="keyword">FROM</span> students<span class="built_in"> GROUP </span>BY gender;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算各个分组中有多少人数</span></span><br><span class="line">SELECT gender COUNT(*) <span class="keyword">FROM</span> students<span class="built_in"> GROUP </span>BY gender;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示每个分组中的名字</span></span><br><span class="line">SELECT gender, GROUP_CONCAT(name) <span class="keyword">FROM</span> students<span class="built_in"> GROUP </span>BY gender;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查询每种性别中的平均年龄avg(age), 最大年龄,平均身高,最高身高, 分组是为了更好的统计</span></span><br><span class="line">SELECT gender, AVG(age), MAX(age), AVG(height), MAX(height) <span class="keyword">FROM</span> students<span class="built_in"> GROUP </span>BY gender;</span><br></pre></td></tr></table></figure>
 <ul>
-<li>HAVING 分组后进一步的筛选<br>分组之后不能使用 WHERE 做条件筛选只能用 HAVING<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 只想知道男性的人数</span></span><br><span class="line">SELECT gender, COUNT(*) <span class="keyword">FROM</span> students<span class="built_in"> GROUP </span>BY gender HAVING <span class="attribute">gender</span>=1;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查询平均年龄超过30岁的性别, 及姓名</span></span><br><span class="line">SELECT gender, GROUP_CONCAT(name) <span class="keyword">FROM</span> studetns<span class="built_in"> GROUP </span>BY gender HAVING AVG(age)&gt;30;</span><br></pre></td></tr></table></figure>
+<li>HAVING 分组后进一步的筛选<br>分组之后不能使用 WHERE 做条件筛选只能用 HAVING<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 只想知道男性的人数</span></span><br><span class="line">SELECT gender, COUNT(*) <span class="keyword">FROM</span> students<span class="built_in"> GROUP </span>BY gender HAVING <span class="attribute">gender</span>=1;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查询平均年龄超过30岁的性别, 及姓名</span></span><br><span class="line">SELECT gender, GROUP_CONCAT(name) <span class="keyword">FROM</span> students<span class="built_in"> GROUP </span>BY gender HAVING AVG(age)&gt;30;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
@@ -460,6 +461,22 @@
 </li>
 </ul>
 <p>RIGHT JOIN 右外连接，与左连接的意义相反。</p>
+</li>
+<li><p>子查询<br>指在一条select语句中，嵌入了另外一条select语句，那么被嵌入的select语句称之为子查询语句</p>
+<ul>
+<li><p>标量子查询：子查询语句返回的结果是一行一列</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查询表中身高最高的人名字</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span> <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> height = (<span class="keyword">SELECT</span> <span class="keyword">MAX</span>(height) <span class="keyword">FROM</span> students);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>列子查询：得到的数据是一列多行</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 用 in 或 any 连接子查询语句, all 表示满足子查询的所有项</span></span><br><span class="line"><span class="keyword">SELECT</span> classes.name <span class="keyword">FROM</span> classes <span class="keyword">WHERE</span> <span class="keyword">id</span> <span class="keyword">in</span> (<span class="keyword">SELECT</span> cls_id <span class="keyword">FROM</span> students);</span><br><span class="line"><span class="keyword">SELECT</span> classes.name <span class="keyword">FROM</span> classes <span class="keyword">WHERE</span> <span class="keyword">id</span> = <span class="keyword">any</span>(<span class="keyword">SELECT</span> cls_id <span class="keyword">FROM</span> students);</span><br><span class="line"><span class="keyword">SELECT</span> classes.name <span class="keyword">FROM</span> classes <span class="keyword">WHERE</span> <span class="keyword">id</span> = all(<span class="keyword">SELECT</span> cls_id <span class="keyword">FROM</span> students)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>行子查询：得到一行多列<br>行子查询需要构建行元素<br>行元素：字段元素是指一个字段对应的值，行元素对应的就是多个字段：多个字段合起来作为一个元素参与运算，把这种情况称之为行元素</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM students WHERE (<span class="name">age</span>, height) = (<span class="name">SELECT</span> MAX(<span class="name">age</span>), MAX(<span class="name">height</span>) FROM students)<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>表子查询：得到多行多列，充当数据源</p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> tmp.* <span class="keyword">FROM</span> (<span class="keyword">SELECT</span> students.* <span class="keyword">FROM</span> studnets) <span class="keyword">as</span> tmp;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
 </li>
 </ul>
 
@@ -501,6 +518,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/11/Python-基础/" rel="prev" title="Python 基础">
+                Python 基础 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -579,7 +600,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -590,7 +611,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -601,7 +622,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

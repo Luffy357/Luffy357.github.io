@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="Django2.0,">
+  <meta name="keywords" content="Python,">
 
 
 
@@ -123,18 +123,18 @@
 
 
 
-<meta name="description" content="浏览器在访问服务器发生错误时，会根据状态码返回一些提示。而这些提示不够人性化，所以可以自定义一些错误页面，根据不同的错误状态码返回。">
-<meta name="keywords" content="Django2.0">
+<meta name="description" content="Python 表达式操作符及其优先级 操作符                     描述x or y                 逻辑或(只要一个条件为真即为真)x and y                 逻辑与(只有 x 为真，才会计算 y)not x                  逻辑非(取反操作)x in y, x not in y         成员关系（可迭代对象、集合）">
+<meta name="keywords" content="Python">
 <meta property="og:type" content="article">
-<meta property="og:title" content="错误页面处理">
-<meta property="og:url" content="https://luffy357.github.io/2018/12/15/错误页面处理/index.html">
+<meta property="og:title" content="Python 基础">
+<meta property="og:url" content="https://luffy357.github.io/2019/08/11/Python-基础/index.html">
 <meta property="og:site_name" content="Three Fire">
-<meta property="og:description" content="浏览器在访问服务器发生错误时，会根据状态码返回一些提示。而这些提示不够人性化，所以可以自定义一些错误页面，根据不同的错误状态码返回。">
+<meta property="og:description" content="Python 表达式操作符及其优先级 操作符                     描述x or y                 逻辑或(只要一个条件为真即为真)x and y                 逻辑与(只有 x 为真，才会计算 y)not x                  逻辑非(取反操作)x in y, x not in y         成员关系（可迭代对象、集合）">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-17T15:18:52.689Z">
+<meta property="og:updated_time" content="2019-08-12T15:21:07.181Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="错误页面处理">
-<meta name="twitter:description" content="浏览器在访问服务器发生错误时，会根据状态码返回一些提示。而这些提示不够人性化，所以可以自定义一些错误页面，根据不同的错误状态码返回。">
+<meta name="twitter:title" content="Python 基础">
+<meta name="twitter:description" content="Python 表达式操作符及其优先级 操作符                     描述x or y                 逻辑或(只要一个条件为真即为真)x and y                 逻辑与(只有 x 为真，才会计算 y)not x                  逻辑非(取反操作)x in y, x not in y         成员关系（可迭代对象、集合）">
 
 
 
@@ -164,13 +164,13 @@
 
 
 
-  <link rel="canonical" href="https://luffy357.github.io/2018/12/15/错误页面处理/">
+  <link rel="canonical" href="https://luffy357.github.io/2019/08/11/Python-基础/">
 
 
 
 
 
-  <title>错误页面处理 | Three Fire</title>
+  <title>Python 基础 | Three Fire</title>
   
 
 
@@ -297,7 +297,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://luffy357.github.io/2018/12/15/错误页面处理/">
+    <link itemprop="mainEntityOfPage" href="https://luffy357.github.io/2019/08/11/Python-基础/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Threefire">
@@ -314,7 +314,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">错误页面处理</h1>
+          <h1 class="post-title" itemprop="name headline">Python 基础</h1>
         
 
         <div class="post-meta">
@@ -326,8 +326,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-15T23:55:04+08:00">
-                2018-12-15
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-11T21:43:32+08:00">
+                2019-08-11
               </time>
             
 
@@ -349,8 +349,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/学习笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">学习笔记</span>
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
                   </a>
                 </span>
 
@@ -386,9 +386,22 @@
       
 
       
-        <p>浏览器在访问服务器发生错误时，会根据状态码返回一些提示。而这些提示不够人性化，所以可以自定义一些错误页面，根据不同的错误状态码返回。<br><a id="more"></a></p>
-<h2 id="400-和-500-错误"><a href="#400-和-500-错误" class="headerlink" title="400 和 500 错误"></a>400 和 500 错误</h2><p>对于400 和 500 错误，django 已经做了处理，只要在 templates 文件夹只能放入自定义的错误页面就可以了。命名必须以错误状态码命名。</p>
-<h2 id="其他错误状态码"><a href="#其他错误状态码" class="headerlink" title="其他错误状态码"></a>其他错误状态码</h2><p>对于其他的错误状态码，可以定义一个专门的 app 来处理这些页面。然后在需要的时候进行重定向到相应的页面就可以了。<br><figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># errors/views.py</span></span><br><span class="line">def view_403(request):</span><br><span class="line">    <span class="keyword">return</span> render(request, <span class="string">'errors/403.html'</span>, status=<span class="number">403</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta"># errors/templates</span></span><br><span class="line"><span class="number">403.</span>html</span><br><span class="line"></span><br><span class="line"><span class="meta"># urls.py</span></span><br><span class="line">   path(<span class="string">'403.html'</span>, views.view_403, name=<span class="number">403</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta"># app/views.py</span></span><br><span class="line">   redirct(rever(<span class="string">'errors.403'</span>))</span><br></pre></td></tr></table></figure></p>
+        <p>Python 表达式操作符及其优先级</p>
+<p>操作符                     描述<br>x or y                 逻辑或(只要一个条件为真即为真)<br>x and y                 逻辑与(只有 x 为真，才会计算 y)<br>not x                  逻辑非(取反操作)<br>x in y, x not in y         成员关系（可迭代对象、集合）<br>x is y, x is not y         对象实体测试<br>x &lt; y, x &lt;= y, x &gt; y,<br>x &gt;= y, x == y, x != y       大小比较，集合子集和超集值相等性操作符<br>x | y                  位或，集合并集<br>x ^ y                  位异或，集合对称差<br>x &amp; y                  位与，集合交集<br>x &lt;&lt; y, x &gt;&gt; y            位移或右位 y 位<br>x + y, x - y             加法/合并， 减法，集合差集<br>x * y, x % y, x / y, x // y    乘法/重复, 余数/格式化，真除法，整除或floor除法<br>-x, +x                 一元加减，识别<br>~x                    按位求补(取反)<br>x ** y                 幂运算<br>x[i]                  索引<br>x[i:j:k]               分片<br>x(…)                 调用(函数，方法，类及其他可调用的)<br>x.attr                 属性引用<br>(…)                 元组, 表达式, 生成器表达式<br>[…]                 列表，列表解析<br>{…}                 字典, 集合、集合和字典解析</p>
+<p>1、操作符越靠后的优先级越高，在混合使用时，一定要注意优先级<br>2、同一行的表达式在组合时候通常从左到右组合(除了幂运算是从右向左组合的，比较运算是从左到右连接的)<br>3、如果用括号分组的子表达式，会超越 Python 的优先级规则。总是最先计算括号中的表达式<br>4、数字的混合类型计算，会将对象转换为其中最复杂的类型的进行计算。比如 整数加浮点数，会将整数转换为浮点数</p>
+<h1 id="数字"><a href="#数字" class="headerlink" title="数字"></a>数字</h1><h1 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h1><p>“””<br>1、变量在它第一次赋值时创建。<br>2、变量在表达式中使用将被替换为它们的值。<br>3、变量在表达式中使用以前必须已赋值。<br>4、变量像对象一样不需要在一开始进行声明。<br>“””<br>a = 3<br>b = 4</p>
+<h1 id="数字的标准计算"><a href="#数字的标准计算" class="headerlink" title="数字的标准计算"></a>数字的标准计算</h1><p>a - 1, b + 1<br>a * 3, b / 3<br>a % 2, b ** 2<br>b / (2.0 + a)</p>
+<h1 id="比较-一般和连续性的"><a href="#比较-一般和连续性的" class="headerlink" title="比较: 一般和连续性的"></a>比较: 一般和连续性的</h1><p>1 &lt; 2<br>2.0 &gt; 1<br>2.0 == 2.0<br>2.0 != 3.0</p>
+<p>x = 1<br>y = 3<br>z = 5<br>x &lt; y &lt; z<br>x &lt; y and y &lt; z</p>
+<h1 id="除法"><a href="#除法" class="headerlink" title="除法"></a>除法</h1><p>10 / 4   # 真除法，不管操作数的类型，都返回包含任何余数的浮点结果<br>10 // 4  # Floor 除法，只截取掉余数，返回的类型根据操作数的类型。只要有个浮点数，结果为浮点数</p>
+<h1 id="、-floor-不管整数还是负数总是向下取整"><a href="#、-floor-不管整数还是负数总是向下取整" class="headerlink" title="// 、 floor 不管整数还是负数总是向下取整"></a>// 、 floor 不管整数还是负数总是向下取整</h1><h1 id="floor-并没有真正意义上截断负数的结果"><a href="#floor-并没有真正意义上截断负数的结果" class="headerlink" title="floor 并没有真正意义上截断负数的结果"></a>floor 并没有真正意义上截断负数的结果</h1><p>import math</p>
+<p>math.floor(2.5)<br>math.floor(-2.5)</p>
+<h1 id="math-trunc-正数向下取整，负数向上取整"><a href="#math-trunc-正数向下取整，负数向上取整" class="headerlink" title="math.trunc 正数向下取整，负数向上取整"></a>math.trunc 正数向下取整，负数向上取整</h1><p>math.trunc(2.5)<br>math.trunc(-2.5)</p>
+<h1 id="十六进制、八进制和二进制"><a href="#十六进制、八进制和二进制" class="headerlink" title="十六进制、八进制和二进制"></a>十六进制、八进制和二进制</h1><h1 id="Python-默认用十进制，如下内置函数将十进制转换为其他进制"><a href="#Python-默认用十进制，如下内置函数将十进制转换为其他进制" class="headerlink" title="Python 默认用十进制，如下内置函数将十进制转换为其他进制"></a>Python 默认用十进制，如下内置函数将十进制转换为其他进制</h1><p>oct(64), hex(64), bin(64)</p>
+<p>‘{0:o}, {1:x}, {2:b}’.format(64, 64, 64)</p>
+<h1 id="int-函数将一个数字字符串通过对应的进制转换为整数，第二个参数为进制"><a href="#int-函数将一个数字字符串通过对应的进制转换为整数，第二个参数为进制" class="headerlink" title="int 函数将一个数字字符串通过对应的进制转换为整数，第二个参数为进制"></a>int 函数将一个数字字符串通过对应的进制转换为整数，第二个参数为进制</h1><p>int(‘64’), int(‘100’, 8), int(‘40’, 16), int(‘1000000’, 2)</p>
+<h1 id="位操作"><a href="#位操作" class="headerlink" title="位操作"></a>位操作</h1><p>x = 1<br>x &lt;&lt; 2  # (0001) 左移 2 位 (0100)<br>x | 2   # (0001 | 0010 = 0011)<br>x &amp; 1   # (0001 &amp; 0001 = 0001)</p>
+<h1 id="bit-lenght-可以得到二进制字符串的长度"><a href="#bit-lenght-可以得到二进制字符串的长度" class="headerlink" title="bit_lenght 可以得到二进制字符串的长度"></a>bit_lenght 可以得到二进制字符串的长度</h1><p>(256).bit_length()</p>
 
       
     </div>
@@ -406,7 +419,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Django2-0/" rel="tag"># Django2.0</a>
+            <a href="/tags/Python/" rel="tag"># Python</a>
           
         </div>
       
@@ -419,8 +432,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/12/13/类视图/" rel="next" title="类视图">
-                <i class="fa fa-chevron-left"></i> 类视图
+              <a href="/2019/07/20/MySQL查询/" rel="next" title="MySQL查询">
+                <i class="fa fa-chevron-left"></i> MySQL查询
               </a>
             
           </div>
@@ -428,10 +441,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/12/17/Django表单/" rel="prev" title="Django表单">
-                Django表单 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -587,7 +596,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#400-和-500-错误"><span class="nav-number">1.</span> <span class="nav-text">400 和 500 错误</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他错误状态码"><span class="nav-number">2.</span> <span class="nav-text">其他错误状态码</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数字"><span class="nav-number">1.</span> <span class="nav-text">数字</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#变量"><span class="nav-number">2.</span> <span class="nav-text">变量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数字的标准计算"><span class="nav-number">3.</span> <span class="nav-text">数字的标准计算</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#比较-一般和连续性的"><span class="nav-number">4.</span> <span class="nav-text">比较: 一般和连续性的</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#除法"><span class="nav-number">5.</span> <span class="nav-text">除法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#、-floor-不管整数还是负数总是向下取整"><span class="nav-number">6.</span> <span class="nav-text">// 、 floor 不管整数还是负数总是向下取整</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#floor-并没有真正意义上截断负数的结果"><span class="nav-number">7.</span> <span class="nav-text">floor 并没有真正意义上截断负数的结果</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#math-trunc-正数向下取整，负数向上取整"><span class="nav-number">8.</span> <span class="nav-text">math.trunc 正数向下取整，负数向上取整</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#十六进制、八进制和二进制"><span class="nav-number">9.</span> <span class="nav-text">十六进制、八进制和二进制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Python-默认用十进制，如下内置函数将十进制转换为其他进制"><span class="nav-number">10.</span> <span class="nav-text">Python 默认用十进制，如下内置函数将十进制转换为其他进制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#int-函数将一个数字字符串通过对应的进制转换为整数，第二个参数为进制"><span class="nav-number">11.</span> <span class="nav-text">int 函数将一个数字字符串通过对应的进制转换为整数，第二个参数为进制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#位操作"><span class="nav-number">12.</span> <span class="nav-text">位操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#bit-lenght-可以得到二进制字符串的长度"><span class="nav-number">13.</span> <span class="nav-text">bit_lenght 可以得到二进制字符串的长度</span></a></li></ol></div>
             
 
           </div>
