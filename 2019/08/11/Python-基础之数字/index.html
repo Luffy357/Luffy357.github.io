@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|20:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Python,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Python 表达式操作符及其优先级">
+<meta name="keywords" content="Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python 基础">
+<meta property="og:url" content="https://luffy357.github.io/2019/08/11/Python-基础之数字/index.html">
+<meta property="og:site_name" content="Three Fire">
+<meta property="og:description" content="Python 表达式操作符及其优先级">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-17T15:16:14.810Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python 基础">
+<meta name="twitter:description" content="Python 表达式操作符及其优先级">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://luffy357.github.io/2019/08/11/Python-基础之数字/">
+
+
+
+
+
+  <title>Python 基础 | Three Fire</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Three Fire</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">三火的个人博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://luffy357.github.io/2019/08/11/Python-基础之数字/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Threefire">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="http://piuib58oz.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181205230447.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Three Fire">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python 基础</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-11T21:43:32+08:00">
+                2019-08-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Python 表达式操作符及其优先级</p>
+<a id="more"></a>
+<p>操作符                            描述<br>x or y                     逻辑或(只要一个条件为真即为真)<br>x and y                    逻辑与(只有 x 为真，才会计算 y)<br>not x                      逻辑非(取反操作)<br>x in y, x not in y         成员关系（可迭代对象、集合）<br>x is y, x is not y         对象实体测试<br>x &lt; y, x &lt;= y, x &gt; y,<br>x &gt;= y, x == y, x != y     大小比较，集合子集和超集值相等性操作符<br>x | y                      位或，集合并集<br>x ^ y                      位异或，集合对称差<br>x &amp; y                      位与，集合交集<br>x &lt;&lt; y, x &gt;&gt; y             位移或右位 y 位<br>x + y, x - y               加法/合并， 减法，集合差集<br>x * y, x % y, x / y, x // y    乘法/重复, 余数/格式化，真除法，整除或floor除法<br>-x, +x                     一元加减，识别<br>~x                         按位求补(取反)<br>x ** y                     幂运算<br>x[i]                       索引<br>x[i:j:k]                   分片<br>x(…)                     调用(函数，方法，类及其他可调用的)<br>x.attr                     属性引用<br>(…)                      元组, 表达式, 生成器表达式<br>[…]                      列表，列表解析<br>{…}                      字典, 集合、集合和字典解析</p>
+<p>1、操作符越靠后的优先级越高，在混合使用时，一定要注意优先级<br>2、同一行的表达式在组合时候通常从左到右组合(除了幂运算是从右向左组合的，比较运算是从左到右连接的)<br>3、如果用括号分组的子表达式，会超越 Python 的优先级规则。总是最先计算括号中的表达式<br>4、数字的混合类型计算，会将对象转换为其中最复杂的类型的进行计算。比如 整数加浮点数，会将整数转换为浮点数</p>
+<h1 id="数字"><a href="#数字" class="headerlink" title="数字"></a>数字</h1><h1 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h1><p>1、变量在它第一次赋值时创建。<br>2、变量在表达式中使用将被替换为它们的值。<br>3、变量在表达式中使用以前必须已赋值。<br>4、变量像对象一样不需要在一开始进行声明。<br>a = 3<br>b = 4</p>
+<h1 id="数字的标准计算"><a href="#数字的标准计算" class="headerlink" title="数字的标准计算"></a>数字的标准计算</h1><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a - <span class="number">1</span>, b + <span class="number">1</span></span><br><span class="line">a * <span class="number">3</span>, b / <span class="number">3</span></span><br><span class="line">a % <span class="number">2</span>, b ** <span class="number">2</span></span><br><span class="line">b / (<span class="number">2.0</span> + a)</span><br></pre></td></tr></table></figure>
+<h1 id="比较-一般和连续性的"><a href="#比较-一般和连续性的" class="headerlink" title="比较: 一般和连续性的"></a>比较: 一般和连续性的</h1><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> &lt; <span class="number">2</span></span><br><span class="line"><span class="number">2.0</span> &gt; <span class="number">1</span></span><br><span class="line"><span class="number">2.0</span> == <span class="number">2.0</span></span><br><span class="line"><span class="number">2.0</span> != <span class="number">3.0</span></span><br><span class="line"></span><br><span class="line">x = <span class="number">1</span></span><br><span class="line">y = <span class="number">3</span></span><br><span class="line">z = <span class="number">5</span></span><br><span class="line">x &lt; y &lt; z</span><br><span class="line">x &lt; y and y &lt; z</span><br></pre></td></tr></table></figure>
+<h1 id="除法"><a href="#除法" class="headerlink" title="除法"></a>除法</h1><p>// 、 floor 不管整数还是负数总是向下取整<br>floor 并没有真正意义上截断负数的结果<br><figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># 真除法，不管操作数的类型，都返回包含任何余数的浮点结果</span></span><br><span class="line"><span class="number">10</span> / <span class="number">4</span></span><br><span class="line"><span class="meta"># Floor 除法，只截取掉余数，返回的类型根据操作数的类型。只要有个浮点数，结果为浮点数  </span></span><br><span class="line"><span class="number">10</span> <span class="comment">// 4</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="math-trunc-正数向下取整，负数向上取整"><a href="#math-trunc-正数向下取整，负数向上取整" class="headerlink" title="math.trunc 正数向下取整，负数向上取整"></a>math.trunc 正数向下取整，负数向上取整</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">import</span> <span class="selector-tag">math</span></span><br><span class="line"></span><br><span class="line"><span class="selector-tag">math</span><span class="selector-class">.floor</span>(2<span class="selector-class">.5</span>)</span><br><span class="line"><span class="selector-tag">math</span><span class="selector-class">.floor</span>(<span class="selector-tag">-2</span><span class="selector-class">.5</span>)</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">math</span><span class="selector-class">.trunc</span>(2<span class="selector-class">.5</span>)</span><br><span class="line"><span class="selector-tag">math</span><span class="selector-class">.trunc</span>(<span class="selector-tag">-2</span><span class="selector-class">.5</span>)</span><br></pre></td></tr></table></figure>
+<h1 id="十六进制、八进制和二进制"><a href="#十六进制、八进制和二进制" class="headerlink" title="十六进制、八进制和二进制"></a>十六进制、八进制和二进制</h1><p>Python 默认用十进制，如下内置函数将十进制转换为其他进制<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">oct</span><span class="params">(<span class="number">64</span>)</span></span>, hex(<span class="number">64</span>), bin(<span class="number">64</span>)</span><br><span class="line"></span><br><span class="line"><span class="string">'&#123;0:o&#125;, &#123;1:x&#125;, &#123;2:b&#125;'</span>.format(<span class="number">64</span>, <span class="number">64</span>, <span class="number">64</span>)</span><br></pre></td></tr></table></figure></p>
+<p>int 函数将一个数字字符串通过对应的进制转换为整数，第二个参数为进制<br><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>(<span class="string">'64'</span>), <span class="keyword">int</span>(<span class="string">'100'</span>, <span class="number">8</span>), <span class="keyword">int</span>(<span class="string">'40'</span>, <span class="number">16</span>), <span class="keyword">int</span>(<span class="string">'1000000'</span>, <span class="number">2</span>)</span><br></pre></td></tr></table></figure></p>
+<h1 id="位操作"><a href="#位操作" class="headerlink" title="位操作"></a>位操作</h1><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">1</span></span><br><span class="line">x &lt;&lt; <span class="number">2</span>  # (<span class="number">0001</span>) 左移 <span class="number">2</span> 位 (<span class="number">0100</span>)</span><br><span class="line">x | <span class="number">2</span>   # (<span class="number">0001</span> | <span class="number">0010</span> = <span class="number">0011</span>)</span><br><span class="line">x &amp; <span class="number">1</span>   # (<span class="number">0001</span> &amp; <span class="number">0001</span> = <span class="number">0001</span>)</span><br></pre></td></tr></table></figure>
+<h1 id="bit-lenght-可以得到二进制字符串的长度"><a href="#bit-lenght-可以得到二进制字符串的长度" class="headerlink" title="bit_lenght 可以得到二进制字符串的长度"></a>bit_lenght 可以得到二进制字符串的长度</h1><p>(256).bit_length()</p>
+<h1 id="Python-内置的数学工具"><a href="#Python-内置的数学工具" class="headerlink" title="Python 内置的数学工具"></a>Python 内置的数学工具</h1><p>import math</p>
+<p>math.pi, math.e</p>
+<h1 id="sin"><a href="#sin" class="headerlink" title="sin"></a>sin</h1><p>math.sin(2 * math.pi / 180)</p>
+<h1 id="开平方"><a href="#开平方" class="headerlink" title="开平方"></a>开平方</h1><p>math.sqrt(144), math.sqrt(2)</p>
+<h1 id="幂运算"><a href="#幂运算" class="headerlink" title="幂运算"></a>幂运算</h1><p>pow(2, 3)</p>
+<h1 id="绝对值与和"><a href="#绝对值与和" class="headerlink" title="绝对值与和"></a>绝对值与和</h1><p>abs(-5), sum((1, 2, 3, 4, 5))</p>
+<h1 id="最小最大值"><a href="#最小最大值" class="headerlink" title="最小最大值"></a>最小最大值</h1><p>min(3, 2, 9, 7), max(3, 2, 9, 7)</p>
+<h1 id="四舍五入"><a href="#四舍五入" class="headerlink" title="四舍五入"></a>四舍五入</h1><p>round(2.467), round(2.567)</p>
+<h1 id="截断"><a href="#截断" class="headerlink" title="截断"></a>截断</h1><p>math.floor(2.567), math.floor(-2.567)<br>math.trunc(2.567), math.trunc(-2.567)<br>int(2.567), int(-2.567)</p>
+<p>‘%.1f’ % 2.567, ‘{0:.2f}’.format(2.567)</p>
+<h1 id="在两数之间任意挑选一项"><a href="#在两数之间任意挑选一项" class="headerlink" title="在两数之间任意挑选一项"></a>在两数之间任意挑选一项</h1><p>import random<br>random.random()</p>
+<p>random.randint(1, 100)</p>
+<p>random.choice([‘hey’, ‘hi’, ‘hello’])</p>
+<h1 id="其他数据内型"><a href="#其他数据内型" class="headerlink" title="其他数据内型"></a>其他数据内型</h1><h1 id="浮点数缺乏精确性"><a href="#浮点数缺乏精确性" class="headerlink" title="浮点数缺乏精确性"></a>浮点数缺乏精确性</h1><p>0.1+0.1+0.1-0.3</p>
+<h1 id="使用小数对象"><a href="#使用小数对象" class="headerlink" title="使用小数对象"></a>使用小数对象</h1><p>from decimal import Decimal<br>Decimal(‘0.1’)+Decimal(‘0.1’)+Decimal(‘0.1’)-Decimal(‘0.3’)</p>
+<h1 id="deciaml-可以设置全局精度，适用于调用线程中的所有小数"><a href="#deciaml-可以设置全局精度，适用于调用线程中的所有小数" class="headerlink" title="deciaml 可以设置全局精度，适用于调用线程中的所有小数"></a>deciaml 可以设置全局精度，适用于调用线程中的所有小数</h1><p>import decimal<br>decimal.Decimal(1) / decimal.Decimal(7)</p>
+<p>decimal.getcontext().prec = 4<br>decimal.Decimal(1) / decimal.Decimal(7)</p>
+<h1 id="也可以使用小数上下文管理器，设置临时精度。语句退出后精度又为初始值"><a href="#也可以使用小数上下文管理器，设置临时精度。语句退出后精度又为初始值" class="headerlink" title="也可以使用小数上下文管理器，设置临时精度。语句退出后精度又为初始值"></a>也可以使用小数上下文管理器，设置临时精度。语句退出后精度又为初始值</h1><p>import decimal<br>with decimal.localcontext() as ctx:<br>    ctx.prec = 2<br>    decimal.Decimal(‘1.00’) / decimal.Decimal(‘3.00’)</p>
+<h1 id="分数类型"><a href="#分数类型" class="headerlink" title="分数类型"></a>分数类型</h1><p>from fractions import Fraction<br>x = Fraction(1, 3)<br>y = Fraction(2, 3)<br>x + y<br>Fraction(‘0.25’)<br>Fraction(‘1.25’)</p>
+<h1 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h1><h1 id="唯一不可变的对象的无序集合"><a href="#唯一不可变的对象的无序集合" class="headerlink" title="唯一不可变的对象的无序集合"></a>唯一不可变的对象的无序集合</h1><p>x = set(‘abcde’)<br>y = set(‘bdxyz’)</p>
+<h1 id="集合可以通过操作符来实现一般的数学集合运算"><a href="#集合可以通过操作符来实现一般的数学集合运算" class="headerlink" title="集合可以通过操作符来实现一般的数学集合运算"></a>集合可以通过操作符来实现一般的数学集合运算</h1><p>‘e’ in x<br>x - y<br>x | y<br>x &amp; y<br>x ^ y<br>x &gt; y, x &lt; y</p>
+<h1 id="交集"><a href="#交集" class="headerlink" title="交集"></a>交集</h1><p>z = x.intersection(y)</p>
+<h1 id="向集合中增加元素"><a href="#向集合中增加元素" class="headerlink" title="向集合中增加元素"></a>向集合中增加元素</h1><p>z.add(‘SPAM’)<br>z.update(set([‘x’, ‘y’]))<br>z.remove(‘b’)</p>
+<h1 id="使用集合去除列表中的重复元素"><a href="#使用集合去除列表中的重复元素" class="headerlink" title="使用集合去除列表中的重复元素"></a>使用集合去除列表中的重复元素</h1><p>L = [1, 2, 1, 3, 2, 4, 5]<br>L = list(set(L))</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/20/MySQL查询/" rel="next" title="MySQL查询">
+                <i class="fa fa-chevron-left"></i> MySQL查询
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/14/Python-动态类型/" rel="prev" title="Python 动态类型">
+                Python 动态类型 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="http://piuib58oz.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181205230447.jpg" alt="Threefire">
+            
+              <p class="site-author-name" itemprop="name">Threefire</p>
+              <p class="site-description motion-element" itemprop="description">记录我的学习生活</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Luffy357" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ljy1042537@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/Liang3Fire" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数字"><span class="nav-number">1.</span> <span class="nav-text">数字</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#变量"><span class="nav-number">2.</span> <span class="nav-text">变量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数字的标准计算"><span class="nav-number">3.</span> <span class="nav-text">数字的标准计算</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#比较-一般和连续性的"><span class="nav-number">4.</span> <span class="nav-text">比较: 一般和连续性的</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#除法"><span class="nav-number">5.</span> <span class="nav-text">除法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#math-trunc-正数向下取整，负数向上取整"><span class="nav-number">5.1.</span> <span class="nav-text">math.trunc 正数向下取整，负数向上取整</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#十六进制、八进制和二进制"><span class="nav-number">6.</span> <span class="nav-text">十六进制、八进制和二进制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#位操作"><span class="nav-number">7.</span> <span class="nav-text">位操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#bit-lenght-可以得到二进制字符串的长度"><span class="nav-number">8.</span> <span class="nav-text">bit_lenght 可以得到二进制字符串的长度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Python-内置的数学工具"><span class="nav-number">9.</span> <span class="nav-text">Python 内置的数学工具</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sin"><span class="nav-number">10.</span> <span class="nav-text">sin</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#开平方"><span class="nav-number">11.</span> <span class="nav-text">开平方</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#幂运算"><span class="nav-number">12.</span> <span class="nav-text">幂运算</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#绝对值与和"><span class="nav-number">13.</span> <span class="nav-text">绝对值与和</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#最小最大值"><span class="nav-number">14.</span> <span class="nav-text">最小最大值</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四舍五入"><span class="nav-number">15.</span> <span class="nav-text">四舍五入</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#截断"><span class="nav-number">16.</span> <span class="nav-text">截断</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#在两数之间任意挑选一项"><span class="nav-number">17.</span> <span class="nav-text">在两数之间任意挑选一项</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其他数据内型"><span class="nav-number">18.</span> <span class="nav-text">其他数据内型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#浮点数缺乏精确性"><span class="nav-number">19.</span> <span class="nav-text">浮点数缺乏精确性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用小数对象"><span class="nav-number">20.</span> <span class="nav-text">使用小数对象</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#deciaml-可以设置全局精度，适用于调用线程中的所有小数"><span class="nav-number">21.</span> <span class="nav-text">deciaml 可以设置全局精度，适用于调用线程中的所有小数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#也可以使用小数上下文管理器，设置临时精度。语句退出后精度又为初始值"><span class="nav-number">22.</span> <span class="nav-text">也可以使用小数上下文管理器，设置临时精度。语句退出后精度又为初始值</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分数类型"><span class="nav-number">23.</span> <span class="nav-text">分数类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#集合"><span class="nav-number">24.</span> <span class="nav-text">集合</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#唯一不可变的对象的无序集合"><span class="nav-number">25.</span> <span class="nav-text">唯一不可变的对象的无序集合</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#集合可以通过操作符来实现一般的数学集合运算"><span class="nav-number">26.</span> <span class="nav-text">集合可以通过操作符来实现一般的数学集合运算</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#交集"><span class="nav-number">27.</span> <span class="nav-text">交集</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#向集合中增加元素"><span class="nav-number">28.</span> <span class="nav-text">向集合中增加元素</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用集合去除列表中的重复元素"><span class="nav-number">29.</span> <span class="nav-text">使用集合去除列表中的重复元素</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Threefire</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

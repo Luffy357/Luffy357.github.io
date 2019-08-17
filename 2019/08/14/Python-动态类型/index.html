@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="Django2.0,">
+  <meta name="keywords" content="Python,">
 
 
 
@@ -123,18 +123,18 @@
 
 
 
-<meta name="description" content="XSS(Cross Site Script) 攻击又叫做跨脚本攻击，原理是用户在使用具有 XSS 漏洞的网站的时候向这个网站提交一些恶意的代码，当用户在访问这个网站的某个页面的时候，这个恶意代码就会被执行，从而来破坏网页的结构，获取用户的隐私信息等。">
-<meta name="keywords" content="Django2.0">
+<meta name="description" content="动态类型是 Python 的灵活性的根源">
+<meta name="keywords" content="Python">
 <meta property="og:type" content="article">
-<meta property="og:title" content="XSS攻击">
-<meta property="og:url" content="https://luffy357.github.io/2019/01/02/XSS攻击/index.html">
+<meta property="og:title" content="Python 动态类型">
+<meta property="og:url" content="https://luffy357.github.io/2019/08/14/Python-动态类型/index.html">
 <meta property="og:site_name" content="Three Fire">
-<meta property="og:description" content="XSS(Cross Site Script) 攻击又叫做跨脚本攻击，原理是用户在使用具有 XSS 漏洞的网站的时候向这个网站提交一些恶意的代码，当用户在访问这个网站的某个页面的时候，这个恶意代码就会被执行，从而来破坏网页的结构，获取用户的隐私信息等。">
+<meta property="og:description" content="动态类型是 Python 的灵活性的根源">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-17T15:18:52.592Z">
+<meta property="og:updated_time" content="2019-08-17T15:16:18.380Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="XSS攻击">
-<meta name="twitter:description" content="XSS(Cross Site Script) 攻击又叫做跨脚本攻击，原理是用户在使用具有 XSS 漏洞的网站的时候向这个网站提交一些恶意的代码，当用户在访问这个网站的某个页面的时候，这个恶意代码就会被执行，从而来破坏网页的结构，获取用户的隐私信息等。">
+<meta name="twitter:title" content="Python 动态类型">
+<meta name="twitter:description" content="动态类型是 Python 的灵活性的根源">
 
 
 
@@ -164,13 +164,13 @@
 
 
 
-  <link rel="canonical" href="https://luffy357.github.io/2019/01/02/XSS攻击/">
+  <link rel="canonical" href="https://luffy357.github.io/2019/08/14/Python-动态类型/">
 
 
 
 
 
-  <title>XSS攻击 | Three Fire</title>
+  <title>Python 动态类型 | Three Fire</title>
   
 
 
@@ -297,7 +297,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://luffy357.github.io/2019/01/02/XSS攻击/">
+    <link itemprop="mainEntityOfPage" href="https://luffy357.github.io/2019/08/14/Python-动态类型/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Threefire">
@@ -314,7 +314,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">XSS攻击</h1>
+          <h1 class="post-title" itemprop="name headline">Python 动态类型</h1>
         
 
         <div class="post-meta">
@@ -326,8 +326,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-02T23:59:37+08:00">
-                2019-01-02
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-14T22:13:31+08:00">
+                2019-08-14
               </time>
             
 
@@ -349,8 +349,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/学习笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">学习笔记</span>
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
                   </a>
                 </span>
 
@@ -386,18 +386,32 @@
       
 
       
-        <p>XSS(Cross Site Script) 攻击又叫做跨脚本攻击，原理是用户在使用具有 XSS 漏洞的网站的时候向这个网站提交一些恶意的代码，当用户在访问这个网站的某个页面的时候，这个恶意代码就会被执行，从而来破坏网页的结构，获取用户的隐私信息等。<br><a id="more"></a></p>
-<h2 id="XSS攻击场景"><a href="#XSS攻击场景" class="headerlink" title="XSS攻击场景"></a>XSS攻击场景</h2><p>比如某个网站有一个发布评价的入口，如果用户在提交数据的时候，提交了一段 js 代码比如”&amp;;lt;script&amp;;gt;alert(“hello world”);&amp;;lt;/script&amp;;gt;”<br>那么这个网站在渲染这条消息的时候就会弹出一个对话框来显示。这样运行成功攻击就可以运行很多 js 代码。做其他的一些事情了。</p>
-<h2 id="XSS攻击防御"><a href="#XSS攻击防御" class="headerlink" title="XSS攻击防御"></a>XSS攻击防御</h2><p>1、在 Django 的模板中是默认转义的，也就是对提交的字符只做为普通字符处理，而不会做为前端代码渲染。也可以在数据存储到数据库之前就对它进行转义，这样渲染的时候就已经是转义处理后的代码，不会有安全问题。<br><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用 escape</span></span><br><span class="line"><span class="built_in">from</span> django.template.defaultfilters import escape</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取用户提交的数据进行转义再存储到数据库 </span></span><br><span class="line">content = request.POST.<span class="built_in">get</span>(<span class="string">'content'</span>)</span><br><span class="line">escaped_content = escape(content)</span><br><span class="line">Comment.objects.<span class="built_in">create</span>(content=escaped_content)</span><br></pre></td></tr></table></figure></p>
-<p>2、如果用户提交上来的数据包含了一些富文本，那么在渲染的时候也要进行富文本的形式进行渲染，也就一些标签样式要显示出来。这个时候可以在模板中使用标签 safe 就相当于关闭的 django 模板的默认转义功能，这样富文本提交的样式就都可以实现了。<br><figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"># index.html</span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span></span><br><span class="line"><span class="xml">    </span><span class="template-tag">&#123;% <span class="name"><span class="name">for</span></span> comment <span class="keyword">in</span> comments %&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><span class="template-variable">&#123;&#123; comment.content|<span class="name">safe</span> &#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="xml">    </span><span class="template-tag">&#123;% <span class="name"><span class="name">endfor</span></span> %&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></span><br></pre></td></tr></table></figure></p>
-<p>但这样还是避免不了攻击者利用这个入口，提交攻击代码。这个时候可以引入第三方库，对于那种安全的标签我们可以不转义，哪些可能含有攻击代码的标签进行转义获取移除掉，就可以满足需要了。</p>
-<p>##bleach库<br>bleach 库是用来清理包含 html 格式字符串的库，它可以指定哪些标签需要保留，哪些标签是需要过滤掉的。还可以指定标签上哪些属性是可以保留，哪些属性是不需要的。要使用这个库需要先安装<br><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip <span class="keyword">install</span> beach</span><br></pre></td></tr></table></figure></p>
-<p>使用这个库的 clean 方法对数据进行过滤处理。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> bleach </span><br><span class="line"><span class="keyword">from</span> beach.sanitizer <span class="keyword">import</span> ALLOWED_TAGS, ALLOWED_ATTRIBUTES</span><br><span class="line"></span><br><span class="line"><span class="meta">@require_http_methods(['POST'])</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">message</span><span class="params">(request)</span>:</span></span><br><span class="line">    <span class="comment"># 获取前端提交的数据</span></span><br><span class="line">    content = reqeust.POST.get(<span class="string">'content'</span>)</span><br><span class="line">    <span class="comment"># 在默认的允许标签中添加img标签</span></span><br><span class="line">    tags = ALLOWED_TAGS + [<span class="string">'img'</span>]</span><br><span class="line">    <span class="comment"># 在默认的允许属性中添加src属性 </span></span><br><span class="line">    attributes = &#123;**ALLOWED_ATTRIBUTES, <span class="string">'img'</span>:[<span class="string">'src'</span>]&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 对提交的数据进行过滤</span></span><br><span class="line">    cleaned_content = bleach.clean(content, tags=tags, attributes=attributes)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 保存到数据库中</span></span><br><span class="line">    Messages.objects.create(content=cleaned_content)</span><br><span class="line">    <span class="keyword">return</span> redirect(reverse(<span class="string">'index'</span>))</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>ALLOWED_TAGS： bleach 中默认定义的一些标签，可以对其进行增删的操作，它是一个列表。</li>
-<li>ALLOWED_ATTRIBUTES: 这个变量是 bleach 中默认定义的一些属性，也可以进行增删操作，这是一个字典。<br>自定义修改的这连个变量，作为参数传递到 bleach.clean 方法中。<br>需要注意的是在对第三方变量进行修改时，不要直接修改原始变量里的内容，而应以该重新定义，不要在其他地方要使用这个变量时会不清楚哪些内容被修改了。</li>
-</ul>
-<p>更多 bleach 资料<br>github地址： “<a href="https://github.com/mozilla/bleach&quot;" target="_blank" rel="noopener">https://github.com/mozilla/bleach&quot;</a><br>文档地址： “<a href="https://bleach.readthedocs.io/&quot;" target="_blank" rel="noopener">https://bleach.readthedocs.io/&quot;</a></p>
+        <p>动态类型是 Python 的灵活性的根源</p>
+<a id="more"></a>
+<p>在 Python 中，类型是在运行过程中自动决定的，而不是通过代码声明，这意味着没有必要事先声明变量、对象的类型</p>
+<h1 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h1><p>变量是没有类型的也不会被类型约束，类型的概念只存在于对象中，而不是变量名中。<br>变量出现在表达式中马上会被该变量所引用的对象代替</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># a: &lt;class 'int'&gt;</span></span><br><span class="line"><span class="attr">a</span> = <span class="number">3</span></span><br><span class="line"><span class="comment"># a: &lt;class 'float'&gt;</span></span><br><span class="line"><span class="attr">a</span> = <span class="number">3.0</span></span><br><span class="line"><span class="comment"># a: &lt;class 'str'&gt;</span></span><br><span class="line"><span class="attr">a</span> = <span class="string">'liang'</span></span><br></pre></td></tr></table></figure>
+<p>变量 = 对象 的操作只是将变量与对象连接，对象是一块内存，有足够的空间去表示它们所代表的值。<br>这个值是什么类型，该对象就是什么类型。类型时属于对象的而不是变量。牢记：Python 中变量没有类型。</p>
+<h1 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h1><p>每个对象都有两个标准的头部信息：一个类型标志符去标识这个对象的类型，一个引用计数器。</p>
+<h2 id="对象的垃圾回收机制"><a href="#对象的垃圾回收机制" class="headerlink" title="对象的垃圾回收机制"></a>对象的垃圾回收机制</h2><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">x</span> = <span class="number">3.1415</span></span><br><span class="line"><span class="attr">y</span> = <span class="number">3.1415</span></span><br><span class="line"></span><br><span class="line"><span class="attr">x</span> = <span class="number">1</span></span><br><span class="line"><span class="attr">y</span> = <span class="number">2</span></span><br></pre></td></tr></table></figure>
+<p>变量 x、y 都引用对象 3.1415 的时候。这个浮点数对象就有两个引用计数。当 x 变量指向别的对象时候，<br>3.1415 对象的引用计数减 1。 当 y 变量也指向别的对象时。3.1415 对象引用计数为零那么这个对象<br>的内存空间就会被自动回收。在程序中一个对象的引用计数为零，就会释放这个对象的内存空间。</p>
+<h2 id="共享引用"><a href="#共享引用" class="headerlink" title="共享引用"></a>共享引用</h2><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">a</span> = <span class="number">3</span></span><br><span class="line"><span class="selector-tag">b</span> = a</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">a</span> = <span class="string">'SPAM'</span></span><br></pre></td></tr></table></figure>
+<p>变量 a 指向对象 3 ，变量 b 又指向了变量 a ，实际上变量a、b 都指向对象 3。当变量 a 指向别的对象时候<br>变量 b 还是指向 3。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">a</span> = <span class="number">3</span></span><br><span class="line"><span class="function"><span class="title">id</span><span class="params">(a)</span></span></span><br><span class="line"><span class="selector-tag">b</span> = a</span><br><span class="line"><span class="selector-tag">a</span> = <span class="selector-tag">a</span> + <span class="number">2</span></span><br><span class="line"><span class="function"><span class="title">id</span><span class="params">(a)</span></span></span><br></pre></td></tr></table></figure>
+<p>整数是不可变对象，因此没有方法在原处修改它，最一条语句其实变量 a 最后指向的是对象 5。可以<br>通过 id 函数来查看变量指向内存地址。会发现前一个和后一个变量 a 指向不是同一个内存空间地址。</p>
+<p>在 Pthon 中变量总是一个指向对象的指针，而不是可改变的内存区域的标签：给一个变量赋一个新的值，<br>并不是替换了原始的对象，而是让这个变量去引用完全不同的一个对象。改变了变量的指向。</p>
+<h2 id="共享引用和在原处修改"><a href="#共享引用和在原处修改" class="headerlink" title="共享引用和在原处修改"></a>共享引用和在原处修改</h2><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">L1 = [1, 2, 3]</span><br><span class="line">L2 = L1</span><br><span class="line"></span><br><span class="line">L1 = 24</span><br><span class="line">id(L1), id(L2)</span><br></pre></td></tr></table></figure>
+<p>变量 L1 指向了一新的对象，而变量 L2 还是指向原来的对象。</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">L1 = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">L2 = L1</span><br><span class="line"></span><br><span class="line">L1[<span class="number">0</span>] = <span class="number">10</span></span><br><span class="line">id(L1), id(L2)</span><br></pre></td></tr></table></figure>
+<p>因为列表是可变类型，变量 L1、L2 同时指向一个对象。当 L1 对列表进行修改时。就是原地修改了<br>这个列表对象。</p>
+<p>如果想拷贝 L1，在对 L1 做修改是又不影响到 L2 的时候。就需要拷贝 L1 指向的对象而不是简单的<br>将变量同 L1 进行同一指向的赋值操作。<br><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">L1 = [1, 2, 3]</span><br><span class="line">L2 = L1[:]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 对字典或集合进行拷贝时</span></span><br><span class="line">import copy</span><br><span class="line">x = copy.copy(y)</span><br><span class="line">x = copy.deepcopy(y)</span><br></pre></td></tr></table></figure></p>
+<h2 id="共享引用和相等"><a href="#共享引用和相等" class="headerlink" title="共享引用和相等"></a>共享引用和相等</h2><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">L = [1, 2, 3]</span><br><span class="line">M = L</span><br><span class="line">L == M    <span class="comment"># True</span></span><br><span class="line">L is M    <span class="comment"># True</span></span><br></pre></td></tr></table></figure>
+<p>‘==’ 操作符是测试两个被引用的对象是否有相等的值<br>‘is’ 操作符是测试对象的同一性，如果两个变量指向同一个对象，会返回 True</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">L = [1, 2, 3]</span><br><span class="line">M = [1, 2, 3]</span><br><span class="line">L == M   <span class="comment"># True</span></span><br><span class="line">L is M   <span class="comment"># False</span></span><br></pre></td></tr></table></figure>
+<p>虽然两个变量指向对象的值相等，当指向的并不是同一个对象</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">x = 10</span><br><span class="line">y = 10</span><br><span class="line">x == y  <span class="comment"># True</span></span><br><span class="line">x is y  <span class="comment"># True</span></span><br><span class="line"></span><br><span class="line">x = 257</span><br><span class="line">y = 257</span><br><span class="line">x == y  <span class="comment"># True</span></span><br><span class="line">x is y  <span class="comment"># False</span></span><br></pre></td></tr></table></figure>
+<p>这个现象是因为 Python 内部有一个小整数池，从 -5~256 当引用小整数时都会在这里引用。<br>超过这个范围的整数会在内存空间开辟新的空间来保存。所以 is 得到不一样的结果。</p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># 可以查看对象的引用计数</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="title">sys</span>.getrefcount(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -415,7 +429,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Django2-0/" rel="tag"># Django2.0</a>
+            <a href="/tags/Python/" rel="tag"># Python</a>
           
         </div>
       
@@ -428,8 +442,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/12/28/CSRF攻击/" rel="next" title="CSRF攻击">
-                <i class="fa fa-chevron-left"></i> CSRF攻击
+              <a href="/2019/08/11/Python-基础之数字/" rel="next" title="Python 基础">
+                <i class="fa fa-chevron-left"></i> Python 基础
               </a>
             
           </div>
@@ -438,8 +452,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/01/03/clickjacking攻击/" rel="prev" title="clickjacking攻击">
-                clickjacking攻击 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/08/16/Python-字符串/" rel="prev" title="Python 字符串">
+                Python 字符串 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -596,7 +610,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#XSS攻击场景"><span class="nav-number">1.</span> <span class="nav-text">XSS攻击场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XSS攻击防御"><span class="nav-number">2.</span> <span class="nav-text">XSS攻击防御</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#变量"><span class="nav-number">1.</span> <span class="nav-text">变量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对象"><span class="nav-number">2.</span> <span class="nav-text">对象</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#对象的垃圾回收机制"><span class="nav-number">2.1.</span> <span class="nav-text">对象的垃圾回收机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#共享引用"><span class="nav-number">2.2.</span> <span class="nav-text">共享引用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#共享引用和在原处修改"><span class="nav-number">2.3.</span> <span class="nav-text">共享引用和在原处修改</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#共享引用和相等"><span class="nav-number">2.4.</span> <span class="nav-text">共享引用和相等</span></a></li></ol></li></ol></div>
             
 
           </div>

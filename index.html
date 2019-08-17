@@ -297,7 +297,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://luffy357.github.io/2019/08/11/Python-基础/">
+    <link itemprop="mainEntityOfPage" href="https://luffy357.github.io/2019/08/16/Python-字符串/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Threefire">
@@ -316,7 +316,302 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/08/11/Python-基础/" itemprop="url">Python 基础</a></h1>
+                <a class="post-title-link" href="/2019/08/16/Python-字符串/" itemprop="url">Python 字符串</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-16T21:56:03+08:00">
+                2019-08-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <a id="more"></a>
+<h1 id="常见字符串常量和表达式"><a href="#常见字符串常量和表达式" class="headerlink" title="常见字符串常量和表达式"></a>常见字符串常量和表达式</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 操作                         # 解释</span></span><br><span class="line">s = <span class="string">''</span>                    <span class="comment"># 空字符串</span></span><br><span class="line">s = <span class="string">"spam's"</span>              <span class="comment"># 双引号中包含单引号</span></span><br><span class="line">s = <span class="string">'s\np\ta\x00m'</span>        <span class="comment"># 转义序列</span></span><br><span class="line">s = <span class="string">"""..."""</span>             <span class="comment"># 三重引号字符串块  </span></span><br><span class="line">s = <span class="string">r'\temp\spam'</span>         <span class="comment"># Raw字符串</span></span><br><span class="line">s = <span class="string">b'spam'</span>               <span class="comment"># 字节字符串</span></span><br><span class="line">s1 + s2                   <span class="comment"># 合并</span></span><br><span class="line">s * <span class="number">3</span>                     <span class="comment"># 重复</span></span><br><span class="line">s[i]                      <span class="comment"># 索引</span></span><br><span class="line">s[i:j]                    <span class="comment"># 分片</span></span><br><span class="line">len(s)                    <span class="comment"># 求长度</span></span><br><span class="line"><span class="string">"a %s parrot"</span> % kind      <span class="comment"># 字符串格式化表达式</span></span><br><span class="line"><span class="string">'a &#123;0&#125; parrot'</span>.format(kind)   <span class="comment">#字符串格式化方法</span></span><br><span class="line">s.find(<span class="string">'pa'</span>)                <span class="comment"># 字符串方法调用：搜索</span></span><br><span class="line">s.rstrip()                  <span class="comment"># 移除空格</span></span><br><span class="line">s.replace(<span class="string">'pa'</span>, <span class="string">'xx'</span>)       <span class="comment"># 替换</span></span><br><span class="line">s.split(<span class="string">','</span>)                <span class="comment"># 用逗号分隔</span></span><br><span class="line">s.isdigit()                 <span class="comment"># 内容测试</span></span><br><span class="line">s.lower()                   <span class="comment"># 全都转为小写</span></span><br><span class="line">s.endswith(<span class="string">'spam'</span>)          <span class="comment"># 是否为某个内容结束</span></span><br><span class="line"><span class="string">'spam'</span>.join(strlist)        <span class="comment"># 插入分隔符</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> S: print(x)        <span class="comment"># 迭代，</span></span><br><span class="line"><span class="string">'spam'</span> <span class="keyword">in</span> s                 <span class="comment"># 成员关系</span></span><br><span class="line">[c * <span class="number">2</span> <span class="keyword">for</span> c <span class="keyword">in</span> s]</span><br><span class="line">map(ord, s)</span><br></pre></td></tr></table></figure>
+<h1 id="字符串中特殊字符转义"><a href="#字符串中特殊字符转义" class="headerlink" title="字符串中特殊字符转义"></a>字符串中特殊字符转义</h1><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">'a\nb\tc'</span></span><br><span class="line"><span class="function"><span class="title">len</span><span class="params">(s)</span></span></span><br></pre></td></tr></table></figure>
+<p>‘\n’ 表示换行，’\t’ 表示字表符。所以这个字符串的长度还是 5。</p>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">转义              意义</span><br><span class="line"><span class="string">\\</span>              反斜杠保留</span><br><span class="line"><span class="string">\'</span>              单引号保留</span><br><span class="line"><span class="string">\"</span>              双引号保留</span><br><span class="line"><span class="string">\a</span>              响铃</span><br><span class="line"><span class="string">\b</span>              倒退</span><br><span class="line"><span class="string">\f</span>              换页</span><br><span class="line"><span class="string">\n</span>              换行</span><br><span class="line"><span class="string">\r</span>              返回</span><br><span class="line"><span class="string">\t</span>              水平制表符</span><br><span class="line"><span class="string">\v</span>              垂直制表符</span><br></pre></td></tr></table></figure>
+<p>在打开文件时文件的路径可能包含反斜杠。如果不想转义准确的表达路径可以使用 raw字符串<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myfile = open(<span class="string">r'C:\new\text.text'</span>, <span class="string">'w'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>使用三重引号编写多行字符串块<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">mantra</span> = <span class="string">""" Always look</span></span><br><span class="line"><span class="string">on the bright</span></span><br><span class="line"><span class="string">side of life. """</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果没有变量接收就是注释。不会被执行</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h1><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">len(<span class="string">'abc'</span>)  <span class="comment"># 输出字符串长度</span></span><br><span class="line"><span class="string">'a'</span> + <span class="string">'b'</span>   <span class="comment"># 拼接字符串</span></span><br><span class="line"><span class="string">'Hi'</span> * <span class="number">4</span>    <span class="comment"># 重复输出   </span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 循环遍历</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="string">'hello world'</span><span class="symbol">:</span></span><br><span class="line">pring(i, <span class="keyword">end</span>=<span class="string">''</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 索引和切片</span></span><br><span class="line">h = <span class="string">'Hello World'</span></span><br><span class="line">h[<span class="number">0</span>], h[-<span class="number">1</span>]     <span class="comment"># 索引从零开始。最后一位也可以用 -1 表示</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 从索引 1 开始取 在 3 之前结束，从 1 到最后，从 0 开始最后一个之前结束</span></span><br><span class="line">h[<span class="number">1</span><span class="symbol">:</span><span class="number">3</span>], h[<span class="number">1</span><span class="symbol">:</span>], h[<span class="symbol">:-</span><span class="number">1</span>], h[<span class="symbol">:</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 开始：结束：步长</span></span><br><span class="line">h[<span class="number">1</span><span class="symbol">:</span><span class="number">5</span><span class="symbol">:</span><span class="number">2</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 步长为 -1, 将字符串倒序</span></span><br><span class="line">h[::-<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://luffy357.github.io/2019/08/14/Python-动态类型/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Threefire">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="http://piuib58oz.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181205230447.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Three Fire">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/14/Python-动态类型/" itemprop="url">Python 动态类型</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-14T22:13:31+08:00">
+                2019-08-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>动态类型是 Python 的灵活性的根源</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/08/14/Python-动态类型/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://luffy357.github.io/2019/08/11/Python-基础之数字/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Threefire">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="http://piuib58oz.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181205230447.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Three Fire">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/11/Python-基础之数字/" itemprop="url">Python 基础</a></h1>
         
 
         <div class="post-meta">
@@ -389,25 +684,14 @@
 
       
         
-          
-            <p>Python 表达式操作符及其优先级</p>
-<p>操作符                     描述<br>x or y                 逻辑或(只要一个条件为真即为真)<br>x and y                 逻辑与(只有 x 为真，才会计算 y)<br>not x                  逻辑非(取反操作)<br>x in y, x not in y         成员关系（可迭代对象、集合）<br>x is y, x is not y         对象实体测试<br>x &lt; y, x &lt;= y, x &gt; y,<br>x &gt;= y, x == y, x != y       大小比较，集合子集和超集值相等性操作符<br>x | y                  位或，集合并集<br>x ^ y                  位异或，集合对称差<br>x &amp; y                  位与，集合交集<br>x &lt;&lt; y, x &gt;&gt; y            位移或右位 y 位<br>x + y, x - y             加法/合并， 减法，集合差集<br>x * y, x % y, x / y, x // y    乘法/重复, 余数/格式化，真除法，整除或floor除法<br>-x, +x                 一元加减，识别<br>~x                    按位求补(取反)<br>x ** y                 幂运算<br>x[i]                  索引<br>x[i:j:k]               分片<br>x(…)                 调用(函数，方法，类及其他可调用的)<br>x.attr                 属性引用<br>(…)                 元组, 表达式, 生成器表达式<br>[…]                 列表，列表解析<br>{…}                 字典, 集合、集合和字典解析</p>
-<p>1、操作符越靠后的优先级越高，在混合使用时，一定要注意优先级<br>2、同一行的表达式在组合时候通常从左到右组合(除了幂运算是从右向左组合的，比较运算是从左到右连接的)<br>3、如果用括号分组的子表达式，会超越 Python 的优先级规则。总是最先计算括号中的表达式<br>4、数字的混合类型计算，会将对象转换为其中最复杂的类型的进行计算。比如 整数加浮点数，会将整数转换为浮点数</p>
-<h1 id="数字"><a href="#数字" class="headerlink" title="数字"></a>数字</h1><h1 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h1><p>“””<br>1、变量在它第一次赋值时创建。<br>2、变量在表达式中使用将被替换为它们的值。<br>3、变量在表达式中使用以前必须已赋值。<br>4、变量像对象一样不需要在一开始进行声明。<br>“””<br>a = 3<br>b = 4</p>
-<h1 id="数字的标准计算"><a href="#数字的标准计算" class="headerlink" title="数字的标准计算"></a>数字的标准计算</h1><p>a - 1, b + 1<br>a * 3, b / 3<br>a % 2, b ** 2<br>b / (2.0 + a)</p>
-<h1 id="比较-一般和连续性的"><a href="#比较-一般和连续性的" class="headerlink" title="比较: 一般和连续性的"></a>比较: 一般和连续性的</h1><p>1 &lt; 2<br>2.0 &gt; 1<br>2.0 == 2.0<br>2.0 != 3.0</p>
-<p>x = 1<br>y = 3<br>z = 5<br>x &lt; y &lt; z<br>x &lt; y and y &lt; z</p>
-<h1 id="除法"><a href="#除法" class="headerlink" title="除法"></a>除法</h1><p>10 / 4   # 真除法，不管操作数的类型，都返回包含任何余数的浮点结果<br>10 // 4  # Floor 除法，只截取掉余数，返回的类型根据操作数的类型。只要有个浮点数，结果为浮点数</p>
-<h1 id="、-floor-不管整数还是负数总是向下取整"><a href="#、-floor-不管整数还是负数总是向下取整" class="headerlink" title="// 、 floor 不管整数还是负数总是向下取整"></a>// 、 floor 不管整数还是负数总是向下取整</h1><h1 id="floor-并没有真正意义上截断负数的结果"><a href="#floor-并没有真正意义上截断负数的结果" class="headerlink" title="floor 并没有真正意义上截断负数的结果"></a>floor 并没有真正意义上截断负数的结果</h1><p>import math</p>
-<p>math.floor(2.5)<br>math.floor(-2.5)</p>
-<h1 id="math-trunc-正数向下取整，负数向上取整"><a href="#math-trunc-正数向下取整，负数向上取整" class="headerlink" title="math.trunc 正数向下取整，负数向上取整"></a>math.trunc 正数向下取整，负数向上取整</h1><p>math.trunc(2.5)<br>math.trunc(-2.5)</p>
-<h1 id="十六进制、八进制和二进制"><a href="#十六进制、八进制和二进制" class="headerlink" title="十六进制、八进制和二进制"></a>十六进制、八进制和二进制</h1><h1 id="Python-默认用十进制，如下内置函数将十进制转换为其他进制"><a href="#Python-默认用十进制，如下内置函数将十进制转换为其他进制" class="headerlink" title="Python 默认用十进制，如下内置函数将十进制转换为其他进制"></a>Python 默认用十进制，如下内置函数将十进制转换为其他进制</h1><p>oct(64), hex(64), bin(64)</p>
-<p>‘{0:o}, {1:x}, {2:b}’.format(64, 64, 64)</p>
-<h1 id="int-函数将一个数字字符串通过对应的进制转换为整数，第二个参数为进制"><a href="#int-函数将一个数字字符串通过对应的进制转换为整数，第二个参数为进制" class="headerlink" title="int 函数将一个数字字符串通过对应的进制转换为整数，第二个参数为进制"></a>int 函数将一个数字字符串通过对应的进制转换为整数，第二个参数为进制</h1><p>int(‘64’), int(‘100’, 8), int(‘40’, 16), int(‘1000000’, 2)</p>
-<h1 id="位操作"><a href="#位操作" class="headerlink" title="位操作"></a>位操作</h1><p>x = 1<br>x &lt;&lt; 2  # (0001) 左移 2 位 (0100)<br>x | 2   # (0001 | 0010 = 0011)<br>x &amp; 1   # (0001 &amp; 0001 = 0001)</p>
-<h1 id="bit-lenght-可以得到二进制字符串的长度"><a href="#bit-lenght-可以得到二进制字符串的长度" class="headerlink" title="bit_lenght 可以得到二进制字符串的长度"></a>bit_lenght 可以得到二进制字符串的长度</h1><p>(256).bit_length()</p>
-
-          
+          <p>Python 表达式操作符及其优先级</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/08/11/Python-基础之数字/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -547,7 +831,7 @@
       
         
           
-            <p><-- more !--></--></p>
+            <a id="more"></a>
 <h2 id="MySQL-的查询操作"><a href="#MySQL-的查询操作" class="headerlink" title="MySQL 的查询操作"></a>MySQL 的查询操作</h2><ul>
 <li><p>查询所有字段</p>
 <figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> 表名;</span><br></pre></td></tr></table></figure>
@@ -1524,298 +1808,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://luffy357.github.io/2019/01/08/权限和分组/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Threefire">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="http://piuib58oz.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181205230447.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Three Fire">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/08/权限和分组/" itemprop="url">权限和分组</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-08T22:14:53+08:00">
-                2019-01-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/学习笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">学习笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>Django中内置了权限的功能。他的权限都是针对表或者说是模型级别的。比如对某个模型上的数据是否可以进行增删改查操作。他不能针对数据级别的，比如对某个表中的某条数据能否进行增删改查操作（如果要实现数据级别的，考虑使用 django-guardian。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/01/08/权限和分组/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </p></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://luffy357.github.io/2019/01/07/扩展内置User模型/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Threefire">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="http://piuib58oz.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181205230447.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Three Fire">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/07/扩展内置User模型/" itemprop="url">扩展内置User模型</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-07T20:41:32+08:00">
-                2019-01-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/学习笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">学习笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>Django 有一个内置的授权系统，用来处理用户、分组、权限以及基于 cookie 的会话系统。 Django 的授权系统包括验证和授权两个部分。验证时验证这个用户是否是他声称的人(比如用户名和密码验证，角色验证), 授权是给与他相应的权限。<br>Django 内置的权限系统包括用户、权限、分组、一个可以配置的密码哈希系统和可拔插的后台管理系统。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/01/07/扩展内置User模型/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </p></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1868,7 +1860,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-count">34</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
