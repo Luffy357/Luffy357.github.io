@@ -297,6 +297,147 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://luffy357.github.io/2019/08/18/Python-列表与字典/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Threefire">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="http://piuib58oz.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181205230447.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Three Fire">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/18/Python-列表与字典/" itemprop="url">Python 列表与字典</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-18T19:00:47+08:00">
+                2019-08-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://luffy357.github.io/2019/08/16/Python-字符串/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -389,20 +530,25 @@
 
       
         
-          
-            <a id="more"></a>
-<h1 id="常见字符串常量和表达式"><a href="#常见字符串常量和表达式" class="headerlink" title="常见字符串常量和表达式"></a>常见字符串常量和表达式</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 操作                         # 解释</span></span><br><span class="line">s = <span class="string">''</span>                    <span class="comment"># 空字符串</span></span><br><span class="line">s = <span class="string">"spam's"</span>              <span class="comment"># 双引号中包含单引号</span></span><br><span class="line">s = <span class="string">'s\np\ta\x00m'</span>        <span class="comment"># 转义序列</span></span><br><span class="line">s = <span class="string">"""..."""</span>             <span class="comment"># 三重引号字符串块  </span></span><br><span class="line">s = <span class="string">r'\temp\spam'</span>         <span class="comment"># Raw字符串</span></span><br><span class="line">s = <span class="string">b'spam'</span>               <span class="comment"># 字节字符串</span></span><br><span class="line">s1 + s2                   <span class="comment"># 合并</span></span><br><span class="line">s * <span class="number">3</span>                     <span class="comment"># 重复</span></span><br><span class="line">s[i]                      <span class="comment"># 索引</span></span><br><span class="line">s[i:j]                    <span class="comment"># 分片</span></span><br><span class="line">len(s)                    <span class="comment"># 求长度</span></span><br><span class="line"><span class="string">"a %s parrot"</span> % kind      <span class="comment"># 字符串格式化表达式</span></span><br><span class="line"><span class="string">'a &#123;0&#125; parrot'</span>.format(kind)   <span class="comment">#字符串格式化方法</span></span><br><span class="line">s.find(<span class="string">'pa'</span>)                <span class="comment"># 字符串方法调用：搜索</span></span><br><span class="line">s.rstrip()                  <span class="comment"># 移除空格</span></span><br><span class="line">s.replace(<span class="string">'pa'</span>, <span class="string">'xx'</span>)       <span class="comment"># 替换</span></span><br><span class="line">s.split(<span class="string">','</span>)                <span class="comment"># 用逗号分隔</span></span><br><span class="line">s.isdigit()                 <span class="comment"># 内容测试</span></span><br><span class="line">s.lower()                   <span class="comment"># 全都转为小写</span></span><br><span class="line">s.endswith(<span class="string">'spam'</span>)          <span class="comment"># 是否为某个内容结束</span></span><br><span class="line"><span class="string">'spam'</span>.join(strlist)        <span class="comment"># 插入分隔符</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> S: print(x)        <span class="comment"># 迭代，</span></span><br><span class="line"><span class="string">'spam'</span> <span class="keyword">in</span> s                 <span class="comment"># 成员关系</span></span><br><span class="line">[c * <span class="number">2</span> <span class="keyword">for</span> c <span class="keyword">in</span> s]</span><br><span class="line">map(ord, s)</span><br></pre></td></tr></table></figure>
-<h1 id="字符串中特殊字符转义"><a href="#字符串中特殊字符转义" class="headerlink" title="字符串中特殊字符转义"></a>字符串中特殊字符转义</h1><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">'a\nb\tc'</span></span><br><span class="line"><span class="function"><span class="title">len</span><span class="params">(s)</span></span></span><br></pre></td></tr></table></figure>
-<p>‘\n’ 表示换行，’\t’ 表示字表符。所以这个字符串的长度还是 5。</p>
-<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">转义              意义</span><br><span class="line"><span class="string">\\</span>              反斜杠保留</span><br><span class="line"><span class="string">\'</span>              单引号保留</span><br><span class="line"><span class="string">\"</span>              双引号保留</span><br><span class="line"><span class="string">\a</span>              响铃</span><br><span class="line"><span class="string">\b</span>              倒退</span><br><span class="line"><span class="string">\f</span>              换页</span><br><span class="line"><span class="string">\n</span>              换行</span><br><span class="line"><span class="string">\r</span>              返回</span><br><span class="line"><span class="string">\t</span>              水平制表符</span><br><span class="line"><span class="string">\v</span>              垂直制表符</span><br></pre></td></tr></table></figure>
-<p>在打开文件时文件的路径可能包含反斜杠。如果不想转义准确的表达路径可以使用 raw字符串<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myfile = open(<span class="string">r'C:\new\text.text'</span>, <span class="string">'w'</span>)</span><br></pre></td></tr></table></figure></p>
-<p>使用三重引号编写多行字符串块<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">mantra</span> = <span class="string">""" Always look</span></span><br><span class="line"><span class="string">on the bright</span></span><br><span class="line"><span class="string">side of life. """</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果没有变量接收就是注释。不会被执行</span></span><br></pre></td></tr></table></figure></p>
-<h1 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h1><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">len(<span class="string">'abc'</span>)  <span class="comment"># 输出字符串长度</span></span><br><span class="line"><span class="string">'a'</span> + <span class="string">'b'</span>   <span class="comment"># 拼接字符串</span></span><br><span class="line"><span class="string">'Hi'</span> * <span class="number">4</span>    <span class="comment"># 重复输出   </span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 循环遍历</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="string">'hello world'</span><span class="symbol">:</span></span><br><span class="line">pring(i, <span class="keyword">end</span>=<span class="string">''</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 索引和切片</span></span><br><span class="line">h = <span class="string">'Hello World'</span></span><br><span class="line">h[<span class="number">0</span>], h[-<span class="number">1</span>]     <span class="comment"># 索引从零开始。最后一位也可以用 -1 表示</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 从索引 1 开始取 在 3 之前结束，从 1 到最后，从 0 开始最后一个之前结束</span></span><br><span class="line">h[<span class="number">1</span><span class="symbol">:</span><span class="number">3</span>], h[<span class="number">1</span><span class="symbol">:</span>], h[<span class="symbol">:-</span><span class="number">1</span>], h[<span class="symbol">:</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 开始：结束：步长</span></span><br><span class="line">h[<span class="number">1</span><span class="symbol">:</span><span class="number">5</span><span class="symbol">:</span><span class="number">2</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 步长为 -1, 将字符串倒序</span></span><br><span class="line">h[::-<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
-
-          
+          <h1 id="字符串是不可变的序列：它们不可以在原地进行改变-不可变部分"><a href="#字符串是不可变的序列：它们不可以在原地进行改变-不可变部分" class="headerlink" title="字符串是不可变的序列：它们不可以在原地进行改变(不可变部分)"></a>字符串是不可变的序列：它们不可以在原地进行改变(不可变部分)</h1><p>  同样的类型共享其操作集合</p>
+<ul>
+<li>数字：(整数、浮点数、二进制、分数等) 都支持加减乘除</li>
+<li>序列：(字符串、列表、元组) 支持索引、分片、合并等</li>
+<li>映射: (字典) 支持通过键的索引</li>
+</ul>
+<h1 id="可变序列能够在原处修改"><a href="#可变序列能够在原处修改" class="headerlink" title="可变序列能够在原处修改"></a>可变序列能够在原处修改</h1><ul>
+<li>不可变类型 (数字、字符串、元组、不可变集合)<br>   不可变的分类中没有那个对象类型支持原处修改，尽管我们总是可以运行表达式来创建新的对象<br>   并将其结果分配给变量</li>
+<li>可变类型 (列表、字典、可变集合)<br>   相反，可变的类型总是可以通过操作原处修改，而不用创建新的对象，尽管这样的对象可以复制，
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/08/16/Python-字符串/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
-    </div>
+    </li></ul></div>
     
     
     
@@ -830,102 +976,14 @@
 
       
         
-          
-            <a id="more"></a>
-<h2 id="MySQL-的查询操作"><a href="#MySQL-的查询操作" class="headerlink" title="MySQL 的查询操作"></a>MySQL 的查询操作</h2><ul>
-<li><p>查询所有字段</p>
-<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> 表名;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>查询字段</p>
-<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT 列<span class="number">1</span>, 列<span class="number">2</span> FROM 表名；</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>as 给表、字段起别名<br>为了更好的显示结果,可以给字段起别名。但需要注意别名只有在该条 SQL 语句中有效</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span> <span class="keyword">FROM</span> students <span class="keyword">as</span> 学生;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span> <span class="keyword">as</span> 名字, age <span class="keyword">as</span> 年龄 <span class="keyword">FROM</span> students;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>完整的查询语句<br>在多表查询时,为避免混淆需要加上表名或数据库名</p>
-<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> 表名.列名 <span class="keyword">FROM</span> 表名;</span><br><span class="line"><span class="keyword">SELECT</span> 数据库名.表名.列名 <span class="keyword">FROM</span> 表名;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>查询去重 DISTINCT</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将身高没有重复的数据取出来</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> height <span class="keyword">from</span> students;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 当 distinct 后面有多个字段，只有当查询的多列的查询结果完全相同才能去重</span></span><br><span class="line"><span class="comment"># 同时满足多个字段相同才能去重</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> height, gender <span class="keyword">from</span> students;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>条件查询 WHERE</p>
-<ul>
-<li><p>比较运算符</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> 表名 <span class="keyword">WHERE</span> 条件；</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span> <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> age &gt; <span class="number">18</span>;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>逻辑运算符<br>逻辑运算符 ‘and’、’or’、’not’。与或非</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 'and' 必须同时满足所有的条件</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span> <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> age = <span class="number">12</span> <span class="keyword">and</span> height = <span class="number">170</span>；</span><br><span class="line"></span><br><span class="line"><span class="comment"># 'or' 只需要满足其中一个条件</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span> <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> age = <span class="number">35</span> <span class="keyword">or</span> age= <span class="number">12</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 'not' 相当于取反操作</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span> <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> <span class="keyword">not</span> gender = <span class="string">'女'</span>;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>模糊查询 LIKE<br>使用’百分号’、’下滑线’代替任意字符。百分号表示可有可无一个或者多个字符<br>一个下滑线表示一个字符</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 取出表中梁姓的名字</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> <span class="keyword">name</span> <span class="keyword">LIKE</span> <span class="string">'梁%'</span>;</span><br><span class="line"><span class="comment"># 取出表中名字为两个字符的名字</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> <span class="keyword">name</span> <span class="keyword">LIKE</span> <span class="string">'__'</span>；</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>范围查询</p>
-<ul>
-<li><p>IN 表示在一个非连续的范围内</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> age <span class="keyword">IN</span> (<span class="number">12</span>, <span class="number">18</span>, <span class="number">35</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment"># 某个可表示的联系范围</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> age &gt; <span class="number">18</span> <span class="keyword">AND</span> age &lt; <span class="number">50</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 不存在某个范围</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> age <span class="keyword">NOT</span> <span class="keyword">IN</span> (<span class="number">12</span>, <span class="number">18</span>, <span class="number">35</span>);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>BETWEEN 表示在某个范围之间</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> age <span class="keyword">BETWEEN</span> <span class="number">18</span> <span class="keyword">AND</span> <span class="number">45</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 不在这个范围内</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> age <span class="keyword">NOT</span> <span class="keyword">BETWEEN</span> <span class="number">18</span> ADN <span class="number">45</span>；</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<ul>
-<li>空判断<br>做空判断时不可以用比较运算符，因为 NULL 是一种特殊的值。不能进行比较要用 is 判断<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 身高的空判断</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> height <span class="keyword">IS</span> <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 不为空的判断</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> <span class="keyword">NOT</span> height <span class="keyword">IS</span> <span class="literal">NULL</span>;</span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> height <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 错误写法</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> height <span class="keyword">NOT</span> <span class="keyword">IS</span> <span class="literal">NULL</span>；</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>排序<br>ASC: 从下到大为升序，DESC: 从大到小为降序。<br>ORDER BY 默认为升序排序</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 对身高进行升序排序</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> students <span class="keyword">ORDER</span> <span class="keyword">BY</span> heigth <span class="keyword">ASC</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 对年龄进行降序排序</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> students <span class="keyword">ORDER</span> <span class="keyword">BY</span> age DSEC;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 多个字段排序</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> students <span class="keyword">ORDER</span> <span class="keyword">BY</span> height <span class="keyword">DESC</span>, age <span class="keyword">ASC</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查询年龄在18到34岁之间的女性，身高从高到矮排序, 如果身高相同的情况下按照年龄从小到大排序</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> age <span class="keyword">BETWEEN</span> <span class="number">18</span> <span class="keyword">and</span> <span class="number">34</span> <span class="keyword">AND</span> gender=<span class="number">2</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> height DSEC, age <span class="keyword">ASC</span>;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>聚合函数<br>COUNT 总数统计，以行作为单位统计个数</p>
-<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(*) <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> gender = <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
-<p>MAX 最大值</p>
-<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">MAX</span>(age) <span class="keyword">FROM</span> students;</span><br></pre></td></tr></table></figure>
-<p>MIN 最小值</p>
-<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">MIN</span>(age) <span class="keyword">FROM</span> students;</span><br></pre></td></tr></table></figure>
-<p>SUM 求和</p>
-<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">SUM</span>(height) <span class="keyword">FROM</span> students;</span><br></pre></td></tr></table></figure>
-<p>AVG 平均值</p>
-<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">AVG</span>(age) <span class="keyword">FROM</span> students;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>分组<br>GROUP BY 分组的目的就是为了进行聚合统计</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 按性别分组，就可以直接知道有多少种性别</span></span><br><span class="line">SELECT gender <span class="keyword">FROM</span> students<span class="built_in"> GROUP </span>BY gender;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算各个分组中有多少人数</span></span><br><span class="line">SELECT gender COUNT(*) <span class="keyword">FROM</span> students<span class="built_in"> GROUP </span>BY gender;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示每个分组中的名字</span></span><br><span class="line">SELECT gender, GROUP_CONCAT(name) <span class="keyword">FROM</span> students<span class="built_in"> GROUP </span>BY gender;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查询每种性别中的平均年龄avg(age), 最大年龄,平均身高,最高身高, 分组是为了更好的统计</span></span><br><span class="line">SELECT gender, AVG(age), MAX(age), AVG(height), MAX(height) <span class="keyword">FROM</span> students<span class="built_in"> GROUP </span>BY gender;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>HAVING 分组后进一步的筛选<br>分组之后不能使用 WHERE 做条件筛选只能用 HAVING<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 只想知道男性的人数</span></span><br><span class="line">SELECT gender, COUNT(*) <span class="keyword">FROM</span> students<span class="built_in"> GROUP </span>BY gender HAVING <span class="attribute">gender</span>=1;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查询平均年龄超过30岁的性别, 及姓名</span></span><br><span class="line">SELECT gender, GROUP_CONCAT(name) <span class="keyword">FROM</span> students<span class="built_in"> GROUP </span>BY gender HAVING AVG(age)&gt;30;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>分页<br>LIMIT 指定跳过一些数据，然后显示多少条。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># LIMIT start,count</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> students <span class="keyword">LIMIT</span> <span class="number">4</span>,<span class="number">5</span>;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>连接查询<br>连接查询 将两个表中的数据按照设置的连接条件进行筛选, 符合连接条件的数据才能够被筛选出来<br>table1 INNER JOIN table2 ON 条件</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查找每个学生属于哪个班级，班级保存在classes中</span></span><br><span class="line"><span class="keyword">SELECT</span> students.name, classes.name <span class="keyword">FROM</span> studens <span class="keyword">INNER</span> <span class="keyword">JOIN</span> classes <span class="keyword">on</span> students.cls_id = classes.id;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>外连接查询<br>使用 INNER JOIN 连接查询，不符合条件的数据将不显示。如果想显示就可以使用外连接<br>LEFT JOIN 左外连接查询，不符合条件的将使用 NULL 填充<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 左外连接就是以 LEFT JOIN 左边的数据库为主，显示其所有结果。右侧没有匹配的用 NULL 填充</span></span><br><span class="line"><span class="keyword">SELECT</span> s.name, c.name <span class="keyword">FROM</span> studens <span class="keyword">as</span> s <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> classes <span class="keyword">as</span> c <span class="keyword">ON</span> s.cls_id = c.id;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>RIGHT JOIN 右外连接，与左连接的意义相反。</p>
-</li>
-<li><p>子查询<br>指在一条select语句中，嵌入了另外一条select语句，那么被嵌入的select语句称之为子查询语句</p>
-<ul>
-<li><p>标量子查询：子查询语句返回的结果是一行一列</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查询表中身高最高的人名字</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span> <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> height = (<span class="keyword">SELECT</span> <span class="keyword">MAX</span>(height) <span class="keyword">FROM</span> students);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>列子查询：得到的数据是一列多行</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 用 in 或 any 连接子查询语句, all 表示满足子查询的所有项</span></span><br><span class="line"><span class="keyword">SELECT</span> classes.name <span class="keyword">FROM</span> classes <span class="keyword">WHERE</span> <span class="keyword">id</span> <span class="keyword">in</span> (<span class="keyword">SELECT</span> cls_id <span class="keyword">FROM</span> students);</span><br><span class="line"><span class="keyword">SELECT</span> classes.name <span class="keyword">FROM</span> classes <span class="keyword">WHERE</span> <span class="keyword">id</span> = <span class="keyword">any</span>(<span class="keyword">SELECT</span> cls_id <span class="keyword">FROM</span> students);</span><br><span class="line"><span class="keyword">SELECT</span> classes.name <span class="keyword">FROM</span> classes <span class="keyword">WHERE</span> <span class="keyword">id</span> = all(<span class="keyword">SELECT</span> cls_id <span class="keyword">FROM</span> students)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>行子查询：得到一行多列<br>行子查询需要构建行元素<br>行元素：字段元素是指一个字段对应的值，行元素对应的就是多个字段：多个字段合起来作为一个元素参与运算，把这种情况称之为行元素</p>
-<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM students WHERE (<span class="name">age</span>, height) = (<span class="name">SELECT</span> MAX(<span class="name">age</span>), MAX(<span class="name">height</span>) FROM students)<span class="comment">;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>表子查询：得到多行多列，充当数据源</p>
-<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> tmp.* <span class="keyword">FROM</span> (<span class="keyword">SELECT</span> students.* <span class="keyword">FROM</span> studnets) <span class="keyword">as</span> tmp;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-
-          
+          <p>mysql 查询</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/07/20/MySQL查询/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1662,152 +1720,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://luffy357.github.io/2019/01/09/Redis数据库/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Threefire">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="http://piuib58oz.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181205230447.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Three Fire">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/09/Redis数据库/" itemprop="url">Redis数据库</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-09T22:24:13+08:00">
-                2019-01-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数据库/" itemprop="url" rel="index">
-                    <span itemprop="name">数据库</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>redis 是一种 nosql 数据库，他的数据是保存在内存中，同时 redis 可以定时把内存数据同步到磁盘，既可以将数据持久化，并且比 memcached 支持更多的数据结构(string, list列表, set集合, sorted set有序集合，hash表)文档参考: “<a href="http://redisdoc.com/index.html&quot;" target="_blank" rel="noopener">http://redisdoc.com/index.html&quot;</a><br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/01/09/Redis数据库/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </p></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1860,7 +1772,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-count">35</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
