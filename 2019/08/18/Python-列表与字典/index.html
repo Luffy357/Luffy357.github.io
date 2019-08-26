@@ -123,18 +123,18 @@
 
 
 
-<meta name="description" content="记录我的学习生活">
+<meta name="description" content="列表中可以包含任何种类的对象：数字、字符串、甚至其他列表。列表是可变对象，可以原地修改它 任意对象的有序集合">
 <meta name="keywords" content="Python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python 列表与字典">
 <meta property="og:url" content="https://luffy357.github.io/2019/08/18/Python-列表与字典/index.html">
 <meta property="og:site_name" content="Three Fire">
-<meta property="og:description" content="记录我的学习生活">
+<meta property="og:description" content="列表中可以包含任何种类的对象：数字、字符串、甚至其他列表。列表是可变对象，可以原地修改它 任意对象的有序集合">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-18T11:06:27.429Z">
+<meta property="og:updated_time" content="2019-08-25T13:57:08.738Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python 列表与字典">
-<meta name="twitter:description" content="记录我的学习生活">
+<meta name="twitter:description" content="列表中可以包含任何种类的对象：数字、字符串、甚至其他列表。列表是可变对象，可以原地修改它 任意对象的有序集合">
 
 
 
@@ -386,7 +386,18 @@
       
 
       
-        
+        <p>列表中可以包含任何种类的对象：数字、字符串、甚至其他列表。列表是可变对象，可以原地修改它</p>
+<p>任意对象的有序集合</p>
+<a id="more"></a>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 操作                                   # 解释</span></span><br><span class="line">L = []                            <span class="comment"># 空列表</span></span><br><span class="line">L = [0, 1, 2, 3]                  <span class="comment"># 四项元素： 索引从0到3</span></span><br><span class="line">L = ['abc', ['def', 'ghi']]       <span class="comment"># 嵌套子列表</span></span><br><span class="line">L = list('Threefire')             <span class="comment"># 将字符转为列表</span></span><br><span class="line">L = list(range(10))               <span class="comment"># 将整数转为列表</span></span><br><span class="line">L[i], L[i][j], L[i:j], len(L)     <span class="comment"># 索引,索引的索引, 分片,求长度</span></span><br><span class="line">L1 + L2                           <span class="comment"># 合并</span></span><br><span class="line">L * 3                             <span class="comment"># 重复</span></span><br><span class="line">for i in L:  print(i)             <span class="comment"># 迭代</span></span><br><span class="line">3 in L                            <span class="comment"># 成员关系</span></span><br><span class="line">L.append(4)                       <span class="comment"># 末尾增加元素</span></span><br><span class="line">L.extend([4, 5, 6]                <span class="comment"># 合并</span></span><br><span class="line">L.insert(I, X)                    <span class="comment"># 指定位置插入</span></span><br><span class="line">L.index(1)                        <span class="comment"># 返回元素索引</span></span><br><span class="line">L.count(x)                        <span class="comment"># 返回元素个数</span></span><br><span class="line">L.sort()                          <span class="comment"># 排序</span></span><br><span class="line">L.reverse()                       <span class="comment"># 反转列表中的元素顺序,无返回值(迭代器)</span></span><br><span class="line">del L[i]                          <span class="comment"># 删除指定元素,索引为参数</span></span><br><span class="line">del L[i:j]                        <span class="comment"># 删除范围内元素</span></span><br><span class="line">L.pop(i)                          <span class="comment"># 删除指定元素(默认为最后一个),以索引为参数。返回删除元素</span></span><br><span class="line">L.remove(2)                       <span class="comment"># 移除指定元素，无返回值</span></span><br><span class="line">L[i] = 1, L[i:j] = [2, 5, 7]      <span class="comment"># 修改值</span></span><br></pre></td></tr></table></figure>
+<h1 id="将列表转换为字符串时需要注意"><a href="#将列表转换为字符串时需要注意" class="headerlink" title="将列表转换为字符串时需要注意"></a>将列表转换为字符串时需要注意</h1><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;</span>&gt; L = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; str(L)</span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; <span class="string">'[1, 2, 3]'</span></span><br></pre></td></tr></table></figure>
+<h1 id="map-方法"><a href="#map-方法" class="headerlink" title="map 方法"></a>map 方法</h1><p>将列表中的每个元素应用一个函数，并把结果放到一个新的列表中<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># map 是一个迭代器,要显示结果需要用一个<span class="type">list</span>函数</span><br><span class="line"><span class="type">list</span>(map(abs, [<span class="number">-1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">-4</span>, <span class="number">5</span>]))</span><br></pre></td></tr></table></figure></p>
+<p>列表的分片会得到一个新的列表<br>对列表的索引和分片赋值,就会修改列表。<br>需要注意的是分片赋值，其实是先将分片区域的值删除，再在该区域插入数据。而新插入的数据数量<br>不需要和删除的相同。</p>
+<h1 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h1><p>字典通过键而不是索引来读取，是任意对象的无序集合、可变长、异构、任意嵌套。属于可变映射类型。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># 操作                                    # 解释</span></span><br><span class="line">D = &#123;&#125;                                <span class="meta"># 空字典</span></span><br><span class="line">D = &#123;<span class="string">'spam'</span>:<span class="number">2</span>, <span class="string">'eggs'</span>: <span class="number">3</span>&#125;             <span class="meta"># 含两项的字典</span></span><br><span class="line">D = &#123;<span class="string">'food'</span>: &#123;<span class="string">'ham'</span>: <span class="number">1</span>, <span class="string">'egg'</span>: <span class="number">3</span>&#125;&#125;    <span class="meta"># 嵌套</span></span><br><span class="line">D = dict.fromkeys([<span class="string">'a'</span>, <span class="string">'b'</span>])         <span class="meta"># 指定key键创建字典</span></span><br><span class="line">D = dict(zip(keyslist, valslist))     <span class="meta"># 使用列表创建字典</span></span><br><span class="line">D = dict(naem=<span class="string">'liang'</span>, age=<span class="string">'26'</span>)      <span class="meta"># 创建字典</span></span><br><span class="line">D[<span class="string">'eggs'</span>]                             <span class="meta"># 以键索引值</span></span><br><span class="line">D[<span class="string">'food'</span>][<span class="string">'ham'</span>]                      <span class="meta"># 嵌套时提供多个键</span></span><br><span class="line"><span class="string">'eggs'</span> <span class="keyword">in</span> D                           <span class="meta"># 成员关系：键存在测试</span></span><br><span class="line">D.keys()                              <span class="meta"># 获取键</span></span><br><span class="line">D.values()                            <span class="meta"># 获取值</span></span><br><span class="line">D.items()                             <span class="meta"># 同时获取键、值</span></span><br><span class="line">D.copy()                              <span class="meta"># 拷贝副本</span></span><br><span class="line">D.<span class="keyword">get</span>(Key, <span class="keyword">default</span>)                   <span class="meta"># 获取键的对应值</span></span><br><span class="line">D.update(D2)                          <span class="meta"># 合并字典</span></span><br><span class="line">D.pop(key)                            <span class="meta"># 删除</span></span><br><span class="line">len(D)                                <span class="meta"># 长度</span></span><br><span class="line">D[key] = <span class="number">26</span>                           <span class="meta"># 新增、修改键, 删除键</span></span><br><span class="line">del D [key]                           <span class="meta"># 根据键删除条目</span></span><br><span class="line">list(D.keys())                        <span class="meta">#</span></span><br></pre></td></tr></table></figure>
+<p>使用字典时需要注意，因为字典是无序的，所有序列运算例如分片是不可用的，键必须是不可变对象</p>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建字典</span></span><br><span class="line">D.fromkeys([<span class="string">'a'</span>, <span class="string">'b'</span>], <span class="number">123</span>)</span><br><span class="line">D = &#123;<span class="string">'a'</span>: <span class="number">123</span>, <span class="string">'b'</span>: <span class="number">123</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 字典解析</span></span><br><span class="line">D = &#123;k:v <span class="keyword">for</span> (k,v) <span class="keyword">in</span> zip([<span class="string">'a'</span>,b<span class="string">','</span>c'], [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])&#125;</span><br><span class="line">D = &#123;<span class="string">'a'</span>:<span class="number">1</span>, <span class="string">'b'</span>:<span class="number">2</span>, <span class="string">'c'</span>:<span class="number">3</span>&#125;</span><br><span class="line"></span><br><span class="line">D = &#123;x:x ** <span class="number">2</span> <span class="keyword">for</span> x <span class="keyword">in</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]&#125;</span><br><span class="line">D = &#123;<span class="number">1</span>:<span class="number">1</span>, <span class="number">2</span>:<span class="number">4</span>, <span class="number">3</span>:<span class="number">9</span>, <span class="number">4</span>:<span class="number">16</span>&#125;</span><br></pre></td></tr></table></figure>
+
       
     </div>
     
@@ -425,6 +436,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/25/Python-爬虫/" rel="prev" title="Python 爬虫">
+                Python 爬虫 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -476,8 +491,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -494,7 +518,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-count">36</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -516,7 +540,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -561,6 +585,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#将列表转换为字符串时需要注意"><span class="nav-number">1.</span> <span class="nav-text">将列表转换为字符串时需要注意</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#map-方法"><span class="nav-number">2.</span> <span class="nav-text">map 方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#字典"><span class="nav-number">3.</span> <span class="nav-text">字典</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
