@@ -297,6 +297,174 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://luffy357.github.io/2019/08/29/Matplotlib/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Threefire">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="http://piuib58oz.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181205230447.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Three Fire">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/29/Matplotlib/" itemprop="url">Matplotlib</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-29T22:07:48+08:00">
+                2019-08-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>matplotlib 是一个 Python 2D 绘图库，简单易于使用</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入模块</span></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">x = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">y = [<span class="number">4</span>, <span class="number">6</span>, <span class="number">7</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 绘制图画，注意 x、y 元素数量要一致</span></span><br><span class="line">plt.plot(x,y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示图例</span></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="./img/output_1_0.png" class="full-image"><br><img src="output_1_0.png" alt="png"></p>
+<h1 id="基本配置"><a href="#基本配置" class="headerlink" title="基本配置"></a>基本配置</h1><p>“””<br>linestyle 线的样式<br>linewidth 线的宽度<br>color 线的颜色<br>alpha 线的透明度</p>
+<h3 id="线的样式"><a href="#线的样式" class="headerlink" title="线的样式"></a>线的样式</h3><p>‘-‘    实线<br>‘–’   短线<br>‘-.’   短点相间线<br>‘:’    虚线</p>
+<h3 id="折点样式"><a href="#折点样式" class="headerlink" title="折点样式"></a>折点样式</h3><p><code>&#39;-&#39;</code>             solid line style<br><code>&#39;--&#39;</code>            dashed line style<br><code>&#39;-.&#39;</code>            dash-dot line style<br><code>&#39;:&#39;</code>             dotted line style<br><code>&#39;.&#39;</code>             point marker<br><code>&#39;,&#39;</code>             pixel marker<br><code>&#39;o&#39;</code>             circle marker<br><code>&#39;v&#39;</code>             triangle_down marker<br><code>&#39;^&#39;</code>             triangle_up marker<br><code>&#39;&lt;&#39;</code>             triangle_left marker<br><code>&#39;&gt;&#39;</code>             triangle_right marker<br><code>&#39;1&#39;</code>             tri_down marker<br><code>&#39;2&#39;</code>             tri_up marker<br><code>&#39;3&#39;</code>             tri_left marker<br><code>&#39;4&#39;</code>             tri_right marker<br><code>&#39;s&#39;</code>             square marker<br><code>&#39;p&#39;</code>             pentagon marker<br><code>&#39;*&#39;</code>             star marker<br><code>&#39;h&#39;</code>             hexagon1 marker<br><code>&#39;H&#39;</code>             hexagon2 marker<br><code>&#39;+&#39;</code>             plus marker<br><code>&#39;x&#39;</code>             x marker<br><code>&#39;D&#39;</code>             diamond marker<br><code>&#39;d&#39;</code>             thin_diamond marker<br><code>&#39;|&#39;</code>             vline marker<br><code>&#39;_&#39;</code>             hline marker<br>“””</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在绘制图例时，传入绘制参数</span></span><br><span class="line">plt.plot([<span class="number">1</span>,<span class="number">2</span>, <span class="number">3</span>], [<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>], linestyle=<span class="string">':'</span>, color=<span class="string">'red'</span>, linewidth=<span class="number">2</span>, alpha=<span class="number">0.5</span>, marker=<span class="string">'o'</span>)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="output_3_0.png" alt="png"></p>
+<h2 id="保存图例为图片格式，设置画布大小"><a href="#保存图例为图片格式，设置画布大小" class="headerlink" title="保存图例为图片格式，设置画布大小"></a>保存图例为图片格式，设置画布大小</h2><p>figure 方法设置画布大小  savefig 方法保存图例</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置画布大小和保存图片</span></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">x = range(<span class="number">2</span>, <span class="number">38</span>, <span class="number">2</span>)</span><br><span class="line">y = [random.randint(<span class="number">15</span>, <span class="number">30</span>) <span class="keyword">for</span> i <span class="keyword">in</span> x]</span><br><span class="line"></span><br><span class="line"><span class="comment"># figure 方法设置画布属性， figsize 设置宽高， dpi 画布的像素</span></span><br><span class="line">plt.figure(figsize=(<span class="number">20</span>, <span class="number">10</span>), dpi=<span class="number">200</span>)</span><br><span class="line">plt.plot(x, y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 保存到指定路径下可指定格式</span></span><br><span class="line">plt.savefig(<span class="string">'./s1.png'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 注意在保存图画之前不可用 show() 方法</span></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="output_5_0.png" alt="png"></p>
+<h2 id="绘制-X-轴刻度-Y-轴刻度和设置刻度标签"><a href="#绘制-X-轴刻度-Y-轴刻度和设置刻度标签" class="headerlink" title="绘制 X 轴刻度 Y 轴刻度和设置刻度标签"></a>绘制 X 轴刻度 Y 轴刻度和设置刻度标签</h2><p>使用 xticks\yticks 分别设置 x 轴和 y 轴，第一个参数为刻度。第二参数为刻度标签</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">x = range(<span class="number">10</span>, <span class="number">50</span>, <span class="number">5</span>)</span><br><span class="line">y = [random.randint(<span class="number">1</span>, <span class="number">10</span>) <span class="keyword">for</span> i <span class="keyword">in</span> x]</span><br><span class="line"></span><br><span class="line">plt.figure(figsize=(<span class="number">8</span>, <span class="number">5</span>), dpi=<span class="number">80</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置 X 轴刻度</span></span><br><span class="line"><span class="comment"># plt.xticks(x)</span></span><br><span class="line"><span class="comment"># plt.xticks(range(1, 50, 3))</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置 Y 轴刻度</span></span><br><span class="line"><span class="comment"># plt.yticks(range(1, 10, 3))</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 构造 X 轴刻度标签</span></span><br><span class="line">x_ticks_lable = [<span class="string">"&#123;&#125;"</span>.format(i) <span class="keyword">for</span> i <span class="keyword">in</span> x]</span><br><span class="line">plt.xticks(x, x_ticks_lable)</span><br><span class="line"></span><br><span class="line">y_ticks_lable = [<span class="string">"&#123;&#125;:00"</span>.format(i) <span class="keyword">for</span> i <span class="keyword">in</span> y]</span><br><span class="line">plt.yticks(y, y_ticks_lable)</span><br><span class="line"></span><br><span class="line">plt.plot(x, y)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="output_7_0.png" alt="png"></p>
+<h2 id="使用中文设置-x、y-轴和图像标题"><a href="#使用中文设置-x、y-轴和图像标题" class="headerlink" title="使用中文设置 x、y 轴和图像标题"></a>使用中文设置 x、y 轴和图像标题</h2><p>使用 font_manager 指定字体，fontproperties 选择字体<br>注意在有中文显示的地方都要传入 fontproperties 参数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 显示中文</span></span><br><span class="line"><span class="comment"># matplotlib 只显示英文，要显示中文要更改 matplotlib 的默认字体</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> font_manager</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">x = range(<span class="number">1</span>, <span class="number">25</span>)</span><br><span class="line">y = [random.randint(<span class="number">60</span>, <span class="number">120</span>) <span class="keyword">for</span> i <span class="keyword">in</span> x]</span><br><span class="line"></span><br><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">8</span>), dpi=<span class="number">80</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 fontproperties 属性。</span></span><br><span class="line"><span class="comment"># plt.xlabel('时间', fontproperties='simHei', fontsize=20)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定字体</span></span><br><span class="line"><span class="comment"># my_font = font_manager.FontProperties(fname='C:\Windows\Fonts\STSONG.TTF', size=18)</span></span><br><span class="line"><span class="comment"># plt.xlabel('时间', fontproperties=my_font)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">plt.ylabel(<span class="string">'次数'</span>, fontproperties=<span class="string">'simHei'</span>, fontsize=<span class="number">20</span>)</span><br><span class="line">plt.title(<span class="string">'每小时跳动的次数'</span>, fontproperties=<span class="string">'simHei'</span>, fontsize=<span class="number">30</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 旋转字体角度</span></span><br><span class="line">plt.xlabel(<span class="string">'时间'</span>,fontproperties=<span class="string">'simHei'</span>, fontsize=<span class="number">20</span>, rotation=<span class="number">45</span>)</span><br><span class="line"></span><br><span class="line">plt.plot(x, y)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="output_9_0.png" alt="png"></p>
+<h2 id="设置图例说明"><a href="#设置图例说明" class="headerlink" title="设置图例说明"></a>设置图例说明</h2><p>使用legend方法 位置 loc: upper  lower  center  /left/right</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">x = range(<span class="number">11</span>, <span class="number">31</span>, <span class="number">1</span>)</span><br><span class="line">y1 = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>]</span><br><span class="line">y2 = [<span class="number">2</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">8</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">5</span>, <span class="number">4</span>]</span><br><span class="line"></span><br><span class="line">plt.figure(figsize=(<span class="number">20</span>, <span class="number">8</span>), dpi=<span class="number">80</span>)</span><br><span class="line"></span><br><span class="line">plt.plot(x, y1, color=<span class="string">'red'</span>, label=<span class="string">'自己'</span>)</span><br><span class="line">plt.plot(x, y2, color=<span class="string">'blue'</span>, label=<span class="string">'好友'</span>)</span><br><span class="line"></span><br><span class="line">my_font = font_manager.FontProperties(fname=<span class="string">'C:\Windows\Fonts\STSONG.TTF'</span>, size=<span class="number">18</span>)</span><br><span class="line">x_ticks_lable = [<span class="string">'&#123;&#125;岁'</span>.format(i) <span class="keyword">for</span> i <span class="keyword">in</span> x]</span><br><span class="line"></span><br><span class="line">plt.xticks(x, x_ticks_lable, fontproperties=my_font)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加图例说明</span></span><br><span class="line">plt.legend(prop=my_font, loc=<span class="string">'upper left'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置网格透明度</span></span><br><span class="line">plt.grid(alpha=<span class="number">0.4</span>)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="output_11_0.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 一图多个坐标系</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">x = np.arange(<span class="number">1</span>, <span class="number">100</span>)</span><br><span class="line"></span><br><span class="line">fig,axes = plt.subplots(<span class="number">2</span>,<span class="number">2</span>)</span><br><span class="line">axe1 = axes[<span class="number">0</span>,<span class="number">0</span>]</span><br><span class="line">axe2 = axes[<span class="number">0</span>,<span class="number">1</span>]</span><br><span class="line">axe3 = axes[<span class="number">1</span>,<span class="number">0</span>]</span><br><span class="line">axe4 = axes[<span class="number">0</span>,<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">fig = plt.figure(figsize=(<span class="number">30</span>,<span class="number">15</span>), dpi=<span class="number">80</span>)</span><br><span class="line"></span><br><span class="line">axe1.plot(x, x)</span><br><span class="line">axe2.plot(x, -x)</span><br><span class="line">axe3.plot(x, x ** <span class="number">2</span>)</span><br><span class="line">axe4.plot(x, np.log(x))</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="output_12_0.png" alt="png"></p>
+<pre><code>&lt;Figure size 2400x1200 with 0 Axes&gt;
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 散点图</span></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> font_manager</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line">x  = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>, <span class="number">12</span>, <span class="number">13</span>, <span class="number">14</span>, <span class="number">15</span>, <span class="number">16</span>, <span class="number">17</span>, <span class="number">18</span>, <span class="number">19</span>, <span class="number">20</span>, <span class="number">21</span>, <span class="number">22</span>, <span class="number">23</span>, <span class="number">24</span>, <span class="number">25</span>, <span class="number">26</span>, <span class="number">27</span>, <span class="number">28</span>, <span class="number">29</span>, <span class="number">30</span>, <span class="number">31</span>]</span><br><span class="line">y = [random.randint(<span class="number">15</span>, <span class="number">27</span>) <span class="keyword">for</span> i <span class="keyword">in</span> x]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">plt.figure(figsize=(<span class="number">20</span>,<span class="number">8</span>), dpi=<span class="number">80</span>)</span><br><span class="line"><span class="comment"># 绘制散点图</span></span><br><span class="line">plt.scatter(x, y, label=<span class="string">'三月份'</span>)</span><br><span class="line"></span><br><span class="line">my_font = font_manager.FontProperties(fname=<span class="string">'C:\Windows\Fonts\STSONG.TTF'</span>, size=<span class="number">18</span>)</span><br><span class="line">x_ticks_labels = [<span class="string">'3月&#123;&#125;'</span>.format(i) <span class="keyword">for</span> i <span class="keyword">in</span> x]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">plt.xticks(x[::<span class="number">3</span>], x_ticks_labels[::<span class="number">3</span>], fontproperties=my_font, rotation=<span class="number">45</span>)</span><br><span class="line"></span><br><span class="line">plt.xlabel(<span class="string">'日期'</span>, fontproperties=my_font)</span><br><span class="line">plt.ylabel(<span class="string">'温度'</span>, fontproperties=my_font)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">plt.legend(prop=my_font)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="output_13_0.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 绘制条形图</span></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> font_manager</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">plt.figure(figsize=(<span class="number">20</span>,<span class="number">8</span>), dpi=<span class="number">80</span>)</span><br><span class="line">my_font = font_manager.FontProperties(fname=<span class="string">'C:\Windows\Fonts\STSONG.TTF'</span>, size=<span class="number">18</span>)</span><br><span class="line"></span><br><span class="line">a = [<span class="string">'流浪地球'</span>, <span class="string">'疯狂的外星人'</span>, <span class="string">'飞驰人生'</span>, <span class="string">'大黄蜂'</span>, <span class="string">'熊出没.原始时代'</span>, <span class="string">'新喜剧之王'</span>,]</span><br><span class="line">b = [<span class="number">38.13</span>, <span class="number">19.85</span>, <span class="number">14.89</span>, <span class="number">11.36</span>, <span class="number">6.47</span>, <span class="number">5.93</span>]</span><br><span class="line"></span><br><span class="line">rects = plt.bar(range(len(a)), b, width=<span class="number">0.3</span>, color=<span class="string">'red'</span>)</span><br><span class="line"></span><br><span class="line">plt.xticks(range(len(a)), a, fontproperties=my_font, rotation=<span class="number">45</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 直方图上加标注</span></span><br><span class="line"><span class="keyword">for</span> rect <span class="keyword">in</span> rects:</span><br><span class="line">    height = rect.get_height()</span><br><span class="line">    plt.text(rect.get_x() + rect.get_width() / <span class="number">2</span>, height+<span class="number">0.3</span>, str(height), ha=<span class="string">'center'</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="output_14_0.png" alt="png"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://luffy357.github.io/2019/08/25/Python-爬虫/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1588,152 +1756,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://luffy357.github.io/2019/01/18/sass语法/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Threefire">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="http://piuib58oz.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181205230447.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Three Fire">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/18/sass语法/" itemprop="url">sass语法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-18T23:56:16+08:00">
-                2019-01-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/前端/" itemprop="url" rel="index">
-                    <span itemprop="name">前端</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>众所周知，css 不是一门编程语言，他没有像 js 和 python 那样拥有逻辑处理的能力，甚至导入其他的 css 文件中的样式都做不到，而 sass 就是为了解决 css 的这些问题。它允许你使用变量、嵌套规则、mixins、导入等功能。并且完全兼容 css 语法。sass 文件不能直接被网页所识别，写完 sass 后还有用估计转化为 css 才能使用。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/01/18/sass语法/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </p></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1786,7 +1808,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1808,7 +1830,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
